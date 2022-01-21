@@ -45,7 +45,7 @@ object from the [pystlouisfed.models](https://tomaskoutek.github.io/pystlouisfed
 
 For example:
 
-"Hey FRED give me [Category](https://tomaskoutek.github.io/pystlouisfed/models.html#stlouisfed.models.Category) with ID 125"
+"Hey FRED give me [Category](https://tomaskoutek.github.io/pystlouisfed/models.html#pystlouisfed.models.Category) with ID 125"
 
 ```python
 from pystlouisfed import FRED
@@ -55,7 +55,7 @@ category = fred.category(category_id=125)
 # Category(id=125, name='Trade Balance', parent_id=13)
 ```
 
-or [Source](https://tomaskoutek.github.io/pystlouisfed/models.html#stlouisfed.models.Source) with ID 1
+or [Source](https://tomaskoutek.github.io/pystlouisfed/models.html#pystlouisfed.models.Source) with ID 1
 
 ```python
 from pystlouisfed import FRED
@@ -202,7 +202,7 @@ The method above can then be called as follows:
 from pystlouisfed import FRED, AggregationMethod, Frequency
 
 fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-df = df = fred.series_observations(series_id='T10Y2Y', aggregation_method=AggregationMethod.end_of_period, frequency=Frequency.weekly_ending_friday)
+df = fred.series_observations(series_id='T10Y2Y', aggregation_method=AggregationMethod.end_of_period, frequency=Frequency.weekly_ending_friday)
 ```
 
 ### Working with rate limiting
@@ -280,7 +280,7 @@ and we see how the value for day "2021-07-01" has changed.
 Between dates "2021-11-01" - "2021-11-23" was 23173.496, then until "2021-12-21" at 23187.042 and finally at 23202.344. I think this is important information for backtesting.
 Because the backtest on the current/last data will be wrong.
 
-Many other features in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#stlouisfed.client.FRED).
+Many other features in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#pystlouisfed.client.FRED).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -334,7 +334,7 @@ print(df.head())
 4  California   06  70192.0    CAPCPI  2020
 ```
 
-Other functions in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#stlouisfed.client.GeoFRED).
+Other functions in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#pystlouisfed.client.GeoFRED).
 
 ### FRASER
 
@@ -368,7 +368,7 @@ print(metadata['url'])
 ]
 ```
 
-Other functions in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#stlouisfed.client.FRASER).
+Other functions in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#pystlouisfed.client.FRASER).
 
 ## License
 
