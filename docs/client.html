@@ -258,7 +258,7 @@ class FRED:
         &#34;&#34;&#34;
 
         if int(category_id) &lt; 0:
-            raise Exception(&#39;Variable category_id is not 0 or a positive integer.&#39;)
+            raise ValueError(&#39;Variable category_id is not 0 or a positive integer.&#39;)
 
         data = self._client.get(
             &#39;/fred/category&#39;,
@@ -321,10 +321,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/category/children&#39;,
@@ -393,10 +393,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/category/related&#39;,
@@ -528,16 +528,16 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if filter_variable is not None and filter_variable not in enums.FilterVariable:
-            raise ValueError(&#39;Variable filter_variable is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+            raise ValueError(&#39;Variable filter_variable ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
         if exclude_tag_names is not None and tag_names is None:
-            raise Exception(&#39;Parameter exclude_tag_names requires that parameter tag_names also be set to limit the number of matching series.&#39;)
+            raise ValueError(&#39;Parameter exclude_tag_names requires that parameter tag_names also be set to limit the number of matching series.&#39;)
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -691,10 +691,10 @@ class FRED:
             raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, allowed_tag_group_ids))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -830,10 +830,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -950,10 +950,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -1063,10 +1063,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -1135,13 +1135,13 @@ class FRED:
         ```
         &#34;&#34;&#34;
         if int(release_id) &lt;= 0:
-            raise Exception(&#39;Variable release_id is not 0 or a positive integer.&#39;)
+            raise ValueError(&#39;Variable release_id is not 0 or a positive integer.&#39;)
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/release&#39;,
@@ -1224,10 +1224,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -1366,13 +1366,13 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if filter_variable is not None and filter_variable not in enums.FilterVariable:
-            raise ValueError(&#39;Variable allowed_filter_variables is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+            raise ValueError(&#39;Variable allowed_filter_variables ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -1464,10 +1464,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -1588,10 +1588,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -1725,10 +1725,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -1895,10 +1895,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/series&#39;,
@@ -1963,10 +1963,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         return pd.DataFrame(
             self._client.get(
@@ -2087,7 +2087,7 @@ class FRED:
         ```python
         &gt;&gt;&gt; from matplotlib import pyplot as plt
 
-        &gt;&gt;&gt; fred = FRED(api_key=&#39;9a8263c93d03d49079ad016afb7bdee3&#39;)
+        &gt;&gt;&gt; fred = FRED(api_key=&#39;abcdefghijklmnopqrstuvwxyz123456&#39;)
         &gt;&gt;&gt; df = fred.series_observations(series_id=&#39;T10Y2Y&#39;)
         &gt;&gt;&gt; df.plot(x=&#39;date&#39;, y=&#39;value&#39;, grid=True)
 
@@ -2097,22 +2097,22 @@ class FRED:
         &#34;&#34;&#34;
 
         if units not in enums.Unit:
-            raise ValueError(&#39;Variable units is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.Unit))))
+            raise ValueError(&#39;Variable units ({}) is not one of the values: {}&#39;.format(units, &#39;, &#39;.join(map(str, enums.Unit))))
 
         if frequency is not None and frequency not in enums.Frequency:
-            raise ValueError(&#39;Variable frequency is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.Frequency))))
+            raise ValueError(&#39;Variable frequency ({}) is not one of the values: {}&#39;.format(frequency, &#39;, &#39;.join(map(str, enums.Frequency))))
 
         if aggregation_method not in enums.AggregationMethod:
-            raise ValueError(&#39;Variable aggregation_method is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.AggregationMethod))))
+            raise ValueError(&#39;Variable aggregation_method ({}) is not one of the values: {}&#39;.format(aggregation_method, &#39;, &#39;.join(map(str, enums.AggregationMethod))))
 
         if output_type not in enums.OutputType:
-            raise ValueError(&#39;Variable output_type is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.OutputType))))
+            raise ValueError(&#39;Variable output_type ({}) is not one of the values: {}&#39;.format(output_type, &#39;, &#39;.join(map(str, enums.OutputType))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -2198,10 +2198,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -2361,16 +2361,16 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if search_type not in enums.SearchType:
-            raise ValueError(&#39;Variable search_type is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.SearchType))))
+            raise ValueError(&#39;Variable search_type ({}) is not one of the values: {}&#39;.format(search_type, &#39;, &#39;.join(map(str, enums.SearchType))))
 
         if filter_variable is not None and filter_variable not in enums.FilterVariable:
-            raise ValueError(&#39;Variable filter_variable is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+            raise ValueError(&#39;Variable filter_variable ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -2508,10 +2508,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -2643,10 +2643,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -2759,10 +2759,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -2872,22 +2872,22 @@ class FRED:
         &#34;&#34;&#34;
 
         if filter_value not in enums.FilterValue:
-            raise ValueError(&#39;Variable filter_value is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterValue))))
+            raise ValueError(&#39;Variable filter_value ({}) is not one of the values: {}&#39;.format(filter_value, &#39;, &#39;.join(map(str, enums.FilterValue))))
 
         if start_time is not None and end_time is None:
-            raise Exception(&#39;end_time is required if start_time is set&#39;)
+            raise ValueError(&#39;end_time is required if start_time is set&#39;)
 
         if end_time is not None and start_time is None:
-            raise Exception(&#39;start_time is required if end_time is set&#39;)
+            raise ValueError(&#39;start_time is required if end_time is set&#39;)
 
         if start_time is not None and end_time is not None and start_time &gt;= end_time:
-            raise Exception(&#39;end_time must be greater than start_time&#39;)
+            raise ValueError(&#39;end_time must be greater than start_time&#39;)
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -2987,10 +2987,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         return pd.to_datetime(
             pd.Series(
@@ -3092,10 +3092,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -3165,10 +3165,10 @@ class FRED:
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/source&#39;,
@@ -3266,10 +3266,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -3395,13 +3395,13 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if tag_group_id is not None and tag_group_id not in enums.TagGroupID:
-            raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.TagGroupID))))
+            raise ValueError(&#39;Variable tag_group_id ({}) is not one of the values: {}&#39;.format(tag_group_id, &#39;, &#39;.join(map(str, enums.TagGroupID))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -3539,13 +3539,13 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if tag_group_id is not None and tag_group_id not in allowed_tag_group_ids:
-            raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, allowed_tag_group_ids))))
+            raise ValueError(&#39;Variable tag_group_id ({}) is not one of the values: {}&#39;.format(tag_group_id, &#39;, &#39;.join(map(str, allowed_tag_group_ids))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -3680,10 +3680,10 @@ class FRED:
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -4756,7 +4756,7 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if int(category_id) &lt; 0:
-            raise Exception(&#39;Variable category_id is not 0 or a positive integer.&#39;)
+            raise ValueError(&#39;Variable category_id is not 0 or a positive integer.&#39;)
 
         data = self._client.get(
             &#39;/fred/category&#39;,
@@ -4819,10 +4819,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/category/children&#39;,
@@ -4891,10 +4891,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/category/related&#39;,
@@ -5026,16 +5026,16 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if filter_variable is not None and filter_variable not in enums.FilterVariable:
-            raise ValueError(&#39;Variable filter_variable is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+            raise ValueError(&#39;Variable filter_variable ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
         if exclude_tag_names is not None and tag_names is None:
-            raise Exception(&#39;Parameter exclude_tag_names requires that parameter tag_names also be set to limit the number of matching series.&#39;)
+            raise ValueError(&#39;Parameter exclude_tag_names requires that parameter tag_names also be set to limit the number of matching series.&#39;)
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -5189,10 +5189,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, allowed_tag_group_ids))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -5328,10 +5328,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -5448,10 +5448,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -5561,10 +5561,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -5633,13 +5633,13 @@ Requests can be customized according to data source, release, category, series, 
         ```
         &#34;&#34;&#34;
         if int(release_id) &lt;= 0:
-            raise Exception(&#39;Variable release_id is not 0 or a positive integer.&#39;)
+            raise ValueError(&#39;Variable release_id is not 0 or a positive integer.&#39;)
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/release&#39;,
@@ -5722,10 +5722,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -5864,13 +5864,13 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if filter_variable is not None and filter_variable not in enums.FilterVariable:
-            raise ValueError(&#39;Variable allowed_filter_variables is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+            raise ValueError(&#39;Variable allowed_filter_variables ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -5962,10 +5962,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -6086,10 +6086,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -6223,10 +6223,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -6393,10 +6393,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/series&#39;,
@@ -6461,10 +6461,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         return pd.DataFrame(
             self._client.get(
@@ -6585,7 +6585,7 @@ Requests can be customized according to data source, release, category, series, 
         ```python
         &gt;&gt;&gt; from matplotlib import pyplot as plt
 
-        &gt;&gt;&gt; fred = FRED(api_key=&#39;9a8263c93d03d49079ad016afb7bdee3&#39;)
+        &gt;&gt;&gt; fred = FRED(api_key=&#39;abcdefghijklmnopqrstuvwxyz123456&#39;)
         &gt;&gt;&gt; df = fred.series_observations(series_id=&#39;T10Y2Y&#39;)
         &gt;&gt;&gt; df.plot(x=&#39;date&#39;, y=&#39;value&#39;, grid=True)
 
@@ -6595,22 +6595,22 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if units not in enums.Unit:
-            raise ValueError(&#39;Variable units is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.Unit))))
+            raise ValueError(&#39;Variable units ({}) is not one of the values: {}&#39;.format(units, &#39;, &#39;.join(map(str, enums.Unit))))
 
         if frequency is not None and frequency not in enums.Frequency:
-            raise ValueError(&#39;Variable frequency is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.Frequency))))
+            raise ValueError(&#39;Variable frequency ({}) is not one of the values: {}&#39;.format(frequency, &#39;, &#39;.join(map(str, enums.Frequency))))
 
         if aggregation_method not in enums.AggregationMethod:
-            raise ValueError(&#39;Variable aggregation_method is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.AggregationMethod))))
+            raise ValueError(&#39;Variable aggregation_method ({}) is not one of the values: {}&#39;.format(aggregation_method, &#39;, &#39;.join(map(str, enums.AggregationMethod))))
 
         if output_type not in enums.OutputType:
-            raise ValueError(&#39;Variable output_type is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.OutputType))))
+            raise ValueError(&#39;Variable output_type ({}) is not one of the values: {}&#39;.format(output_type, &#39;, &#39;.join(map(str, enums.OutputType))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -6696,10 +6696,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -6859,16 +6859,16 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if search_type not in enums.SearchType:
-            raise ValueError(&#39;Variable search_type is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.SearchType))))
+            raise ValueError(&#39;Variable search_type ({}) is not one of the values: {}&#39;.format(search_type, &#39;, &#39;.join(map(str, enums.SearchType))))
 
         if filter_variable is not None and filter_variable not in enums.FilterVariable:
-            raise ValueError(&#39;Variable filter_variable is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+            raise ValueError(&#39;Variable filter_variable ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -7006,10 +7006,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -7141,10 +7141,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -7257,10 +7257,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -7370,22 +7370,22 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if filter_value not in enums.FilterValue:
-            raise ValueError(&#39;Variable filter_value is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterValue))))
+            raise ValueError(&#39;Variable filter_value ({}) is not one of the values: {}&#39;.format(filter_value, &#39;, &#39;.join(map(str, enums.FilterValue))))
 
         if start_time is not None and end_time is None:
-            raise Exception(&#39;end_time is required if start_time is set&#39;)
+            raise ValueError(&#39;end_time is required if start_time is set&#39;)
 
         if end_time is not None and start_time is None:
-            raise Exception(&#39;start_time is required if end_time is set&#39;)
+            raise ValueError(&#39;start_time is required if end_time is set&#39;)
 
         if start_time is not None and end_time is not None and start_time &gt;= end_time:
-            raise Exception(&#39;end_time must be greater than start_time&#39;)
+            raise ValueError(&#39;end_time must be greater than start_time&#39;)
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -7485,10 +7485,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         return pd.to_datetime(
             pd.Series(
@@ -7590,10 +7590,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -7663,10 +7663,10 @@ Requests can be customized according to data source, release, category, series, 
         &#34;&#34;&#34;
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         data = self._client.get(
             &#39;/fred/source&#39;,
@@ -7764,10 +7764,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -7893,13 +7893,13 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if tag_group_id is not None and tag_group_id not in enums.TagGroupID:
-            raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.TagGroupID))))
+            raise ValueError(&#39;Variable tag_group_id ({}) is not one of the values: {}&#39;.format(tag_group_id, &#39;, &#39;.join(map(str, enums.TagGroupID))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -8037,13 +8037,13 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if tag_group_id is not None and tag_group_id not in allowed_tag_group_ids:
-            raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, allowed_tag_group_ids))))
+            raise ValueError(&#39;Variable tag_group_id ({}) is not one of the values: {}&#39;.format(tag_group_id, &#39;, &#39;.join(map(str, allowed_tag_group_ids))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -8178,10 +8178,10 @@ Requests can be customized according to data source, release, category, series, 
             raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
         if realtime_start &lt; date(1776, 7, 4):
-            raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+            raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
         if realtime_start &gt; realtime_end:
-            raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+            raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
         df = pd.DataFrame(
             self._client.get(
@@ -8331,7 +8331,7 @@ The id for a category.</p>
     &#34;&#34;&#34;
 
     if int(category_id) &lt; 0:
-        raise Exception(&#39;Variable category_id is not 0 or a positive integer.&#39;)
+        raise ValueError(&#39;Variable category_id is not 0 or a positive integer.&#39;)
 
     data = self._client.get(
         &#39;/fred/category&#39;,
@@ -8343,7 +8343,7 @@ The id for a category.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_children"><code class="name flex">
-<span>def <span class="ident">category_children</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_children</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -8440,10 +8440,10 @@ The end of the real-time period. For more information, see <a href="https://fred
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     data = self._client.get(
         &#39;/fred/category/children&#39;,
@@ -8457,7 +8457,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_related"><code class="name flex">
-<span>def <span class="ident">category_related</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_related</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -8560,10 +8560,10 @@ Most categories do not have related categories.</p>
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     data = self._client.get(
         &#39;/fred/category/related&#39;,
@@ -8577,7 +8577,7 @@ Most categories do not have related categories.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_related_tags"><code class="name flex">
-<span>def <span class="ident">category_related_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_related_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -8758,10 +8758,10 @@ No tags exist for a category that does not have series.</p>
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -8791,7 +8791,7 @@ No tags exist for a category that does not have series.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_series"><code class="name flex">
-<span>def <span class="ident">category_series</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_series</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -8987,16 +8987,16 @@ Tuple of tag names that series match none of.</p>
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if filter_variable is not None and filter_variable not in enums.FilterVariable:
-        raise ValueError(&#39;Variable filter_variable is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+        raise ValueError(&#39;Variable filter_variable ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
     if exclude_tag_names is not None and tag_names is None:
-        raise Exception(&#39;Parameter exclude_tag_names requires that parameter tag_names also be set to limit the number of matching series.&#39;)
+        raise ValueError(&#39;Parameter exclude_tag_names requires that parameter tag_names also be set to limit the number of matching series.&#39;)
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -9038,7 +9038,7 @@ Tuple of tag names that series match none of.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_tags"><code class="name flex">
-<span>def <span class="ident">category_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9219,10 +9219,10 @@ See the related request fred/category/related_tags.</p>
         raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, allowed_tag_group_ids))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -9251,7 +9251,7 @@ See the related request fred/category/related_tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.related_tags"><code class="name flex">
-<span>def <span class="ident">related_tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">related_tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9431,13 +9431,13 @@ See the related request fred/tags.</p>
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if tag_group_id is not None and tag_group_id not in allowed_tag_group_ids:
-        raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, allowed_tag_group_ids))))
+        raise ValueError(&#39;Variable tag_group_id ({}) is not one of the values: {}&#39;.format(tag_group_id, &#39;, &#39;.join(map(str, allowed_tag_group_ids))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -9466,7 +9466,7 @@ See the related request fred/tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release"><code class="name flex">
-<span>def <span class="ident">release</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> <a title="pystlouisfed.models.Release" href="models.html#pystlouisfed.models.Release">Release</a></span>
+<span>def <span class="ident">release</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> <a title="pystlouisfed.models.Release" href="models.html#pystlouisfed.models.Release">Release</a></span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9557,13 +9557,13 @@ The end of the real-time period. For more information, see <a href="https://fred
     ```
     &#34;&#34;&#34;
     if int(release_id) &lt;= 0:
-        raise Exception(&#39;Variable release_id is not 0 or a positive integer.&#39;)
+        raise ValueError(&#39;Variable release_id is not 0 or a positive integer.&#39;)
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     data = self._client.get(
         &#39;/fred/release&#39;,
@@ -9702,10 +9702,10 @@ Sort results is ascending or descending order for attribute values specified by 
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -9727,7 +9727,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_related_tags"><code class="name flex">
-<span>def <span class="ident">release_related_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_related_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9904,10 +9904,10 @@ Series are assigned tags and releases. Indirectly through series, it is possible
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -9937,7 +9937,7 @@ Series are assigned tags and releases. Indirectly through series, it is possible
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_series"><code class="name flex">
-<span>def <span class="ident">release_series</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_series</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10131,13 +10131,13 @@ Tuple of tag names that series match none of.</p>
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if filter_variable is not None and filter_variable not in enums.FilterVariable:
-        raise ValueError(&#39;Variable allowed_filter_variables is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+        raise ValueError(&#39;Variable allowed_filter_variables ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -10179,7 +10179,7 @@ Tuple of tag names that series match none of.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_sources"><code class="name flex">
-<span>def <span class="ident">release_sources</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_sources</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10276,10 +10276,10 @@ The end of the real-time period. For more information, see <a href="https://fred
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -10436,7 +10436,7 @@ Note that release dates are published by data sources and do not necessarily rep
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_tags"><code class="name flex">
-<span>def <span class="ident">release_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10607,10 +10607,10 @@ See the related request fred/release/related_tags.</p>
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -10639,7 +10639,7 @@ See the related request fred/release/related_tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.releases"><code class="name flex">
-<span>def <span class="ident">releases</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">releases</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10778,10 +10778,10 @@ Sort results is ascending or descending order for attribute values specified by 
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -10808,7 +10808,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.releases_dates"><code class="name flex">
-<span>def <span class="ident">releases_dates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.desc, include_release_dates_with_no_data: bool = False) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">releases_dates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.desc, include_release_dates_with_no_data: bool = False) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10952,10 +10952,10 @@ Note that release dates are published by data sources and do not necessarily rep
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -10977,7 +10977,7 @@ Note that release dates are published by data sources and do not necessarily rep
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series"><code class="name flex">
-<span>def <span class="ident">series</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> <a title="pystlouisfed.models.Series" href="models.html#pystlouisfed.models.Series">Series</a></span>
+<span>def <span class="ident">series</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> <a title="pystlouisfed.models.Series" href="models.html#pystlouisfed.models.Series">Series</a></span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11088,10 +11088,10 @@ The end of the real-time period. For more information, see <a href="https://fred
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     data = self._client.get(
         &#39;/fred/series&#39;,
@@ -11105,7 +11105,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_categories"><code class="name flex">
-<span>def <span class="ident">series_categories</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_categories</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11202,10 +11202,10 @@ The end of the real-time period. For more information, see <a href="https://fred
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     return pd.DataFrame(
         self._client.get(
@@ -11219,7 +11219,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_observations"><code class="name flex">
-<span>def <span class="ident">series_observations</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, observation_start: datetime.date = datetime.date(1776, 7, 4), observation_end: datetime.date = datetime.date(9999, 12, 31), units: <a title="pystlouisfed.enums.Unit" href="enums.html#pystlouisfed.enums.Unit">Unit</a> = Unit.lin, frequency: <a title="pystlouisfed.enums.Frequency" href="enums.html#pystlouisfed.enums.Frequency">Frequency</a> = None, aggregation_method: <a title="pystlouisfed.enums.AggregationMethod" href="enums.html#pystlouisfed.enums.AggregationMethod">AggregationMethod</a> = AggregationMethod.avg, output_type: <a title="pystlouisfed.enums.OutputType" href="enums.html#pystlouisfed.enums.OutputType">OutputType</a> = OutputType.realtime_period, vintage_dates: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_observations</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, observation_start: datetime.date = datetime.date(1776, 7, 4), observation_end: datetime.date = datetime.date(9999, 12, 31), units: <a title="pystlouisfed.enums.Unit" href="enums.html#pystlouisfed.enums.Unit">Unit</a> = Unit.lin, frequency: <a title="pystlouisfed.enums.Frequency" href="enums.html#pystlouisfed.enums.Frequency">Frequency</a> = None, aggregation_method: <a title="pystlouisfed.enums.AggregationMethod" href="enums.html#pystlouisfed.enums.AggregationMethod">AggregationMethod</a> = AggregationMethod.avg, output_type: <a title="pystlouisfed.enums.OutputType" href="enums.html#pystlouisfed.enums.OutputType">OutputType</a> = OutputType.realtime_period, vintage_dates: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11295,7 +11295,7 @@ Entering a vintage date is also useful to compare series on different releases w
 </code></pre>
 <pre><code class="language-python">&gt;&gt;&gt; from matplotlib import pyplot as plt
 
-&gt;&gt;&gt; fred = FRED(api_key='9a8263c93d03d49079ad016afb7bdee3')
+&gt;&gt;&gt; fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 &gt;&gt;&gt; df = fred.series_observations(series_id='T10Y2Y')
 &gt;&gt;&gt; df.plot(x='date', y='value', grid=True)
 
@@ -11415,7 +11415,7 @@ Entering a vintage date is also useful to compare series on different releases w
     ```python
     &gt;&gt;&gt; from matplotlib import pyplot as plt
 
-    &gt;&gt;&gt; fred = FRED(api_key=&#39;9a8263c93d03d49079ad016afb7bdee3&#39;)
+    &gt;&gt;&gt; fred = FRED(api_key=&#39;abcdefghijklmnopqrstuvwxyz123456&#39;)
     &gt;&gt;&gt; df = fred.series_observations(series_id=&#39;T10Y2Y&#39;)
     &gt;&gt;&gt; df.plot(x=&#39;date&#39;, y=&#39;value&#39;, grid=True)
 
@@ -11425,22 +11425,22 @@ Entering a vintage date is also useful to compare series on different releases w
     &#34;&#34;&#34;
 
     if units not in enums.Unit:
-        raise ValueError(&#39;Variable units is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.Unit))))
+        raise ValueError(&#39;Variable units ({}) is not one of the values: {}&#39;.format(units, &#39;, &#39;.join(map(str, enums.Unit))))
 
     if frequency is not None and frequency not in enums.Frequency:
-        raise ValueError(&#39;Variable frequency is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.Frequency))))
+        raise ValueError(&#39;Variable frequency ({}) is not one of the values: {}&#39;.format(frequency, &#39;, &#39;.join(map(str, enums.Frequency))))
 
     if aggregation_method not in enums.AggregationMethod:
-        raise ValueError(&#39;Variable aggregation_method is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.AggregationMethod))))
+        raise ValueError(&#39;Variable aggregation_method ({}) is not one of the values: {}&#39;.format(aggregation_method, &#39;, &#39;.join(map(str, enums.AggregationMethod))))
 
     if output_type not in enums.OutputType:
-        raise ValueError(&#39;Variable output_type is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.OutputType))))
+        raise ValueError(&#39;Variable output_type ({}) is not one of the values: {}&#39;.format(output_type, &#39;, &#39;.join(map(str, enums.OutputType))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -11476,7 +11476,7 @@ Entering a vintage date is also useful to compare series on different releases w
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_release"><code class="name flex">
-<span>def <span class="ident">series_release</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_release</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11571,10 +11571,10 @@ The end of the real-time period. For more information, see <a href="https://fred
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -11599,7 +11599,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_search"><code class="name flex">
-<span>def <span class="ident">series_search</span></span>(<span>self, search_text: str, search_type: <a title="pystlouisfed.enums.SearchType" href="enums.html#pystlouisfed.enums.SearchType">SearchType</a> = SearchType.full_text, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = None, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = None, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_search</span></span>(<span>self, search_text: str, search_type: <a title="pystlouisfed.enums.SearchType" href="enums.html#pystlouisfed.enums.SearchType">SearchType</a> = SearchType.full_text, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = None, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = None, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11814,16 +11814,16 @@ A semicolon delimited list of tag names that series match none of.</p>
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if search_type not in enums.SearchType:
-        raise ValueError(&#39;Variable search_type is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.SearchType))))
+        raise ValueError(&#39;Variable search_type ({}) is not one of the values: {}&#39;.format(search_type, &#39;, &#39;.join(map(str, enums.SearchType))))
 
     if filter_variable is not None and filter_variable not in enums.FilterVariable:
-        raise ValueError(&#39;Variable filter_variable is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterVariable))))
+        raise ValueError(&#39;Variable filter_variable ({}) is not one of the values: {}&#39;.format(filter_variable, &#39;, &#39;.join(map(str, enums.FilterVariable))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -11866,7 +11866,7 @@ A semicolon delimited list of tag names that series match none of.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_search_related_tags"><code class="name flex">
-<span>def <span class="ident">series_search_related_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_search_related_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12042,10 +12042,10 @@ See the related request fred/series/search/tags.</p>
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -12075,7 +12075,7 @@ See the related request fred/series/search/tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_search_tags"><code class="name flex">
-<span>def <span class="ident">series_search_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_search_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12236,10 +12236,10 @@ Sort results is ascending or descending order for attribute values specified by 
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -12268,7 +12268,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_tags"><code class="name flex">
-<span>def <span class="ident">series_tags</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_tags</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12412,10 +12412,10 @@ Sort results is ascending or descending order for attribute values specified by 
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -12440,7 +12440,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_updates"><code class="name flex">
-<span>def <span class="ident">series_updates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = FilterValue.all, start_time: datetime.datetime = None, end_time: datetime.datetime = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_updates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = FilterValue.all, start_time: datetime.datetime = None, end_time: datetime.datetime = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12596,22 +12596,22 @@ Results are limited to series updated within the last two weeks.</p>
     &#34;&#34;&#34;
 
     if filter_value not in enums.FilterValue:
-        raise ValueError(&#39;Variable filter_value is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.FilterValue))))
+        raise ValueError(&#39;Variable filter_value ({}) is not one of the values: {}&#39;.format(filter_value, &#39;, &#39;.join(map(str, enums.FilterValue))))
 
     if start_time is not None and end_time is None:
-        raise Exception(&#39;end_time is required if start_time is set&#39;)
+        raise ValueError(&#39;end_time is required if start_time is set&#39;)
 
     if end_time is not None and start_time is None:
-        raise Exception(&#39;start_time is required if end_time is set&#39;)
+        raise ValueError(&#39;start_time is required if end_time is set&#39;)
 
     if start_time is not None and end_time is not None and start_time &gt;= end_time:
-        raise Exception(&#39;end_time must be greater than start_time&#39;)
+        raise ValueError(&#39;end_time must be greater than start_time&#39;)
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -12763,10 +12763,10 @@ Vintage dates are the release dates for a series excluding release dates when th
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     return pd.to_datetime(
         pd.Series(
@@ -12784,7 +12784,7 @@ Vintage dates are the release dates for a series excluding release dates when th
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.source"><code class="name flex">
-<span>def <span class="ident">source</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21)) ‑> <a title="pystlouisfed.models.Source" href="models.html#pystlouisfed.models.Source">Source</a></span>
+<span>def <span class="ident">source</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> <a title="pystlouisfed.models.Source" href="models.html#pystlouisfed.models.Source">Source</a></span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12874,10 +12874,10 @@ The end of the real-time period. For more information, see <a href="https://fred
     &#34;&#34;&#34;
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     data = self._client.get(
         &#39;/fred/source&#39;,
@@ -12891,7 +12891,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.source_releases"><code class="name flex">
-<span>def <span class="ident">source_releases</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">source_releases</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13035,10 +13035,10 @@ Sort results is ascending or descending order for attribute values specified by 
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -13066,7 +13066,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.sources"><code class="name flex">
-<span>def <span class="ident">sources</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.source_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">sources</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.source_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13201,10 +13201,10 @@ Sort results is ascending or descending order for attribute values specified by 
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -13227,7 +13227,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.tags"><code class="name flex">
-<span>def <span class="ident">tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13383,13 +13383,13 @@ Sort results is ascending or descending order for attribute values specified by 
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if tag_group_id is not None and tag_group_id not in enums.TagGroupID:
-        raise ValueError(&#39;Variable tag_group_id is not one of the values: {}&#39;.format(&#39;, &#39;.join(map(str, enums.TagGroupID))))
+        raise ValueError(&#39;Variable tag_group_id ({}) is not one of the values: {}&#39;.format(tag_group_id, &#39;, &#39;.join(map(str, enums.TagGroupID))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(
@@ -13417,7 +13417,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.tags_series"><code class="name flex">
-<span>def <span class="ident">tags_series</span></span>(<span>self, tag_names: List[str] = None, exclude_tag_names: List[str] = None, realtime_start: datetime.date = datetime.date(2022, 1, 21), realtime_end: datetime.date = datetime.date(2022, 1, 21), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">tags_series</span></span>(<span>self, tag_names: List[str] = None, exclude_tag_names: List[str] = None, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13595,10 +13595,10 @@ Sort results is ascending or descending order for attribute values specified by 
         raise ValueError(&#39;Variable order_by ({}) is not one of the values: {}&#39;.format(order_by, &#39;, &#39;.join(map(str, allowed_orders))))
 
     if realtime_start &lt; date(1776, 7, 4):
-        raise Exception(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
+        raise ValueError(&#39;Variable realtime_start (&#34;{}&#34;) is before min date 1776-07-04.&#39;.format(realtime_start))
 
     if realtime_start &gt; realtime_end:
-        raise Exception(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
+        raise ValueError(&#39;The date set by variable realtime_start (&#34;{}&#34;) can not be after the date set by variable realtime_end (&#34;{}&#34;).&#39;.format(realtime_start, realtime_end))
 
     df = pd.DataFrame(
         self._client.get(

@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='pystlouisfed',
-    version='1.0.0',
+    version='1.0.1',
     packages=['pystlouisfed'],
     url='https://github.com/TomasKoutek/pystlouisfed',
     license='MIT',
