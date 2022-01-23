@@ -37,6 +37,14 @@ First you need to register and create an [API key](https://fred.stlouisfed.org/d
 ### Documentation
 
 The [documentation](https://tomaskoutek.github.io/pystlouisfed/) contains a description of all methods, enums, classes and API calls with individual examples and their results.
+Or you can display a detailed description directly with the help function.
+
+For example:
+```python
+from pystlouisfed import FRED
+
+help(FRED.series_search)
+```
 
 ### Let 's start with FRED and ALFRED
 
