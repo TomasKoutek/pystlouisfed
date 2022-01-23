@@ -243,7 +243,7 @@ For example, "GDP" has 303 values for today.
 ```python
 from pystlouisfed import FRED
 
-fred = FRED(api_key='9a8263c93d03d49079ad016afb7bdee3')
+fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 df = fred.series_observations(series_id='GDP')
 
 print(len(df))
@@ -256,7 +256,7 @@ But if we request all the changes, we get 3068 values!
 from pystlouisfed import FRED
 from datetime import date
 
-fred = FRED(api_key='9a8263c93d03d49079ad016afb7bdee3')
+fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 df = fred.series_observations(series_id='GDP', realtime_start=date(1776, 7, 4))
 
 print(len(df))
@@ -270,7 +270,7 @@ Let's say we want all changes between "2021-11-01" and "2022-01-01":
 from pystlouisfed import FRED
 from datetime import date
 
-fred = FRED(api_key='9a8263c93d03d49079ad016afb7bdee3')
+fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 df = fred.series_observations(series_id='GDP', realtime_start=date(2021, 11, 1), realtime_end=date(2022, 1, 1))
 ```
 
