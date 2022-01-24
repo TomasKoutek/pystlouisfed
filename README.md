@@ -1,3 +1,5 @@
+<div id="top"></div>
+
 # Python client for Federal Reserve Bank of St. Louis
 
 ## Description
@@ -24,7 +26,7 @@ pip install pystlouisfed
 
 ### Dependencies
 
-* [pandas](https://pandas.pydata.org/) for timeseries data and lists
+* [pandas](https://pandas.pydata.org/) for time series data and lists
 * [requests](https://docs.python-requests.org/en/latest/) for API calls
 * [shapely](https://shapely.readthedocs.io/en/latest/) for geometric data from GeoFRED
 * [sickle](https://sickle.readthedocs.io/) for FRASER oai-pmh API
@@ -48,7 +50,7 @@ help(FRED.series_search)
 
 ### Let 's start with FRED and ALFRED
 
-Most FRED (ALFRED) API calls return an list of objects (`pandas.DataFrame`), but there are a few exceptions. A few methods do not return a `pandas.DataFrame`, but only one specific
+Most FRED (ALFRED) API calls return a list of objects (`pandas.DataFrame`), but there are a few exceptions. A few methods do not return a `pandas.DataFrame`, but only one specific
 object from the [pystlouisfed.models](https://tomaskoutek.github.io/pystlouisfed/models.html).
 
 For example:
@@ -74,7 +76,7 @@ fred.source(source_id=1)
 ```
 
 other methods return `pandas.DataFrame`
-For example method `FRED.category_series` (all series for specific category)
+For example method `FRED.category_series` (all series for a specific category)
 
 ```python
 from pystlouisfed import FRED
@@ -216,7 +218,7 @@ df = fred.series_observations(series_id='T10Y2Y', aggregation_method=Aggregation
 ### Working with rate limiting
 
 The API is limited to 120 calls per 60 seconds.
-`pystlouisfed` therefore by default uses [ratelimiter](https://github.com/RazerM/ratelimiter), which monitors this limit!
+`pystlouisfed` therefore, by default uses [ratelimiter](https://github.com/RazerM/ratelimiter), which monitors this limit!
 So it is not a problem to download all series (~800) with the tag "daily" and "nsa" (Not Seasonally Adjusted) without exceeding any limits:
 
 ```python
@@ -225,8 +227,8 @@ from pystlouisfed import FRED
 fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 series = fred.tags_series(tag_names=['daily', 'nsa'], exclude_tag_names=['discontinued'])
 
-for id in series.id.values:
-    df = fred.series_observations(series_id=id)
+for series_id in series.id.values:
+    df = fred.series_observations(series_id=series_id)
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -263,7 +265,7 @@ print(len(df))
 # 3068
 ```
 
-Of course it is possible to set the range or only one day (set same date value for `realtime_start` and `realtime_end`).
+Of course, it is possible to set the range or only one day (set same date value for `realtime_start` and `realtime_end`).
 Let's say we want all changes between "2021-11-01" and "2022-01-01":
 
 ```python
