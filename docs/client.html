@@ -566,7 +566,6 @@ class FRED:
             df.last_updated = pd.to_datetime(df.last_updated + &#39;00&#39;, format=&#39;%Y-%m-%d %H:%M:%S%z&#39;)
 
             df = df.astype(dtype={
-                &#39;group_popularity&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment&#39;: &#39;category&#39;,
                 &#39;units_short&#39;: &#39;category&#39;,
@@ -1406,8 +1405,7 @@ class FRED:
                 &#39;units&#39;: &#39;category&#39;,
                 &#39;units_short&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
-                &#39;group_popularity&#39;: &#39;category&#39;
+                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;
             })
 
         return df
@@ -2405,8 +2403,7 @@ class FRED:
                 &#39;units_short&#39;: &#39;category&#39;,
                 &#39;units&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
-                &#39;group_popularity&#39;: &#39;category&#39;
+                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;
             })
 
         return df
@@ -3713,8 +3710,7 @@ class FRED:
                 &#39;frequency_short&#39;: &#39;category&#39;,
                 &#39;units_short&#39;: &#39;category&#39;,
                 &#39;units&#39;: &#39;category&#39;,
-                &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-                &#39;group_popularity&#39;: &#39;category&#39;
+                &#39;seasonal_adjustment&#39;: &#39;category&#39;
             })
 
         return df
@@ -5064,7 +5060,6 @@ Requests can be customized according to data source, release, category, series, 
             df.last_updated = pd.to_datetime(df.last_updated + &#39;00&#39;, format=&#39;%Y-%m-%d %H:%M:%S%z&#39;)
 
             df = df.astype(dtype={
-                &#39;group_popularity&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment&#39;: &#39;category&#39;,
                 &#39;units_short&#39;: &#39;category&#39;,
@@ -5904,8 +5899,7 @@ Requests can be customized according to data source, release, category, series, 
                 &#39;units&#39;: &#39;category&#39;,
                 &#39;units_short&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
-                &#39;group_popularity&#39;: &#39;category&#39;
+                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;
             })
 
         return df
@@ -6903,8 +6897,7 @@ Requests can be customized according to data source, release, category, series, 
                 &#39;units_short&#39;: &#39;category&#39;,
                 &#39;units&#39;: &#39;category&#39;,
                 &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
-                &#39;group_popularity&#39;: &#39;category&#39;
+                &#39;seasonal_adjustment_short&#39;: &#39;category&#39;
             })
 
         return df
@@ -8211,8 +8204,7 @@ Requests can be customized according to data source, release, category, series, 
                 &#39;frequency_short&#39;: &#39;category&#39;,
                 &#39;units_short&#39;: &#39;category&#39;,
                 &#39;units&#39;: &#39;category&#39;,
-                &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-                &#39;group_popularity&#39;: &#39;category&#39;
+                &#39;seasonal_adjustment&#39;: &#39;category&#39;
             })
 
         return df</code></pre>
@@ -8343,7 +8335,7 @@ The id for a category.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_children"><code class="name flex">
-<span>def <span class="ident">category_children</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_children</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -8457,7 +8449,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_related"><code class="name flex">
-<span>def <span class="ident">category_related</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_related</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -8577,7 +8569,7 @@ Most categories do not have related categories.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_related_tags"><code class="name flex">
-<span>def <span class="ident">category_related_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_related_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -8791,7 +8783,7 @@ No tags exist for a category that does not have series.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_series"><code class="name flex">
-<span>def <span class="ident">category_series</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_series</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9025,7 +9017,6 @@ Tuple of tag names that series match none of.</p>
         df.last_updated = pd.to_datetime(df.last_updated + &#39;00&#39;, format=&#39;%Y-%m-%d %H:%M:%S%z&#39;)
 
         df = df.astype(dtype={
-            &#39;group_popularity&#39;: &#39;category&#39;,
             &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
             &#39;seasonal_adjustment&#39;: &#39;category&#39;,
             &#39;units_short&#39;: &#39;category&#39;,
@@ -9038,7 +9029,7 @@ Tuple of tag names that series match none of.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.category_tags"><code class="name flex">
-<span>def <span class="ident">category_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">category_tags</span></span>(<span>self, category_id: int = 0, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9251,7 +9242,7 @@ See the related request fred/category/related_tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.related_tags"><code class="name flex">
-<span>def <span class="ident">related_tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">related_tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9466,7 +9457,7 @@ See the related request fred/tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release"><code class="name flex">
-<span>def <span class="ident">release</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> <a title="pystlouisfed.models.Release" href="models.html#pystlouisfed.models.Release">Release</a></span>
+<span>def <span class="ident">release</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> <a title="pystlouisfed.models.Release" href="models.html#pystlouisfed.models.Release">Release</a></span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9727,7 +9718,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_related_tags"><code class="name flex">
-<span>def <span class="ident">release_related_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_related_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -9937,7 +9928,7 @@ Series are assigned tags and releases. Indirectly through series, it is possible
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_series"><code class="name flex">
-<span>def <span class="ident">release_series</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_series</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10171,15 +10162,14 @@ Tuple of tag names that series match none of.</p>
             &#39;units&#39;: &#39;category&#39;,
             &#39;units_short&#39;: &#39;category&#39;,
             &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-            &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
-            &#39;group_popularity&#39;: &#39;category&#39;
+            &#39;seasonal_adjustment_short&#39;: &#39;category&#39;
         })
 
     return df</code></pre>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_sources"><code class="name flex">
-<span>def <span class="ident">release_sources</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_sources</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10436,7 +10426,7 @@ Note that release dates are published by data sources and do not necessarily rep
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.release_tags"><code class="name flex">
-<span>def <span class="ident">release_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">release_tags</span></span>(<span>self, release_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10639,7 +10629,7 @@ See the related request fred/release/related_tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.releases"><code class="name flex">
-<span>def <span class="ident">releases</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">releases</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10808,7 +10798,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.releases_dates"><code class="name flex">
-<span>def <span class="ident">releases_dates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.desc, include_release_dates_with_no_data: bool = False) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">releases_dates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.desc, include_release_dates_with_no_data: bool = False) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -10977,7 +10967,7 @@ Note that release dates are published by data sources and do not necessarily rep
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series"><code class="name flex">
-<span>def <span class="ident">series</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> <a title="pystlouisfed.models.Series" href="models.html#pystlouisfed.models.Series">Series</a></span>
+<span>def <span class="ident">series</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> <a title="pystlouisfed.models.Series" href="models.html#pystlouisfed.models.Series">Series</a></span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11105,7 +11095,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_categories"><code class="name flex">
-<span>def <span class="ident">series_categories</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_categories</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11219,7 +11209,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_observations"><code class="name flex">
-<span>def <span class="ident">series_observations</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, observation_start: datetime.date = datetime.date(1776, 7, 4), observation_end: datetime.date = datetime.date(9999, 12, 31), units: <a title="pystlouisfed.enums.Unit" href="enums.html#pystlouisfed.enums.Unit">Unit</a> = Unit.lin, frequency: <a title="pystlouisfed.enums.Frequency" href="enums.html#pystlouisfed.enums.Frequency">Frequency</a> = None, aggregation_method: <a title="pystlouisfed.enums.AggregationMethod" href="enums.html#pystlouisfed.enums.AggregationMethod">AggregationMethod</a> = AggregationMethod.avg, output_type: <a title="pystlouisfed.enums.OutputType" href="enums.html#pystlouisfed.enums.OutputType">OutputType</a> = OutputType.realtime_period, vintage_dates: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_observations</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc, observation_start: datetime.date = datetime.date(1776, 7, 4), observation_end: datetime.date = datetime.date(9999, 12, 31), units: <a title="pystlouisfed.enums.Unit" href="enums.html#pystlouisfed.enums.Unit">Unit</a> = Unit.lin, frequency: <a title="pystlouisfed.enums.Frequency" href="enums.html#pystlouisfed.enums.Frequency">Frequency</a> = None, aggregation_method: <a title="pystlouisfed.enums.AggregationMethod" href="enums.html#pystlouisfed.enums.AggregationMethod">AggregationMethod</a> = AggregationMethod.avg, output_type: <a title="pystlouisfed.enums.OutputType" href="enums.html#pystlouisfed.enums.OutputType">OutputType</a> = OutputType.realtime_period, vintage_dates: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11476,7 +11466,7 @@ Entering a vintage date is also useful to compare series on different releases w
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_release"><code class="name flex">
-<span>def <span class="ident">series_release</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_release</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11599,7 +11589,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_search"><code class="name flex">
-<span>def <span class="ident">series_search</span></span>(<span>self, search_text: str, search_type: <a title="pystlouisfed.enums.SearchType" href="enums.html#pystlouisfed.enums.SearchType">SearchType</a> = SearchType.full_text, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = None, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = None, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_search</span></span>(<span>self, search_text: str, search_type: <a title="pystlouisfed.enums.SearchType" href="enums.html#pystlouisfed.enums.SearchType">SearchType</a> = SearchType.full_text, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = None, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = None, filter_variable: <a title="pystlouisfed.enums.FilterVariable" href="enums.html#pystlouisfed.enums.FilterVariable">FilterVariable</a> = None, filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = None, tag_names: List[str] = None, exclude_tag_names: List[str] = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -11858,15 +11848,14 @@ A semicolon delimited list of tag names that series match none of.</p>
             &#39;units_short&#39;: &#39;category&#39;,
             &#39;units&#39;: &#39;category&#39;,
             &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-            &#39;seasonal_adjustment_short&#39;: &#39;category&#39;,
-            &#39;group_popularity&#39;: &#39;category&#39;
+            &#39;seasonal_adjustment_short&#39;: &#39;category&#39;
         })
 
     return df</code></pre>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_search_related_tags"><code class="name flex">
-<span>def <span class="ident">series_search_related_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_search_related_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, exclude_tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12075,7 +12064,7 @@ See the related request fred/series/search/tags.</p>
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_search_tags"><code class="name flex">
-<span>def <span class="ident">series_search_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_search_tags</span></span>(<span>self, series_search_text: str, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, tag_search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12268,7 +12257,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_tags"><code class="name flex">
-<span>def <span class="ident">series_tags</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_tags</span></span>(<span>self, series_id: str, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12440,7 +12429,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.series_updates"><code class="name flex">
-<span>def <span class="ident">series_updates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = FilterValue.all, start_time: datetime.datetime = None, end_time: datetime.datetime = None) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">series_updates</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), filter_value: <a title="pystlouisfed.enums.FilterValue" href="enums.html#pystlouisfed.enums.FilterValue">FilterValue</a> = FilterValue.all, start_time: datetime.datetime = None, end_time: datetime.datetime = None) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12784,7 +12773,7 @@ Vintage dates are the release dates for a series excluding release dates when th
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.source"><code class="name flex">
-<span>def <span class="ident">source</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22)) ‑> <a title="pystlouisfed.models.Source" href="models.html#pystlouisfed.models.Source">Source</a></span>
+<span>def <span class="ident">source</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25)) ‑> <a title="pystlouisfed.models.Source" href="models.html#pystlouisfed.models.Source">Source</a></span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -12891,7 +12880,7 @@ The end of the real-time period. For more information, see <a href="https://fred
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.source_releases"><code class="name flex">
-<span>def <span class="ident">source_releases</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">source_releases</span></span>(<span>self, source_id: int, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.release_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13066,7 +13055,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.sources"><code class="name flex">
-<span>def <span class="ident">sources</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.source_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">sources</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.source_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13227,7 +13216,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.tags"><code class="name flex">
-<span>def <span class="ident">tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">tags</span></span>(<span>self, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), tag_names: List[str] = None, tag_group_id: <a title="pystlouisfed.enums.TagGroupID" href="enums.html#pystlouisfed.enums.TagGroupID">TagGroupID</a> = None, search_text: str = None, order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_count, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13417,7 +13406,7 @@ Sort results is ascending or descending order for attribute values specified by 
 </details>
 </dd>
 <dt id="pystlouisfed.client.FRED.tags_series"><code class="name flex">
-<span>def <span class="ident">tags_series</span></span>(<span>self, tag_names: List[str] = None, exclude_tag_names: List[str] = None, realtime_start: datetime.date = datetime.date(2022, 1, 22), realtime_end: datetime.date = datetime.date(2022, 1, 22), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
+<span>def <span class="ident">tags_series</span></span>(<span>self, tag_names: List[str] = None, exclude_tag_names: List[str] = None, realtime_start: datetime.date = datetime.date(2022, 1, 25), realtime_end: datetime.date = datetime.date(2022, 1, 25), order_by: <a title="pystlouisfed.enums.OrderBy" href="enums.html#pystlouisfed.enums.OrderBy">OrderBy</a> = OrderBy.series_id, sort_order: <a title="pystlouisfed.enums.SortOrder" href="enums.html#pystlouisfed.enums.SortOrder">SortOrder</a> = SortOrder.asc) ‑> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
@@ -13628,8 +13617,7 @@ Sort results is ascending or descending order for attribute values specified by 
             &#39;frequency_short&#39;: &#39;category&#39;,
             &#39;units_short&#39;: &#39;category&#39;,
             &#39;units&#39;: &#39;category&#39;,
-            &#39;seasonal_adjustment&#39;: &#39;category&#39;,
-            &#39;group_popularity&#39;: &#39;category&#39;
+            &#39;seasonal_adjustment&#39;: &#39;category&#39;
         })
 
     return df</code></pre>

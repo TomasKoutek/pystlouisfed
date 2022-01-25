@@ -538,7 +538,6 @@ class FRED:
             df.last_updated = pd.to_datetime(df.last_updated + '00', format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
-                'group_popularity': 'category',
                 'seasonal_adjustment_short': 'category',
                 'seasonal_adjustment': 'category',
                 'units_short': 'category',
@@ -1378,8 +1377,7 @@ class FRED:
                 'units': 'category',
                 'units_short': 'category',
                 'seasonal_adjustment': 'category',
-                'seasonal_adjustment_short': 'category',
-                'group_popularity': 'category'
+                'seasonal_adjustment_short': 'category'
             })
 
         return df
@@ -2377,8 +2375,7 @@ class FRED:
                 'units_short': 'category',
                 'units': 'category',
                 'seasonal_adjustment': 'category',
-                'seasonal_adjustment_short': 'category',
-                'group_popularity': 'category'
+                'seasonal_adjustment_short': 'category'
             })
 
         return df
@@ -3685,8 +3682,7 @@ class FRED:
                 'frequency_short': 'category',
                 'units_short': 'category',
                 'units': 'category',
-                'seasonal_adjustment': 'category',
-                'group_popularity': 'category'
+                'seasonal_adjustment': 'category'
             })
 
         return df

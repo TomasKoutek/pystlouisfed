@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='pystlouisfed',
-    version='1.0.1',
+    version='1.0.2',
     packages=['pystlouisfed'],
     url='https://github.com/TomasKoutek/pystlouisfed',
     license='MIT',
@@ -57,4 +57,12 @@ setup(
         "sickle",
         "numpy"
     ],
+
+    extras_require={
+        "dev": [
+            "pdoc3",
+            "build",
+            "twine"
+        ]
+    }
 )
