@@ -282,13 +282,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.category_children(category_id=13).head()
-                  id                               name  parent_id
-            0     16                            Exports         13
-            1     17                            Imports         13
-            2   3000         Income Payments & Receipts         13
-            3  33705  International Investment Position         13
-            4    125                      Trade Balance         13
-            ...
+                                                name  parent_id
+            id
+            16                               Exports         13
+            17                               Imports         13
+            3000          Income Payments & Receipts         13
+            33705  International Investment Position         13
+            125                        Trade Balance         13
         ```
         """
 
@@ -306,7 +306,9 @@ class FRED:
             realtime_end=realtime_end
         )
 
-        return pd.DataFrame(data)
+        return pd.DataFrame(data).astype(dtype={
+            'name': 'string'
+        }).set_index('id')
 
     def category_related(self, category_id: int = 0, realtime_start: date = date.today(), realtime_end: date = date.today()) -> pd.DataFrame:
 
@@ -354,13 +356,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.category_related(category_id=32073).head()
-                id         name  parent_id
-            0  149     Arkansas      27281
-            1  150     Illinois      27281
-            2  151      Indiana      27281
-            3  152     Kentucky      27281
-            4  153  Mississippi      27281
-            ...
+                        name  parent_id
+            id
+            149     Arkansas      27281
+            150     Illinois      27281
+            151      Indiana      27281
+            152     Kentucky      27281
+            153  Mississippi      27281
         ```
         """
 
@@ -378,7 +380,9 @@ class FRED:
             realtime_end=realtime_end
         )
 
-        return pd.DataFrame(data)
+        return pd.DataFrame(data).astype(dtype={
+            'name': 'string'
+        }).set_index('id')
 
     def category_series(
             self,
@@ -471,13 +475,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.category_series(category_id=125).head()
-                    id realtime_start realtime_end                                              title observation_start observation_end  frequency frequency_short                units units_short      seasonal_adjustment seasonal_adjustment_short               last_updated  popularity group_popularity                                              notes
-            0  AITGCBN     2022-01-13   2022-01-13  Advance U.S. International Trade in Goods: Bal...        2021-11-01      2021-11-01    Monthly               M  Millions of Dollars   Mil. of $  Not Seasonally Adjusted                       NSA  2021-12-29 07:31:07-06:00           6               27  This advance estimate represents the current m...
-            1  AITGCBS     2022-01-13   2022-01-13  Advance U.S. International Trade in Goods: Bal...        2021-11-01      2021-11-01    Monthly               M  Millions of Dollars   Mil. of $      Seasonally Adjusted                        SA  2021-12-29 07:31:01-06:00          24               27  This advance estimate represents the current m...
-            2   BOPBCA     2022-01-13   2022-01-13          Balance on Current Account (DISCONTINUED)        1960-01-01      2014-01-01  Quarterly               Q  Billions of Dollars   Bil. of $      Seasonally Adjusted                        SA  2014-06-18 08:41:28-05:00          10               12  This series has been discontinued as a result ...
-            3  BOPBCAA     2022-01-13   2022-01-13          Balance on Current Account (DISCONTINUED)        1960-01-01      2013-01-01     Annual               A  Billions of Dollars   Bil. of $  Not Seasonally Adjusted                       NSA  2014-06-18 08:41:28-05:00           2               12  This series has been discontinued as a result ...
-            4  BOPBCAN     2022-01-13   2022-01-13          Balance on Current Account (DISCONTINUED)        1960-01-01      2014-01-01  Quarterly               Q  Billions of Dollars   Bil. of $  Not Seasonally Adjusted                       NSA  2014-06-18 08:41:28-05:00           1               12  This series has been discontinued as a result ...
-            ...
+                    realtime_start realtime_end                                              title observation_start observation_end  frequency frequency_short                units units_short      seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
+            id
+            AITGCBN     2022-02-05   2022-02-05  Advance U.S. International Trade in Goods: Bal...        2021-12-01      2021-12-01    Monthly               M  Millions of Dollars   Mil. of $  Not Seasonally Adjusted                       NSA 2022-01-26 13:31:05+00:00           3                26  This advance estimate represents the current m...
+            AITGCBS     2022-02-05   2022-02-05  Advance U.S. International Trade in Goods: Bal...        2021-12-01      2021-12-01    Monthly               M  Millions of Dollars   Mil. of $      Seasonally Adjusted                        SA 2022-01-26 13:31:02+00:00          26                26  This advance estimate represents the current m...
+            BOPBCA      2022-02-05   2022-02-05          Balance on Current Account (DISCONTINUED)        1960-01-01      2014-01-01  Quarterly               Q  Billions of Dollars   Bil. of $      Seasonally Adjusted                        SA 2014-06-18 13:41:28+00:00          10                11  This series has been discontinued as a result ...
+            BOPBCAA     2022-02-05   2022-02-05          Balance on Current Account (DISCONTINUED)        1960-01-01      2013-01-01     Annual               A  Billions of Dollars   Bil. of $  Not Seasonally Adjusted                       NSA 2014-06-18 13:41:28+00:00           2                11  This series has been discontinued as a result ...
+            BOPBCAN     2022-02-05   2022-02-05          Balance on Current Account (DISCONTINUED)        1960-01-01      2014-01-01  Quarterly               Q  Billions of Dollars   Bil. of $  Not Seasonally Adjusted                       NSA 2014-06-18 13:41:28+00:00           1                11  This series has been discontinued as a result ...
         ```
         """
 
@@ -535,16 +539,19 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
-            df.last_updated = pd.to_datetime(df.last_updated + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.last_updated = pd.to_datetime(df.last_updated + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'id': 'string',
+                'title': 'string',
+                'notes': 'string',
                 'seasonal_adjustment_short': 'category',
                 'seasonal_adjustment': 'category',
                 'units_short': 'category',
                 'units': 'category',
                 'frequency_short': 'category',
                 'frequency': 'category'
-            })
+            }).set_index('id')
 
         return df
 
@@ -628,13 +635,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.category_tags(category_id=125).head()
-                          name group_id notes                 created  popularity  series_count
-            0  capital account      gen        2012-02-27 10:18:19-06          28             2
-            1  current account      gen        2012-02-27 10:18:19-06          41             2
-            2       investment      gen        2012-02-27 10:18:19-06          56             2
-            3      merchandise      gen        2013-11-13 16:08:31-06          18             2
-            4         payments      gen        2012-02-27 10:18:19-06          39             2
-            ...
+                            group_id   notes                   created  popularity  series_count
+            name
+            headline figure      gen         2013-11-19 19:55:53+00:00          53             2
+            primary              gen         2012-02-27 16:18:19+00:00          42             2
+            transfers            gen         2012-02-27 16:18:19+00:00          31             2
+            census               src  Census 2012-02-27 16:18:19+00:00          80             4
+            investment           gen         2012-02-27 16:18:19+00:00          56             4
         ```
         """
         allowed_orders = [
@@ -684,11 +691,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -779,13 +788,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.category_related_tags(category_id=125, tag_names=['services', 'quarterly']).head()
-                       name group_id                        notes                 created  popularity  series_count
-            0           nsa     seas      Not Seasonally Adjusted  2012-02-27 10:18:19-06         100             2
-            1            sa     seas          Seasonally Adjusted  2012-02-27 10:18:19-06          88             2
-            2       balance      gen                               2012-02-27 10:18:19-06          47             4
-            3           bea      src  Bureau of Economic Analysis  2012-02-27 10:18:19-06          79             4
-            4  discontinued      gen                               2012-02-27 10:18:19-06          67             4
-            ...
+                         group_id                    notes                   created  popularity  series_count
+            name
+            discontinued      gen                          2012-02-27 16:18:19+00:00          67             4
+            nsa              seas  Not Seasonally Adjusted 2012-02-27 16:18:19+00:00         100             6
+            sa               seas      Seasonally Adjusted 2012-02-27 16:18:19+00:00          88             6
+            goods             gen                          2012-02-27 16:18:19+00:00          68             8
+            balance           gen                          2012-02-27 16:18:19+00:00          47            12
         ```
         """
 
@@ -824,11 +833,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -899,13 +910,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.releases().head()
-               id realtime_start realtime_end                                               name  press_release                                         link                                              notes
-            0   9     2022-01-14   2022-01-14  Advance Monthly Sales for Retail and Food Serv...           True                http://www.census.gov/retail/  The U.S. Census Bureau conducts the Advance Mo...
-            1  10     2022-01-14   2022-01-14                               Consumer Price Index           True                      http://www.bls.gov/cpi/                                                NaN
-            2  11     2022-01-14   2022-01-14                              Employment Cost Index           True                  http://www.bls.gov/ncs/ect/                                                NaN
-            3  13     2022-01-14   2022-01-14  G.17 Industrial Production and Capacity Utiliz...           True  http://www.federalreserve.gov/releases/g17/                                                NaN
-            4  14     2022-01-14   2022-01-14                               G.19 Consumer Credit           True  http://www.federalreserve.gov/releases/g19/                                                NaN
-            ...
+               realtime_start realtime_end                                               name  press_release                                         link                                              notes
+            id
+            9      2022-02-05   2022-02-05  Advance Monthly Sales for Retail and Food Serv...           True                http://www.census.gov/retail/  The U.S. Census Bureau conducts the Advance Mo...
+            10     2022-02-05   2022-02-05                               Consumer Price Index           True                      http://www.bls.gov/cpi/                                               <NA>
+            11     2022-02-05   2022-02-05                              Employment Cost Index           True                  http://www.bls.gov/ncs/ect/                                               <NA>
+            13     2022-02-05   2022-02-05  G.17 Industrial Production and Capacity Utiliz...           True  http://www.federalreserve.gov/releases/g17/                                               <NA>
+            14     2022-02-05   2022-02-05                               G.19 Consumer Credit           True  http://www.federalreserve.gov/releases/g19/                                               <NA>
         ```
         """
 
@@ -944,8 +955,11 @@ class FRED:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'link': 'string',
+                'notes': 'string',
                 'press_release': 'bool'
-            })
+            }).set_index('id')
 
         return df
 
@@ -1015,13 +1029,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.releases_dates(realtime_start=date.today() - timedelta(days=1)).head()
-               release_id                              release_name        date
-            0         502                      Euro Short Term Rate  2022-01-13
-            1         502                      Euro Short Term Rate  2022-01-14
-            2         494  Chicago Fed Advance Retail Trade Summary  2022-01-13
-            3         492             SONIA Interest Rate Benchmark  2022-01-13
-            4         484                    Key ECB Interest Rates  2022-01-13
-            ...
+                                                             release_name       date
+            release_id
+            502                                      Euro Short Term Rate 2022-02-04
+            492                             SONIA Interest Rate Benchmark 2022-02-04
+            484                                    Key ECB Interest Rates 2022-02-04
+            483                              SOFR Averages and Index Data 2022-02-04
+            469         State Unemployment Insurance Weekly Claims Report 2022-02-04
         ```
         """
         allowed_orders = [
@@ -1054,6 +1068,9 @@ class FRED:
 
         if not df.empty:
             df.date = pd.to_datetime(df.date, format='%Y-%m-%d')
+            df = df.astype(dtype={
+                'release_name': 'string'
+            }).set_index('release_id')
 
         return df
 
@@ -1184,13 +1201,12 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.release_dates(release_id=82).head()
-                    release_id        date
-            0          82  1997-02-10
-            1          82  1998-02-10
-            2          82  1999-02-04
-            3          82  2000-02-10
-            4          82  2001-01-16
-            ...
+               release_id       date
+            0          82 1997-02-10
+            1          82 1998-02-10
+            2          82 1999-02-04
+            3          82 2000-02-10
+            4          82 2001-01-16
         ```
         """
 
@@ -1308,13 +1324,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.release_series(release_id=51).head()
-                        id realtime_start realtime_end                                              title observation_start observation_end frequency frequency_short                units units_short  seasonal_adjustment seasonal_adjustment_short            last_updated  popularity  group_popularity                                              notes
-            0  BOMTVLM133S     2022-01-14   2022-01-14                  U.S. Imports of Services - Travel        1992-01-01      2017-09-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA  2017-11-03 08:12:15-05           1                 1  Further information related to the internation...
-            1  BOMVGMM133S     2022-01-14   2022-01-14  U.S. Imports of Services: U.S. Government Misc...        1992-01-01      2013-12-01   Monthly               M  Millions of Dollars   Mil. of $  Seasonally Adjusted                        SA  2014-10-20 09:27:37-05           1                 1  BEA has introduced new table presentations, in...
-            2  BOMVJMM133S     2022-01-14   2022-01-14  U.S. Imports of Services - Direct Defense Expe...        1992-01-01      2013-12-01   Monthly               M  Millions of Dollars   Mil. of $  Seasonally Adjusted                        SA  2014-10-20 09:26:44-05           1                 1  BEA has introduced new table presentations, in...
-            3  BOMVMPM133S     2022-01-14   2022-01-14         U.S. Imports of Services - Passenger Fares        1992-01-01      2017-09-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA  2017-11-03 08:12:15-05           1                 1  Further information related to the internation...
-            4  BOMVOMM133S     2022-01-14   2022-01-14  U.S. Imports of Services - Other Private Servi...        1992-01-01      2013-12-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA  2014-10-20 09:25:54-05           1                 1  BEA has introduced new table presentations, in...
-            ...
+                        realtime_start realtime_end                                              title observation_start observation_end frequency frequency_short                units units_short  seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
+            id
+            BOMTVLM133S     2022-02-05   2022-02-05                  U.S. Imports of Services - Travel        1992-01-01      2017-09-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA 2017-11-03 13:12:15+00:00           1                 1  Further information related to the internation...
+            BOMVGMM133S     2022-02-05   2022-02-05  U.S. Imports of Services: U.S. Government Misc...        1992-01-01      2013-12-01   Monthly               M  Millions of Dollars   Mil. of $  Seasonally Adjusted                        SA 2014-10-20 14:27:37+00:00           1                 1  BEA has introduced new table presentations, in...
+            BOMVJMM133S     2022-02-05   2022-02-05  U.S. Imports of Services - Direct Defense Expe...        1992-01-01      2013-12-01   Monthly               M  Millions of Dollars   Mil. of $  Seasonally Adjusted                        SA 2014-10-20 14:26:44+00:00           1                 1  BEA has introduced new table presentations, in...
+            BOMVMPM133S     2022-02-05   2022-02-05         U.S. Imports of Services - Passenger Fares        1992-01-01      2017-09-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA 2017-11-03 13:12:15+00:00           1                 1  Further information related to the internation...
+            BOMVOMM133S     2022-02-05   2022-02-05  U.S. Imports of Services - Other Private Servi...        1992-01-01      2013-12-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA 2014-10-20 14:25:54+00:00           1                 1  BEA has introduced new table presentations, in...
         ```
         """
 
@@ -1369,16 +1385,19 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
-            df.last_updated = pd.to_datetime(df.last_updated + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.last_updated = pd.to_datetime(df.last_updated + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'id': 'string',
+                'title': 'string',
+                'notes': 'string',
                 'frequency': 'category',
                 'frequency_short': 'category',
                 'units': 'category',
                 'units_short': 'category',
                 'seasonal_adjustment': 'category',
                 'seasonal_adjustment_short': 'category'
-            })
+            }).set_index('id')
 
         return df
 
@@ -1428,9 +1447,10 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.release_sources(release_id=51).head()
-               id realtime_start realtime_end                              name                    link
-            0  19     2022-01-14   2022-01-14                U.S. Census Bureau  http://www.census.gov/
-            1  18     2022-01-14   2022-01-14  U.S. Bureau of Economic Analysis     http://www.bea.gov/ ...
+               realtime_start realtime_end                              name                    link
+            id
+            19     2022-02-05   2022-02-05                U.S. Census Bureau  http://www.census.gov/
+            18     2022-02-05   2022-02-05  U.S. Bureau of Economic Analysis     http://www.bea.gov/
         """
 
         if realtime_start < date(1776, 7, 4):
@@ -1453,6 +1473,10 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
+            df = df.astype(dtype={
+                'name': 'string',
+                'link': 'string'
+            }).set_index('id')
 
         return df
 
@@ -1537,13 +1561,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.release_tags(release_id=86).head()
-                    name group_id notes                 created  popularity  series_count
-            0    1-month      gen        2012-02-27 10:18:19-06          39             2
-            1  companies      gen        2012-02-27 10:18:19-06          46             2
-            2    nonbank      gen        2012-08-17 10:03:43-05          18             2
-            3      owned      gen        2012-06-25 15:04:36-05          33             2
-            4     15-day      gen        2014-02-12 11:14:39-06          -2             4
-            ...
+                       group_id notes                   created  popularity  series_count
+            name
+            1-month         gen       2012-02-27 16:18:19+00:00          39             2
+            2-month         gen       2012-05-25 16:29:21+00:00          17             2
+            owned           gen       2012-06-25 20:04:36+00:00          33             2
+            tier-2          gen       2014-02-12 17:18:16+00:00         -13             2
+            10-20 days      gen       2014-02-12 17:08:07+00:00         -16             4
         """
 
         allowed_orders = [
@@ -1580,11 +1604,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -1673,13 +1699,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.release_related_tags(release_id=86, tag_names=['sa', 'foreign']).head()
-                           name group_id               notes                 created  popularity  series_count
-            0        commercial      gen                      2012-02-27 10:18:19-06          61             2
-            1  commercial paper      gen                      2012-03-19 10:40:59-05          44             2
-            2         financial      gen                      2012-02-27 10:18:19-06          55             2
-            3               frb      src  Board of Governors  2012-02-27 10:18:19-06          80             2
-            4            nation     geot                      2012-02-27 10:18:19-06          99             2
-            ...
+                         group_id notes                   created  popularity  series_count
+            name
+            financial         gen       2012-02-27 16:18:19+00:00          55             2
+            monthly          freq       2012-02-27 16:18:19+00:00          93             2
+            nonfinancial      gen       2012-02-27 16:18:19+00:00          55             2
+            weekly           freq       2012-02-27 16:18:19+00:00          68             2
+            commercial        gen       2012-02-27 16:18:19+00:00          61             4
         ```
         """
 
@@ -1718,11 +1744,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -1909,12 +1937,8 @@ class FRED:
                     "id": 95,
                     "name": "Monthly Rates",
                     "parent_id": 15
-                },
-                {
-                    "id": 275,
-                    "name": "Japan",
-                    "parent_id": 158
                 }
+                ...
             ]
         }
         ```
@@ -1926,9 +1950,10 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.series_categories(series_id='EXJPUS')
-                id           name  parent_id
-            0   95  Monthly Rates         15
-            1  275          Japan        158
+                          name  parent_id
+            id
+            95   Monthly Rates         15
+            275          Japan        158
         ```
         """
 
@@ -1938,7 +1963,7 @@ class FRED:
         if realtime_start > realtime_end:
             raise ValueError('The date set by variable realtime_start ("{}") can not be after the date set by variable realtime_end ("{}").'.format(realtime_start, realtime_end))
 
-        return pd.DataFrame(
+        df = pd.DataFrame(
             self._client.get(
                 '/fred/series/categories',
                 'categories',
@@ -1946,7 +1971,11 @@ class FRED:
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
             )
-        )
+        ).astype(dtype={
+            'name': 'string'
+        }).set_index('id')
+
+        return df
 
     def series_observations(
             self,
@@ -2045,13 +2074,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.series_observations(series_id='GNPCA').head()
-              realtime_start realtime_end        date     value
-            0     2022-01-14   2022-01-14  1929-01-01  1120.718
-            1     2022-01-14   2022-01-14  1930-01-01  1025.678
-            2     2022-01-14   2022-01-14  1931-01-01   958.927
-            3     2022-01-14   2022-01-14  1932-01-01   834.769
-            4     2022-01-14   2022-01-14  1933-01-01   823.628
-            ...
+                       realtime_start realtime_end     value
+            date
+            1929-01-01     2022-02-05   2022-02-05  1120.718
+            1930-01-01     2022-02-05   2022-02-05  1025.678
+            1931-01-01     2022-02-05   2022-02-05   958.927
+            1932-01-01     2022-02-05   2022-02-05   834.769
+            1933-01-01     2022-02-05   2022-02-05   823.628
         ```
 
         ```python
@@ -2059,7 +2088,7 @@ class FRED:
 
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> df = fred.series_observations(series_id='T10Y2Y')
-        >>> df.plot(x='date', y='value', grid=True)
+        >>> df.plot(y='value', grid=True)
 
         >>> plt.show()
         ```
@@ -2107,12 +2136,11 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
-
             df.value = df.value.replace(self.EMPTY_VALUE, np.nan)
 
             df = df.astype(dtype={
                 'value': 'float'
-            })
+            }).set_index('date')
 
         return df
 
@@ -2162,8 +2190,9 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.series_release(series_id='IRA').head()
-               id realtime_start realtime_end                      name  press_release                                        link
-            0  21     2022-01-14   2022-01-14  H.6 Money Stock Measures           True  http://www.federalreserve.gov/releases/h6/
+               realtime_start realtime_end                      name  press_release                                        link
+            id
+            21     2022-02-05   2022-02-05  H.6 Money Stock Measures           True  http://www.federalreserve.gov/releases/h6/
         ```
         """
 
@@ -2189,8 +2218,10 @@ class FRED:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'link': 'string',
                 'press_release': 'bool'
-            })
+            }).set_index('id')
 
         return df
 
@@ -2288,13 +2319,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.series_search(search_text='monetary service index').head()
-                    id realtime_start realtime_end                                            title observation_start observation_end frequency frequency_short                units units_short  seasonal_adjustment seasonal_adjustment_short            last_updated  popularity  group_popularity                                              notes
-            0  MSIMZMP     2022-01-14   2022-01-14         Monetary Services Index: MZM (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA  2014-01-17 07:16:42-06          22                22  The MSI measure the flow of monetary services ...
-            1    MSIM2     2022-01-14   2022-01-14          Monetary Services Index: M2 (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA  2014-01-17 07:16:44-06          19                19  The MSI measure the flow of monetary services ...
-            2  MSIALLP     2022-01-14   2022-01-14  Monetary Services Index: ALL Assets (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA  2014-01-17 07:16:45-06          17                17  The MSI measure the flow of monetary services ...
-            3   MSIM1P     2022-01-14   2022-01-14          Monetary Services Index: M1 (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA  2014-01-17 07:16:45-06           9                 9  The MSI measure the flow of monetary services ...
-            4   MSIM2A     2022-01-14   2022-01-14        Monetary Services Index: M2 (alternative)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA  2014-01-17 07:16:44-06           7                 7  The MSI measure the flow of monetary services ...
-
+                    realtime_start realtime_end                                            title observation_start observation_end frequency frequency_short                units units_short  seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
+            id
+            MSIMZMP     2022-02-05   2022-02-05         Monetary Services Index: MZM (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:42+00:00          20                20  The MSI measure the flow of monetary services ...
+            MSIM2       2022-02-05   2022-02-05          Monetary Services Index: M2 (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:44+00:00          16                16  The MSI measure the flow of monetary services ...
+            MSIALLP     2022-02-05   2022-02-05  Monetary Services Index: ALL Assets (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:45+00:00          14                14  The MSI measure the flow of monetary services ...
+            MSIM1P      2022-02-05   2022-02-05          Monetary Services Index: M1 (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:45+00:00           9                 9  The MSI measure the flow of monetary services ...
+            MSIM2A      2022-02-05   2022-02-05        Monetary Services Index: M2 (alternative)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:44+00:00           8                 8  The MSI measure the flow of monetary services ...
         ```
         """
 
@@ -2367,16 +2398,19 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
-            df.last_updated = pd.to_datetime(df.last_updated + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.last_updated = pd.to_datetime(df.last_updated + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'id': 'string',
+                'title': 'string',
+                'notes': 'string',
                 'frequency': 'category',
                 'frequency_short': 'category',
                 'units_short': 'category',
                 'units': 'category',
                 'seasonal_adjustment': 'category',
                 'seasonal_adjustment_short': 'category'
-            })
+            }).set_index('id')
 
         return df
 
@@ -2456,13 +2490,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.series_search_tags(series_search_text='monetary service index').head()
-                                  name group_id   notes                 created  popularity  series_count
-            0                   annual     freq          2012-02-27 10:18:19-06          90             2
-            1                    banks      gen          2012-02-27 10:18:19-06          71             2
-            2                   census      src  Census  2012-02-27 10:18:19-06          80             2
-            3            communication      gen          2012-02-27 10:18:19-06          22             2
-            4  depository institutions      gen          2012-02-27 10:18:19-06          71             2
-            ...
+                          group_id            notes                   created  popularity  series_count
+            name
+            accounting         gen                  2012-02-27 16:18:19+00:00          43             2
+            advertisement      gen                  2012-08-06 19:50:07+00:00          17             2
+            assets             gen                  2012-02-27 16:18:19+00:00          64             2
+            boe                src  Bank of England 2013-02-25 22:21:19+00:00          42             2
+            communication      gen                  2012-02-27 16:18:19+00:00          22             2
         ```
         """
         allowed_orders = [
@@ -2499,11 +2533,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -2590,14 +2626,14 @@ class FRED:
         ## Example
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-        >>> fred.series_search_related_tags(series_search_text='mortgage rate', tag_names=['30-year', 'frb']).head()
-                        name group_id                         notes                 created  popularity  series_count
-            0   conventional      gen                                2012-02-27 10:18:19-06          21             4
-            1   discontinued      gen                                2012-02-27 10:18:19-06          67             4
-            2            h15      rls  H.15 Selected Interest Rates  2012-08-16 15:21:17-05          57             4
-            3       interest      gen                                2012-02-27 10:18:19-06          74             4
-            4  interest rate      gen                                2012-05-29 10:14:19-05          74             4
-            ...
+        >>> fred.series_search_related_tags(series_search_text='mortgage rate', tag_names=['30-year', 'frb'], realtime_start=date(2022, 1, 5), realtime_end=date(2022, 1, 5)).head()
+                          group_id                         notes                   created  popularity  series_count
+            name
+            conventional       gen                               2012-02-27 16:18:19+00:00          21             2
+            discontinued       gen                               2012-02-27 16:18:19+00:00          67             2
+            h15                rls  H.15 Selected Interest Rates 2012-08-16 20:21:17+00:00          57             2
+            interest           gen                               2012-02-27 16:18:19+00:00          74             2
+            interest rate      gen                               2012-05-29 15:14:19+00:00          74             2
         """
 
         allowed_orders = [
@@ -2635,11 +2671,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -2707,13 +2745,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.series_tags(series_id='STLFSI').head()
-                       name group_id                             notes                 created  popularity  series_count
-            0        stlfsi      rls  St. Louis Financial Stress Index  2012-08-16 15:21:17-05          19             2
-            1           fsi      gen            Financial Stress Index  2014-08-08 14:01:37-05          26            26
-            2        weekly     freq                                    2012-02-27 10:18:19-06          68          3500
-            3     financial      gen                                    2012-02-27 10:18:19-06          55         21704
-            4  discontinued      gen                                    2012-02-27 10:18:19-06          67         40554
-            ...
+                         group_id                             notes                   created  popularity  series_count
+            name
+            stlfsi            rls  St. Louis Financial Stress Index 2012-08-16 20:21:17+00:00          19             4
+            fsi               gen            Financial Stress Index 2014-08-08 19:01:37+00:00          26            26
+            weekly           freq                                   2012-02-27 16:18:19+00:00          68          3548
+            financial         gen                                   2012-02-27 16:18:19+00:00          55         21652
+            discontinued      gen                                   2012-02-27 16:18:19+00:00          67         40386
         """
 
         allowed_orders = [
@@ -2746,11 +2784,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -2830,13 +2870,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.series_updates(start_time=datetime(2022, 1, 15), end_time=datetime(2022, 1, 16)).head()
-                     id realtime_start realtime_end                                     title observation_start observation_end     frequency frequency_short         units units_short      seasonal_adjustment seasonal_adjustment_short            last_updated  popularity                                              notes
-            0  CBBCHUSD     2022-01-16   2022-01-16                     Coinbase Bitcoin Cash        2017-12-20      2022-01-15  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA  2022-01-15 19:04:11-06          26  All data is as of 5 PM PST. \\n\\nCopyright, 201...
-            1  CBLTCUSD     2022-01-16   2022-01-16                         Coinbase Litecoin        2016-08-17      2022-01-15  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA  2022-01-15 19:04:09-06          28  All data is as of 5 PM PST. \\n\\nCopyright, 201...
-            2  CBETHUSD     2022-01-16   2022-01-16                         Coinbase Ethereum        2016-05-18      2022-01-15  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA  2022-01-15 19:04:06-06          45  All data is as of 5 PM PST. \\n\\nCopyright, 201...
-            3  CBBTCUSD     2022-01-16   2022-01-16                          Coinbase Bitcoin        2014-12-01      2022-01-15  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA  2022-01-15 19:04:04-06          68  All data is as of 5 PM PST. \\n\\nCopyright, 201...
-            4  DFEDTARL     2022-01-16   2022-01-16  Federal Funds Target Range - Lower Limit        2008-12-16      2022-01-14  Daily, 7-Day               D       Percent           %  Not Seasonally Adjusted                       NSA  2022-01-15 07:01:05-06          63  This series represents lower limit of the fede...
-            ...
+                     realtime_start realtime_end                  title observation_start observation_end     frequency frequency_short         units units_short      seasonal_adjustment seasonal_adjustment_short              last_updated  popularity                                              notes
+            id
+            SP500        2022-02-05   2022-02-05                S&P 500        2012-02-06      2022-02-04  Daily, Close               D         Index       Index  Not Seasonally Adjusted                       NSA 2022-02-05 01:11:04+00:00          85  The observations for the S&P 500 represent the...
+            CBBCHUSD     2022-02-05   2022-02-05  Coinbase Bitcoin Cash        2017-12-20      2022-02-04  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA 2022-02-05 01:04:07+00:00          22  All data is as of 5 PM PST.
+            CBBTCUSD     2022-02-05   2022-02-05       Coinbase Bitcoin        2014-12-01      2022-02-04  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA 2022-02-05 01:04:06+00:00          65  All data is as of 5 PM PST.
+            CBETHUSD     2022-02-05   2022-02-05      Coinbase Ethereum        2016-05-18      2022-02-04  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA 2022-02-05 01:04:05+00:00          44  All data is as of 5 PM PST.
+            CBLTCUSD     2022-02-05   2022-02-05      Coinbase Litecoin        2016-08-17      2022-02-04  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA 2022-02-05 01:04:03+00:00          20  All data is as of 5 PM PST.
         ```
         """
 
@@ -2878,16 +2918,19 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
-            df.last_updated = pd.to_datetime(df.last_updated + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.last_updated = pd.to_datetime(df.last_updated + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'id': 'string',
+                'notes': 'string',
+                'title': 'string',
                 'seasonal_adjustment': 'category',
                 'seasonal_adjustment_short': 'category',
                 'units': 'category',
                 'units_short': 'category',
                 'frequency': 'category',
                 'frequency_short': 'category',
-            })
+            }).set_index('id')
 
         return df
 
@@ -2951,7 +2994,6 @@ class FRED:
             2    1959-07-19
             3    1960-02-16
             4    1960-07-22
-            ...
         ```
         """
 
@@ -3040,13 +3082,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.sources()
-               id realtime_start realtime_end                                               name                              link notes
-            0   1     2022-01-14   2022-01-14  Board of Governors of the Federal Reserve Syst...    http://www.federalreserve.gov/   NaN
-            1   3     2022-01-14   2022-01-14               Federal Reserve Bank of Philadelphia  https://www.philadelphiafed.org/   NaN
-            2   4     2022-01-14   2022-01-14                  Federal Reserve Bank of St. Louis        http://www.stlouisfed.org/   NaN
-            3   6     2022-01-14   2022-01-14  Federal Financial Institutions Examination Cou...             http://www.ffiec.gov/   NaN
-            4  11     2022-01-14   2022-01-14                                Dow Jones & Company           http://www.dowjones.com   NaN
-            ...
+               realtime_start realtime_end                                               name                              link notes
+            id
+            1      2022-02-05   2022-02-05  Board of Governors of the Federal Reserve Syst...    http://www.federalreserve.gov/  <NA>
+            3      2022-02-05   2022-02-05               Federal Reserve Bank of Philadelphia  https://www.philadelphiafed.org/  <NA>
+            4      2022-02-05   2022-02-05                  Federal Reserve Bank of St. Louis        http://www.stlouisfed.org/  <NA>
+            6      2022-02-05   2022-02-05  Federal Financial Institutions Examination Cou...             http://www.ffiec.gov/  <NA>
+            11     2022-02-05   2022-02-05                                Dow Jones & Company           http://www.dowjones.com  <NA>
         ```
         """
 
@@ -3082,6 +3124,11 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
+            df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
+                'link': 'string'
+            }).set_index('id')
 
         return df
 
@@ -3213,13 +3260,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.source_releases(source_id=1).head()
-               id realtime_start realtime_end                                               name  press_release                                         link notes
-            0  13     2022-01-14   2022-01-14  G.17 Industrial Production and Capacity Utiliz...           True  http://www.federalreserve.gov/releases/g17/   NaN
-            1  14     2022-01-14   2022-01-14                               G.19 Consumer Credit           True  http://www.federalreserve.gov/releases/g19/   NaN
-            2  15     2022-01-14   2022-01-14                         G.5 Foreign Exchange Rates           True   http://www.federalreserve.gov/releases/g5/   NaN
-            3  17     2022-01-14   2022-01-14                        H.10 Foreign Exchange Rates           True  http://www.federalreserve.gov/releases/h10/   NaN
-            4  18     2022-01-14   2022-01-14                       H.15 Selected Interest Rates           True  http://www.federalreserve.gov/releases/h15/   NaN
-            ...
+               realtime_start realtime_end                                               name  press_release                                         link notes
+            id
+            13     2022-02-05   2022-02-05  G.17 Industrial Production and Capacity Utiliz...           True  http://www.federalreserve.gov/releases/g17/  <NA>
+            14     2022-02-05   2022-02-05                               G.19 Consumer Credit           True  http://www.federalreserve.gov/releases/g19/  <NA>
+            15     2022-02-05   2022-02-05                         G.5 Foreign Exchange Rates           True   http://www.federalreserve.gov/releases/g5/  <NA>
+            17     2022-02-05   2022-02-05                        H.10 Foreign Exchange Rates           True  http://www.federalreserve.gov/releases/h10/  <NA>
+            18     2022-02-05   2022-02-05                       H.15 Selected Interest Rates           True  http://www.federalreserve.gov/releases/h15/  <NA>
         ```
         """
 
@@ -3259,8 +3306,11 @@ class FRED:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'link': 'string',
+                'notes': 'string',
                 'press_release': 'bool'
-            })
+            }).set_index('id')
 
         return df
 
@@ -3342,13 +3392,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.tags().head()
-                         name group_id    notes                 created  popularity  series_count
-            0         1 to 19      gen  1 to 19  2012-11-28 11:48:06-06         -11             2
-            1       2-month +      gen           2012-08-06 14:34:05-05         -62             2
-            2  30 to 34 years      gen           2013-10-10 16:13:04-05         -13             2
-            3      3-family +      gen           2012-08-06 14:48:11-05         -49             2
-            4  40 to 44 years      gen           2013-10-10 16:14:16-05         -25             2
-            ...
+                           group_id notes                   created  popularity  series_count
+            name
+            14 years +          gen       2012-08-06 19:40:56+00:00          -6             2
+            2-month +           gen       2012-08-06 19:34:05+00:00         -62             2
+            2-week              gen       2012-05-25 16:29:34+00:00          -6             2
+            30 to 34 years      gen       2013-10-10 21:13:04+00:00         -13             2
+            3-family +          gen       2012-08-06 19:48:11+00:00         -49             2
         ```
         """
 
@@ -3388,11 +3438,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -3476,13 +3528,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.related_tags(tag_names=['monetary aggregates', 'weekly']).head()
-                                         name group_id            notes                 created  popularity  series_count
-            0  copyrighted: citation required       cc             None  2018-12-17 23:33:13-06          88             4
-            1                         frb stl      src    St. Louis Fed  2012-02-27 10:18:19-06          68             4
-            2                              m1      gen   M1 Money Stock  2012-02-27 10:18:19-06          47             4
-            3                              m2      gen   M2 Money Stock  2012-02-27 10:18:19-06          43             4
-            4                             mzm      gen  MZM Money Stock  2012-02-27 10:18:19-06          27             4
-            ...
+                                           group_id           notes                   created  popularity  series_count
+            name
+            copyrighted: citation required       cc            <NA> 2018-12-18 05:33:13+00:00          88             2
+            currency                            gen                 2012-02-27 16:18:19+00:00          62             2
+            frb stl                             src   St. Louis Fed 2012-02-27 16:18:19+00:00          68             2
+            m1                                  gen  M1 Money Stock 2012-02-27 16:18:19+00:00          47             2
+            m3                                  gen  M3 Money Stock 2012-02-27 16:18:19+00:00          39             2
         ```
         """
 
@@ -3533,11 +3585,13 @@ class FRED:
         )
 
         if not df.empty:
-            df.created = pd.to_datetime(df.created + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.created = pd.to_datetime(df.created + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'name': 'string',
+                'notes': 'string',
                 'group_id': 'category'
-            })
+            }).set_index('name')
 
         return df
 
@@ -3620,13 +3674,13 @@ class FRED:
         ```python
         >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> fred.tags_series(tag_names=['food', 'oecd']).head()
-                            id realtime_start realtime_end                                              title observation_start observation_end  frequency frequency_short           units     units_short      seasonal_adjustment seasonal_adjustment_short            last_updated  popularity  group_popularity                                              notes
-            0  AUSCPICORAINMEI     2022-01-14   2022-01-14  Consumer Price Index: All Items Excluding Food...        1972-01-01      2020-01-01     Annual               A  Index 2015=100  Index 2015=100  Not Seasonally Adjusted                       NSA  2021-02-17 12:27:39-06           1                14  Copyright, 2016, OECD. Reprinted with permissi...
-            1  AUSCPICORQINMEI     2022-01-14   2022-01-14  Consumer Price Index: All Items Excluding Food...        1971-04-01      2021-07-01  Quarterly               Q  Index 2015=100  Index 2015=100  Not Seasonally Adjusted                       NSA  2021-12-14 15:57:04-06          14                14  Copyright, 2016, OECD. Reprinted with permissi...
-            2  AUSCPIFODAINMEI     2022-01-14   2022-01-14           Consumer Price Index: Food for Australia        1977-01-01      2017-01-01     Annual               A  Index 2010=100  Index 2010=100  Not Seasonally Adjusted                       NSA  2018-03-09 15:12:09-06           1                 2  Copyright, 2016, OECD. Reprinted with permissi...
-            3  AUSCPIFODQINMEI     2022-01-14   2022-01-14           Consumer Price Index: Food for Australia        1976-07-01      2018-01-01  Quarterly               Q  Index 2010=100  Index 2010=100  Not Seasonally Adjusted                       NSA  2018-04-24 14:51:04-05           2                 2  Copyright, 2016, OECD. Reprinted with permissi...
-            4  AUTCPICORAINMEI     2022-01-14   2022-01-14  Consumer Price Index: All Items Excluding Food...        1966-01-01      2020-01-01     Annual               A  Index 2015=100  Index 2015=100  Not Seasonally Adjusted                       NSA  2021-03-16 17:37:57-05           0                 1  Copyright, 2016, OECD. Reprinted with permissi...
-            ...
+                            realtime_start realtime_end                                              title observation_start observation_end  frequency frequency_short           units     units_short      seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
+            id
+            AUSCPICORAINMEI     2022-02-05   2022-02-05  Consumer Price Index: All Items Excluding Food...        1972-01-01      2020-01-01     Annual               A  Index 2015=100  Index 2015=100  Not Seasonally Adjusted                       NSA 2021-02-17 18:27:39+00:00           1                12  Copyright, 2016, OECD. Reprinted with permissi...
+            AUSCPICORQINMEI     2022-02-05   2022-02-05  Consumer Price Index: All Items Excluding Food...        1971-04-01      2021-07-01  Quarterly               Q  Index 2015=100  Index 2015=100  Not Seasonally Adjusted                       NSA 2021-12-14 21:57:04+00:00          12                12  Copyright, 2016, OECD. Reprinted with permissi...
+            AUSCPIFODAINMEI     2022-02-05   2022-02-05           Consumer Price Index: Food for Australia        1977-01-01      2017-01-01     Annual               A  Index 2010=100  Index 2010=100  Not Seasonally Adjusted                       NSA 2018-03-09 21:12:09+00:00           1                 2  Copyright, 2016, OECD. Reprinted with permissi...
+            AUSCPIFODQINMEI     2022-02-05   2022-02-05           Consumer Price Index: Food for Australia        1976-07-01      2018-01-01  Quarterly               Q  Index 2010=100  Index 2010=100  Not Seasonally Adjusted                       NSA 2018-04-24 19:51:04+00:00           2                 2  Copyright, 2016, OECD. Reprinted with permissi...
+            AUTCPICORAINMEI     2022-02-05   2022-02-05  Consumer Price Index: All Items Excluding Food...        1966-01-01      2020-01-01     Annual               A  Index 2015=100  Index 2015=100  Not Seasonally Adjusted                       NSA 2021-03-16 22:37:57+00:00           0                 1  Copyright, 2016, OECD. Reprinted with permissi...
         ```
         """
 
@@ -3675,15 +3729,19 @@ class FRED:
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
-            df.last_updated = pd.to_datetime(df.last_updated + '00', format='%Y-%m-%d %H:%M:%S%z')
+            df.last_updated = pd.to_datetime(df.last_updated + '00', utc=True, format='%Y-%m-%d %H:%M:%S%z')
 
             df = df.astype(dtype={
+                'id': 'string',
+                'notes': 'string',
+                'title': 'string',
                 'frequency': 'category',
                 'frequency_short': 'category',
                 'units_short': 'category',
                 'units': 'category',
-                'seasonal_adjustment': 'category'
-            })
+                'seasonal_adjustment': 'category',
+                'seasonal_adjustment_short': 'category'
+            }).set_index('id')
 
         return df
 

@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='pystlouisfed',
-    version='1.0.2',
+    version='2.0.0',
     packages=['pystlouisfed'],
     url='https://github.com/TomasKoutek/pystlouisfed',
     license='MIT',
@@ -50,7 +50,7 @@ setup(
     python_requires=">=3.7",
 
     install_requires=[
-        "pandas",
+        "pandas>1.0.0",
         "requests",
         "ratelimiter",
         "shapely",
