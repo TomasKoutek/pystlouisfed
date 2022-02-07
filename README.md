@@ -319,6 +319,37 @@ Many other features in the [documentation](https://tomaskoutek.github.io/pystlou
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+### Working with TimeZones
+
+This functionality is currently on the TODO list.
+
+FRED/ALFRED works with date in 99% of cases. 
+But what is a date? For example, the friday "2022-02-04" can be almost anything - it depends on the time zone:
+
+![timezones](./docs/timezones.png "timezones")
+
+Why we are interested in this?
+
+Let's say we are in the "Europe/Prague" timezone (UTC+1) and at 2:00am we call the method:
+
+```python
+from pystlouisfed import FRED
+from datetime import date
+
+fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+fred.series_observations(series_id='GDP', realtime_start=date.today(), realtime_end=date.today())
+```
+
+FRED/ALFRED will return the error:
+> "Bad Request. Variable realtime_start can not be after today's date..." 
+
+because it works in the **timezone "US/Central"** (UTC−06:00)! 
+Probably all the date values that the API returns are in "US/Central", but I haven't verified it.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
 ### GeoFRED
 
 > https://geofred.stlouisfed.org/about/
