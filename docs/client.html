@@ -104,7 +104,7 @@ class Client:
     }
     _url: URLFactory
 
-    def __init__(self, key: str, ratelimiter_enabled: bool, ratelimiter_max_calls: int, ratelimiter_period: int):
+    def __init__(self, key: str, ratelimiter_enabled: bool, ratelimiter_max_calls: int, ratelimiter_period: int, request_params: dict = None):
         self._url = URLFactory(key)
         self.rate_limit = 120
         self._rate_limit_remaining = None
@@ -114,6 +114,14 @@ class Client:
             self._rate_limiter = RateLimiter(max_calls=ratelimiter_max_calls, period=ratelimiter_period)
         else:
             self._rate_limiter = nullcontext()
+
+        if request_params is None:
+            request_params = dict()
+
+        if &#39;headers&#39; not in request_params:
+            request_params[&#39;headers&#39;] = self._headers
+
+        self.request_params = request_params
 
     @property
     def rate_limit_remaining(self) -&gt; int:
@@ -140,7 +148,7 @@ class Client:
 
             with self._rate_limiter:
 
-                res = requests.get(url, headers=self._headers)
+                res = requests.get(url, **self.request_params)
 
                 # GeoFRED return error codes and messages in XML
                 if res.headers.get(&#39;content-type&#39;).startswith(&#39;text/xml&#39;) and res.status_code != 200:
@@ -195,14 +203,34 @@ class FRED:
 
     https://fred.stlouisfed.org/docs/api/fred/
     &#34;&#34;&#34;
+
     EMPTY_VALUE = &#39;.&#39;
+    &#34;&#34;&#34;
+    FRED/ALFRED returns empty values as dot
+    &#34;&#34;&#34;
 
-    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1):
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        api_key: str
+                32 character alpha-numeric lowercase string
+        ratelimiter_enabled: bool
+        ratelimiter_max_calls: int
+        ratelimiter_period: int
+        request_params: dict
+                HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+        &#34;&#34;&#34;
+        if api_key is None or len(api_key) != 32:
+            raise Exception(&#39;Variable api_key must be 32 character length alphanumeric string.&#39;)
 
-        if api_key is None:
-            raise Exception(&#39;Variable api_key is not set.&#39;)
-
-        self._client = Client(key=api_key, ratelimiter_enabled=ratelimiter_enabled, ratelimiter_max_calls=ratelimiter_max_calls, ratelimiter_period=ratelimiter_period)
+        self._client = Client(
+            key=api_key.lower(),
+            ratelimiter_enabled=ratelimiter_enabled,
+            ratelimiter_max_calls=ratelimiter_max_calls,
+            ratelimiter_period=ratelimiter_period,
+            request_params=request_params
+        )
 
     @property
     def rate_limit(self) -&gt; int:
@@ -3801,11 +3829,29 @@ class GeoFRED:
     https://geofred.stlouisfed.org/docs/api/geofred/
     &#34;&#34;&#34;
 
-    def __init__(self, api_key: str):
-        if api_key is None:
-            raise Exception(&#39;Variable api_key is not set.&#39;)
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = False, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        api_key: str
+                32 character alpha-numeric lowercase string
+        ratelimiter_enabled: bool
+        ratelimiter_max_calls: int
+        ratelimiter_period: int
+        request_params: dict
+                HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+        &#34;&#34;&#34;
 
-        self._client = Client(api_key, ratelimiter_enabled=False, ratelimiter_max_calls=2, ratelimiter_period=1)
+        if api_key is None or len(api_key) != 32:
+            raise Exception(&#39;Variable api_key must be 32 character length alphanumeric string.&#39;)
+
+        self._client = Client(
+            key=api_key.lower(),
+            ratelimiter_enabled=ratelimiter_enabled,
+            ratelimiter_max_calls=ratelimiter_max_calls,
+            ratelimiter_period=ratelimiter_period,
+            request_params=request_params
+        )
 
     @property
     def rate_limit(self) -&gt; int:
@@ -4308,14 +4354,27 @@ class FRASER:
 <dl>
 <dt id="pystlouisfed.client.ALFRED"><code class="flex name class">
 <span>class <span class="ident">ALFRED</span></span>
-<span>(</span><span>api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1)</span>
+<span>(</span><span>api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>ALFRED stands for Archival Federal Reserve Economic Data.
 ALFRED archives FRED data by adding the real-time period when values were originally released and later revised. For instance on February 2, 1990, the US Bureau of Labor Statistics reported the US unemployment rate for the month of January, 1990 as 5.3 percent.
 Over 6 years later on March 8, 1996, the US unemployment rate for the same month January, 1990 was revised to 5.4 percent.</p>
 <p><a href="https://alfred.stlouisfed.org/">https://alfred.stlouisfed.org/</a></p>
-<p><a href="https://fred.stlouisfed.org/docs/api/fred/alfred.html">https://fred.stlouisfed.org/docs/api/fred/alfred.html</a></p></div>
+<p><a href="https://fred.stlouisfed.org/docs/api/fred/alfred.html">https://fred.stlouisfed.org/docs/api/fred/alfred.html</a></p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>api_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>32 character alpha-numeric lowercase string</dd>
+<dt><strong><code>ratelimiter_enabled</code></strong> :&ensp;<code>bool</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>ratelimiter_max_calls</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>ratelimiter_period</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>request_params</code></strong> :&ensp;<code>dict</code></dt>
+<dd>HTTP GET method parameters, see <a href="https://docs.python-requests.org/en/latest/api/#requests.request">https://docs.python-requests.org/en/latest/api/#requests.request</a></dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -4339,6 +4398,7 @@ Over 6 years later on March 8, 1996, the US unemployment rate for the same month
 <ul class="hlist">
 <li><code><b><a title="pystlouisfed.client.FRED" href="#pystlouisfed.client.FRED">FRED</a></b></code>:
 <ul class="hlist">
+<li><code><a title="pystlouisfed.client.FRED.EMPTY_VALUE" href="#pystlouisfed.client.FRED.EMPTY_VALUE">EMPTY_VALUE</a></code></li>
 <li><code><a title="pystlouisfed.client.FRED.category" href="#pystlouisfed.client.FRED.category">category</a></code></li>
 <li><code><a title="pystlouisfed.client.FRED.category_children" href="#pystlouisfed.client.FRED.category_children">category_children</a></code></li>
 <li><code><a title="pystlouisfed.client.FRED.category_related" href="#pystlouisfed.client.FRED.category_related">category_related</a></code></li>
@@ -4727,13 +4787,26 @@ A resumptionToken can be used to retrieve the complete set structure using multi
 </dd>
 <dt id="pystlouisfed.client.FRED"><code class="flex name class">
 <span>class <span class="ident">FRED</span></span>
-<span>(</span><span>api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1)</span>
+<span>(</span><span>api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>The FRED API is a web service that allows developers to write programs and build applications that retrieve economic data from the FRED and ALFRED websites hosted by the Economic Research Division of the Federal Reserve Bank of St. Louis.
 Requests can be customized according to data source, release, category, series, and other preferences.</p>
 <p><a href="https://fred.stlouisfed.org">https://fred.stlouisfed.org</a></p>
-<p><a href="https://fred.stlouisfed.org/docs/api/fred/">https://fred.stlouisfed.org/docs/api/fred/</a></p></div>
+<p><a href="https://fred.stlouisfed.org/docs/api/fred/">https://fred.stlouisfed.org/docs/api/fred/</a></p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>api_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>32 character alpha-numeric lowercase string</dd>
+<dt><strong><code>ratelimiter_enabled</code></strong> :&ensp;<code>bool</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>ratelimiter_max_calls</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>ratelimiter_period</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>request_params</code></strong> :&ensp;<code>dict</code></dt>
+<dd>HTTP GET method parameters, see <a href="https://docs.python-requests.org/en/latest/api/#requests.request">https://docs.python-requests.org/en/latest/api/#requests.request</a></dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -4747,14 +4820,34 @@ Requests can be customized according to data source, release, category, series, 
 
     https://fred.stlouisfed.org/docs/api/fred/
     &#34;&#34;&#34;
+
     EMPTY_VALUE = &#39;.&#39;
+    &#34;&#34;&#34;
+    FRED/ALFRED returns empty values as dot
+    &#34;&#34;&#34;
 
-    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1):
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        api_key: str
+                32 character alpha-numeric lowercase string
+        ratelimiter_enabled: bool
+        ratelimiter_max_calls: int
+        ratelimiter_period: int
+        request_params: dict
+                HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+        &#34;&#34;&#34;
+        if api_key is None or len(api_key) != 32:
+            raise Exception(&#39;Variable api_key must be 32 character length alphanumeric string.&#39;)
 
-        if api_key is None:
-            raise Exception(&#39;Variable api_key is not set.&#39;)
-
-        self._client = Client(key=api_key, ratelimiter_enabled=ratelimiter_enabled, ratelimiter_max_calls=ratelimiter_max_calls, ratelimiter_period=ratelimiter_period)
+        self._client = Client(
+            key=api_key.lower(),
+            ratelimiter_enabled=ratelimiter_enabled,
+            ratelimiter_max_calls=ratelimiter_max_calls,
+            ratelimiter_period=ratelimiter_period,
+            request_params=request_params
+        )
 
     @property
     def rate_limit(self) -&gt; int:
@@ -8333,7 +8426,7 @@ Requests can be customized according to data source, release, category, series, 
 <dl>
 <dt id="pystlouisfed.client.FRED.EMPTY_VALUE"><code class="name">var <span class="ident">EMPTY_VALUE</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>FRED/ALFRED returns empty values as dot</p></div>
 </dd>
 </dl>
 <h3>Instance variables</h3>
@@ -13798,12 +13891,25 @@ Sort results is ascending or descending order for attribute values specified by 
 </dd>
 <dt id="pystlouisfed.client.GeoFRED"><code class="flex name class">
 <span>class <span class="ident">GeoFRED</span></span>
-<span>(</span><span>api_key: str)</span>
+<span>(</span><span>api_key: str, ratelimiter_enabled: bool = False, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>The GeoFRED API is a web service that allows developers to write programs and build applications to harvest data and shape files found in GeoFRED website hosted by the Economic Research Division of the Federal Reserve Bank of St. Louis.</p>
 <p><a href="https://geofred.stlouisfed.org/">https://geofred.stlouisfed.org/</a></p>
-<p><a href="https://geofred.stlouisfed.org/docs/api/geofred/">https://geofred.stlouisfed.org/docs/api/geofred/</a></p></div>
+<p><a href="https://geofred.stlouisfed.org/docs/api/geofred/">https://geofred.stlouisfed.org/docs/api/geofred/</a></p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>api_key</code></strong> :&ensp;<code>str</code></dt>
+<dd>32 character alpha-numeric lowercase string</dd>
+<dt><strong><code>ratelimiter_enabled</code></strong> :&ensp;<code>bool</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>ratelimiter_max_calls</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>ratelimiter_period</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>request_params</code></strong> :&ensp;<code>dict</code></dt>
+<dd>HTTP GET method parameters, see <a href="https://docs.python-requests.org/en/latest/api/#requests.request">https://docs.python-requests.org/en/latest/api/#requests.request</a></dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -13823,11 +13929,29 @@ Sort results is ascending or descending order for attribute values specified by 
     https://geofred.stlouisfed.org/docs/api/geofred/
     &#34;&#34;&#34;
 
-    def __init__(self, api_key: str):
-        if api_key is None:
-            raise Exception(&#39;Variable api_key is not set.&#39;)
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = False, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+        &#34;&#34;&#34;
+        Parameters
+        ----------
+        api_key: str
+                32 character alpha-numeric lowercase string
+        ratelimiter_enabled: bool
+        ratelimiter_max_calls: int
+        ratelimiter_period: int
+        request_params: dict
+                HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+        &#34;&#34;&#34;
 
-        self._client = Client(api_key, ratelimiter_enabled=False, ratelimiter_max_calls=2, ratelimiter_period=1)
+        if api_key is None or len(api_key) != 32:
+            raise Exception(&#39;Variable api_key must be 32 character length alphanumeric string.&#39;)
+
+        self._client = Client(
+            key=api_key.lower(),
+            ratelimiter_enabled=ratelimiter_enabled,
+            ratelimiter_max_calls=ratelimiter_max_calls,
+            ratelimiter_period=ratelimiter_period,
+            request_params=request_params
+        )
 
     @property
     def rate_limit(self) -&gt; int:

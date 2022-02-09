@@ -76,7 +76,7 @@ class Client:
     }
     _url: URLFactory
 
-    def __init__(self, key: str, ratelimiter_enabled: bool, ratelimiter_max_calls: int, ratelimiter_period: int):
+    def __init__(self, key: str, ratelimiter_enabled: bool, ratelimiter_max_calls: int, ratelimiter_period: int, request_params: dict = None):
         self._url = URLFactory(key)
         self.rate_limit = 120
         self._rate_limit_remaining = None
@@ -86,6 +86,14 @@ class Client:
             self._rate_limiter = RateLimiter(max_calls=ratelimiter_max_calls, period=ratelimiter_period)
         else:
             self._rate_limiter = nullcontext()
+
+        if request_params is None:
+            request_params = dict()
+
+        if 'headers' not in request_params:
+            request_params['headers'] = self._headers
+
+        self.request_params = request_params
 
     @property
     def rate_limit_remaining(self) -> int:
@@ -112,7 +120,7 @@ class Client:
 
             with self._rate_limiter:
 
-                res = requests.get(url, headers=self._headers)
+                res = requests.get(url, **self.request_params)
 
                 # GeoFRED return error codes and messages in XML
                 if res.headers.get('content-type').startswith('text/xml') and res.status_code != 200:
@@ -167,14 +175,34 @@ class FRED:
 
     https://fred.stlouisfed.org/docs/api/fred/
     """
+
     EMPTY_VALUE = '.'
+    """
+    FRED/ALFRED returns empty values as dot
+    """
 
-    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1):
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+        """
+        Parameters
+        ----------
+        api_key: str
+                32 character alpha-numeric lowercase string
+        ratelimiter_enabled: bool
+        ratelimiter_max_calls: int
+        ratelimiter_period: int
+        request_params: dict
+                HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+        """
+        if api_key is None or len(api_key) != 32:
+            raise Exception('Variable api_key must be 32 character length alphanumeric string.')
 
-        if api_key is None:
-            raise Exception('Variable api_key is not set.')
-
-        self._client = Client(key=api_key, ratelimiter_enabled=ratelimiter_enabled, ratelimiter_max_calls=ratelimiter_max_calls, ratelimiter_period=ratelimiter_period)
+        self._client = Client(
+            key=api_key.lower(),
+            ratelimiter_enabled=ratelimiter_enabled,
+            ratelimiter_max_calls=ratelimiter_max_calls,
+            ratelimiter_period=ratelimiter_period,
+            request_params=request_params
+        )
 
     @property
     def rate_limit(self) -> int:
@@ -3773,11 +3801,29 @@ class GeoFRED:
     https://geofred.stlouisfed.org/docs/api/geofred/
     """
 
-    def __init__(self, api_key: str):
-        if api_key is None:
-            raise Exception('Variable api_key is not set.')
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = False, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+        """
+        Parameters
+        ----------
+        api_key: str
+                32 character alpha-numeric lowercase string
+        ratelimiter_enabled: bool
+        ratelimiter_max_calls: int
+        ratelimiter_period: int
+        request_params: dict
+                HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+        """
 
-        self._client = Client(api_key, ratelimiter_enabled=False, ratelimiter_max_calls=2, ratelimiter_period=1)
+        if api_key is None or len(api_key) != 32:
+            raise Exception('Variable api_key must be 32 character length alphanumeric string.')
+
+        self._client = Client(
+            key=api_key.lower(),
+            ratelimiter_enabled=ratelimiter_enabled,
+            ratelimiter_max_calls=ratelimiter_max_calls,
+            ratelimiter_period=ratelimiter_period,
+            request_params=request_params
+        )
 
     @property
     def rate_limit(self) -> int:
