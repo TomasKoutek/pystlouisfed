@@ -4,6 +4,8 @@ from datetime import date, datetime
 from shapely import geos
 from shapely.geometry import Point, MultiPolygon
 
+from typing import Optional
+
 
 @dataclass
 class Category:
@@ -29,7 +31,7 @@ class Series:
     last_updated: datetime
     popularity: int
     # group_popularity: int
-    notes: str
+    notes: Optional[str] = None
 
     def __post_init__(self):
         self.realtime_start = datetime.strptime(self.realtime_start, "%Y-%m-%d").date()
