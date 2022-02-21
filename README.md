@@ -181,20 +181,20 @@ method `FRED.series_observations`) has the optional parameters
 "units", "frequency", "aggregation_method" or "output_type":
 
 ```
-    def series_observations(
-            self,
-            series_id: str,
-            realtime_start: date = date.today(),
-            realtime_end: date = date.today(),
-            sort_order: enums.SortOrder = enums.SortOrder.asc,
-            observation_start: date = date(1776, 7, 4),
-            observation_end: date = date(9999, 12, 31),
-            units: enums.Unit = enums.Unit.lin,
-            frequency: enums.Frequency = None,
-            aggregation_method: enums.AggregationMethod = enums.AggregationMethod.average,
-            output_type: enums.OutputType = enums.OutputType.realtime_period,
-            vintage_dates: List[str] = None
-    ) -> pd.DataFram:
+def series_observations(
+        self,
+        series_id: str,
+        realtime_start: date = None,
+        realtime_end: date = None,
+        sort_order: enums.SortOrder = enums.SortOrder.asc,
+        observation_start: date = date(1776, 7, 4),
+        observation_end: date = date(9999, 12, 31),
+        units: enums.Unit = enums.Unit.lin,
+        frequency: enums.Frequency = None,
+        aggregation_method: enums.AggregationMethod = enums.AggregationMethod.average,
+        output_type: enums.OutputType = enums.OutputType.realtime_period,
+        vintage_dates: List[str] = None
+) -> pd.DataFrame:
 ```
 
 But what should be the value? For example, for the parameter "aggregation_method" it is possible to use `pystlouisfed.AggregationMethod`:
