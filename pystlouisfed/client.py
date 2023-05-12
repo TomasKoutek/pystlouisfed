@@ -2245,6 +2245,12 @@ class FRED:
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
 
+            # fix https://github.com/TomasKoutek/pystlouisfed/issues/1
+            # Is the link optional?
+            # Why doesn't FRED return an empty column?
+            if 'link' not in df.columns:
+                df['link'] = ''
+
             df = df.astype(dtype={
                 'name': 'string',
                 'link': 'string',
