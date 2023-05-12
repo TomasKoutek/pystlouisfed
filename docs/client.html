@@ -2273,6 +2273,12 @@ class FRED:
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format=&#39;%Y-%m-%d&#39;)
 
+            # fix https://github.com/TomasKoutek/pystlouisfed/issues/1
+            # Is the link optional?
+            # Why doesn&#39;t FRED return an empty column?
+            if &#39;link&#39; not in df.columns:
+                df[&#39;link&#39;] = &#39;&#39;
+
             df = df.astype(dtype={
                 &#39;name&#39;: &#39;string&#39;,
                 &#39;link&#39;: &#39;string&#39;,
@@ -6889,6 +6895,12 @@ Requests can be customized according to data source, release, category, series, 
 
         if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format=&#39;%Y-%m-%d&#39;)
+
+            # fix https://github.com/TomasKoutek/pystlouisfed/issues/1
+            # Is the link optional?
+            # Why doesn&#39;t FRED return an empty column?
+            if &#39;link&#39; not in df.columns:
+                df[&#39;link&#39;] = &#39;&#39;
 
             df = df.astype(dtype={
                 &#39;name&#39;: &#39;string&#39;,
@@ -11818,6 +11830,12 @@ The end of the real-time period. For more information, see <a href="https://fred
 
     if not df.empty:
         df[date_columns] = df[date_columns].apply(pd.to_datetime, format=&#39;%Y-%m-%d&#39;)
+
+        # fix https://github.com/TomasKoutek/pystlouisfed/issues/1
+        # Is the link optional?
+        # Why doesn&#39;t FRED return an empty column?
+        if &#39;link&#39; not in df.columns:
+            df[&#39;link&#39;] = &#39;&#39;
 
         df = df.astype(dtype={
             &#39;name&#39;: &#39;string&#39;,

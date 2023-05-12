@@ -32,6 +32,8 @@ from datetime import date, datetime
 from shapely import geos
 from shapely.geometry import Point, MultiPolygon
 
+from typing import Optional
+
 
 @dataclass
 class Category:
@@ -57,7 +59,7 @@ class Series:
     last_updated: datetime
     popularity: int
     # group_popularity: int
-    notes: str
+    notes: Optional[str] = None
 
     def __post_init__(self):
         self.realtime_start = datetime.strptime(self.realtime_start, &#34;%Y-%m-%d&#34;).date()
@@ -248,10 +250,10 @@ class Shape:
 </dd>
 <dt id="pystlouisfed.models.Series"><code class="flex name class">
 <span>class <span class="ident">Series</span></span>
-<span>(</span><span>id: str, realtime_start: datetime.date, realtime_end: datetime.date, title: str, observation_start: datetime.date, observation_end: datetime.date, frequency: str, frequency_short: str, units: str, units_short: str, seasonal_adjustment: str, seasonal_adjustment_short: str, last_updated: datetime.datetime, popularity: int, notes: str)</span>
+<span>(</span><span>id: str, realtime_start: datetime.date, realtime_end: datetime.date, title: str, observation_start: datetime.date, observation_end: datetime.date, frequency: str, frequency_short: str, units: str, units_short: str, seasonal_adjustment: str, seasonal_adjustment_short: str, last_updated: datetime.datetime, popularity: int, notes: Optional[str] = None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Series(id: str, realtime_start: datetime.date, realtime_end: datetime.date, title: str, observation_start: datetime.date, observation_end: datetime.date, frequency: str, frequency_short: str, units: str, units_short: str, seasonal_adjustment: str, seasonal_adjustment_short: str, last_updated: datetime.datetime, popularity: int, notes: str)</p></div>
+<div class="desc"><p>Series(id: str, realtime_start: datetime.date, realtime_end: datetime.date, title: str, observation_start: datetime.date, observation_end: datetime.date, frequency: str, frequency_short: str, units: str, units_short: str, seasonal_adjustment: str, seasonal_adjustment_short: str, last_updated: datetime.datetime, popularity: int, notes: Union[str, NoneType] = None)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -272,7 +274,7 @@ class Shape:
     last_updated: datetime
     popularity: int
     # group_popularity: int
-    notes: str
+    notes: Optional[str] = None
 
     def __post_init__(self):
         self.realtime_start = datetime.strptime(self.realtime_start, &#34;%Y-%m-%d&#34;).date()
@@ -299,7 +301,7 @@ class Shape:
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="pystlouisfed.models.Series.notes"><code class="name">var <span class="ident">notes</span> : str</code></dt>
+<dt id="pystlouisfed.models.Series.notes"><code class="name">var <span class="ident">notes</span> : Optional[str]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
