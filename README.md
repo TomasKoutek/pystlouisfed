@@ -83,7 +83,7 @@ For example method `FRED.category_series` (all series for a specific category)
 from pystlouisfed import FRED
 
 fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-df = fred.category_series(category_id=125).head()
+df = fred.category_series(category_id=125)
 
 print(df.head())
 ```
