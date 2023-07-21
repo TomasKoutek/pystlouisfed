@@ -4065,11 +4065,11 @@ class GeoFRED:
             "frequency": "Annual",
             "date": "2012-01-01",
             "data": {
-              "2020": [
+              "2022-01-01": [
                 {
                   "region": "Alabama",
                   "code": "01",
-                  "value": "46479.0",
+                  "value": "50637",
                   "series_id": "ALPCPI"
                 },
               ...
@@ -4085,12 +4085,12 @@ class GeoFRED:
         ```python
         >>> geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> geo_fred.series_data(series_id='WIPCPI')
-               region code    value series_id  year
-        0     Alabama   01  46479.0    ALPCPI  2020
-        1      Alaska   02  63502.0    AKPCPI  2020
-        2     Arizona   04  49648.0    AZPCPI  2020
-        3    Arkansas   05  47235.0    ARPCPI  2020
-        4  California   06  70192.0    CAPCPI  2020
+              region  code  value series_id       year
+        0  Louisiana    22  54622    LAPCPI 2022-01-01
+        1     Nevada    32  61282    NVPCPI 2022-01-01
+        2   Maryland    24  70730    MDPCPI 2022-01-01
+        3    Arizona     4  56667    AZPCPI 2022-01-01
+        4   New York    36  78089    NYPCPI 2022-01-01
         ```
         """
 
@@ -4108,10 +4108,13 @@ class GeoFRED:
 
         if not df.empty:
             df.value = df.value.replace(self.EMPTY_VALUE, np.nan)
+            df['year'] = pd.to_datetime(df['year'], format='%Y-%m-%d')
 
             df = df.astype(dtype={
-                'value': 'float64',
-                'year': 'int64'
+                'value': int,
+                'series_id': 'category',
+                'region': 'category',
+                'code': int
             })
 
         return df
@@ -4177,11 +4180,11 @@ class GeoFRED:
             "units": "Dollars",
             "frequency": "Annual",
             "data": {
-              "2013": [
+              "2013-01-01": [
                 {
                   "region": "Alabama",
                   "code": "01",
-                  "value": "36258.0",
+                  "value": "36014",
                   "series_id": "ALPCPI"
                 },
                 ...
@@ -4198,12 +4201,12 @@ class GeoFRED:
         ```python
         >>> geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
         >>> geo_fred.regional_data(series_group='882', date=date(2013, 1, 1), region_type=RegionType.state, frequency=Frequency.anual, season=Seasonality.not_seasonally_adjusted)
-               region code    value series_id  year
-        0     Alabama   01  36258.0    ALPCPI  2013
-        1      Alaska   02  52843.0    AKPCPI  2013
-        2     Arizona   04  36739.0    AZPCPI  2013
-        3    Arkansas   05  36605.0    ARPCPI  2013
-        4  California   06  48549.0    CAPCPI  2013
+                         region  code  value series_id       year
+        0                Hawaii    15  43931    HIPCPI 2013-01-01
+        1            California     6  48502    CAPCPI 2013-01-01
+        2  District of Columbia    11  67774    DCPCPI 2013-01-01
+        3              Colorado     8  47404    COPCPI 2013-01-01
+        4           Connecticut     9  62647    CTPCPI 2013-01-01
         ```
         """
 
@@ -4236,10 +4239,13 @@ class GeoFRED:
 
         if not df.empty:
             df.value = df.value.replace(self.EMPTY_VALUE, np.nan)
+            df['year'] = pd.to_datetime(df['year'], format='%Y-%m-%d')
 
             df = df.astype(dtype={
-                'value': 'float64',
-                'year': 'int64'
+                'value': int,
+                'series_id': 'category',
+                'region': 'category',
+                'code': int
             })
 
         return df
@@ -4249,11 +4255,11 @@ class GeoFRED:
         transform dict indexed by year from:
         ```json
         {
-          "2020": [
+          "2020-01-01": [
             {
               "region": "Alabama",
               "code": "01",
-              "value": "46479.0",
+              "value": "46479",
               "series_id": "ALPCPI"
             },
             ...
@@ -4266,9 +4272,9 @@ class GeoFRED:
           {
             "region": "Alabama",
             "code": "01",
-            "value": "46479.0",
+            "value": "46479",
             "series_id": "ALPCPI",
-            "year": "2020"
+            "year": "2020-01-01"
           },
           ...
         ]
