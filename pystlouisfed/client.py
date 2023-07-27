@@ -2097,7 +2097,7 @@ class FRED:
         This parameter has no affect if the frequency parameter is not set.
 
         `output_type`
-        An integer that indicates an output type.
+        An integer that indicates an output type. See https://alfred.stlouisfed.org/help/downloaddata#outputformats
 
         `vintage_dates`
         A comma separated string of YYYY-MM-DD formatted dates in history (e.g. 2000-01-01,2005-02-24).
@@ -2142,20 +2142,9 @@ class FRED:
         ```
 
         ## Returns
-        `pystlouisfed.models.Series`
+        `pandas.DataFrame`
 
-        ## Example
-        ```python
-        >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-        >>> fred.series_observations(series_id='GNPCA').head()
-                       realtime_start realtime_end     value
-            date
-            1929-01-01     2022-02-05   2022-02-05  1120.718
-            1930-01-01     2022-02-05   2022-02-05  1025.678
-            1931-01-01     2022-02-05   2022-02-05   958.927
-            1932-01-01     2022-02-05   2022-02-05   834.769
-            1933-01-01     2022-02-05   2022-02-05   823.628
-        ```
+        ## Examples
 
         ```python
         >>> from matplotlib import pyplot as plt
@@ -2167,6 +2156,99 @@ class FRED:
         >>> plt.show()
         ```
         .. image:: T10Y2Y.png
+
+        ### Output types
+        These output formats are a cross tabulation between the series' observation dates and the specified vintage dates.
+        The first column contains the observation dates for which the data values are measured.
+        The first row contains the vintage dates that specify dates in history and what data actually existed on past dates.
+        The interior cells contain data values for specific combinations of observation dates and vintage dates.
+        For details see https://alfred.stlouisfed.org/help/downloaddata#outputformats .
+
+        #### Observations by Real-Time Period (default)
+
+        ```python
+        >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+        >>> fred.series_observations(
+        >>>     series_id='GNPCA',
+        >>>     output_type=OutputType.realtime_period,
+        >>>     realtime_start=date(2020, 7, 4),
+        >>>     realtime_end=date(2023, 7, 20),
+        >>>     observation_start=date(1990, 7, 1),
+        >>>     observation_end=date(2023, 7, 1)
+        >>> ).head()
+
+                    realtime_start realtime_end      value
+        date
+        1929-01-01     2023-07-27   2023-07-27   1120.718
+        1930-01-01     2023-07-27   2023-07-27   1025.678
+        1931-01-01     2023-07-27   2023-07-27    958.927
+        1932-01-01     2023-07-27   2023-07-27    834.769
+        1933-01-01     2023-07-27   2023-07-27    823.628
+        ```
+
+        #### All Observations
+
+        ```python
+        >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+        >>> fred.series_observations(
+        >>>     series_id='GNPCA',
+        >>>     output_type=OutputType.all,
+        >>>     realtime_start=date(2020, 7, 4),
+        >>>     realtime_end=date(2023, 7, 20),
+        >>>     observation_start=date(1990, 7, 1),
+        >>>     observation_end=date(2023, 7, 1)
+        >>> ).head()
+
+                    GNPCA_20200704  GNPCA_20200730  GNPCA_20210325  GNPCA_20210729  GNPCA_20220330  GNPCA_20220929  GNPCA_20230330  GNPCA_20230720
+        date
+        1991-01-01        9406.669        9406.669        9406.669        9411.632        9411.632        9411.632        9411.632        9411.632
+        1992-01-01        9734.705        9734.705        9734.705        9739.841        9739.841        9739.841        9739.841        9739.841
+        1993-01-01       10000.831       10000.831       10000.831       10006.004       10006.004       10006.004       10006.004       10006.004
+        1994-01-01       10389.663       10389.663       10389.663       10395.034       10395.034       10395.034       10395.034       10395.034
+        1995-01-01       10672.832       10672.832       10672.832       10678.341       10678.341       10678.341       10678.341       10678.341
+        ```
+
+        #### New and Revised Observations Only
+
+        ```python
+        >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+        >>> fred.series_observations(
+        >>>     series_id='GNPCA',
+        >>>     output_type=OutputType.new_and_revised,
+        >>>     realtime_start=date(2020, 7, 4),
+        >>>     realtime_end=date(2023, 7, 20),
+        >>>     observation_start=date(1990, 7, 1),
+        >>>     observation_end=date(2023, 7, 1)
+        >>> ).head()
+
+                    GNPCA_20210729  GNPCA_20200730  GNPCA_20220929  GNPCA_20210325  GNPCA_20220330  GNPCA_20230330
+        date
+        1991-01-01        9411.632             NaN             NaN             NaN             NaN             NaN
+        1992-01-01        9739.841             NaN             NaN             NaN             NaN             NaN
+        1993-01-01       10006.004             NaN             NaN             NaN             NaN             NaN
+        1994-01-01       10395.034             NaN             NaN             NaN             NaN             NaN
+        1995-01-01       10678.341             NaN             NaN             NaN             NaN             NaN
+        ```
+
+        #### Initial Release Only
+
+        ```python
+        >>> fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+        >>> fred.series_observations(
+        >>>     series_id='GNPCA',
+        >>>     output_type=OutputType.initial_release_only,
+        >>>     realtime_start=date(2020, 7, 4),
+        >>>     realtime_end=date(2023, 7, 20),
+        >>>     observation_start=date(1990, 7, 1),
+        >>>     observation_end=date(2023, 7, 1)
+        >>> ).head()
+
+                   realtime_start realtime_end      value
+        date
+        2020-01-01     2021-03-25   2021-07-28  18612.022
+        2021-01-01     2022-03-30   2022-09-28  19644.028
+        2022-01-01     2023-03-30   2023-07-20  20158.225
+        ```
         """
 
         if units not in enums.Unit:
@@ -2209,15 +2291,19 @@ class FRED:
             )
         )
 
-        date_columns = ['realtime_start', 'realtime_end', 'date']
+        if not df.empty and output_type in [enums.OutputType.realtime_period, enums.OutputType.initial_release_only]:
+            date_columns = ['realtime_start', 'realtime_end', 'date']
 
-        if not df.empty:
             df[date_columns] = df[date_columns].apply(pd.to_datetime, format='%Y-%m-%d')
             df.value = df.value.replace(self.EMPTY_VALUE, np.nan)
 
             df = df.astype(dtype={
                 'value': 'float'
             }).set_index('date')
+
+        elif not df.empty and output_type in [enums.OutputType.all, enums.OutputType.new_and_revised]:
+            df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+            df = df.set_index('date').astype(float)
 
         return df
 
