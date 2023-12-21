@@ -1,4 +1,5 @@
 import logging
+import time
 import xml.etree.ElementTree as ET
 from contextlib import nullcontext
 from datetime import datetime, date, timedelta
@@ -10,7 +11,10 @@ import numpy as np
 import pandas as pd
 import requests
 import sickle
-from ratelimiter import RateLimiter
+from rush.throttle import Throttle
+from rush.quota import Quota
+from rush.limiters.periodic import PeriodicLimiter
+from rush.stores.dictionary import DictionaryStore
 
 import pystlouisfed.enums as enums
 import pystlouisfed.models as models
@@ -62,30 +66,31 @@ class URLFactory:
 
 
 class Client:
-    rate_limit: int
 
-    _rate_limit_remaining: int
-    _rate_limit_last_check: datetime
-    _rate_limiter: RateLimiter
-    _rate_limiter_enabled: bool
     _headers: dict = {
         "Accept": "application/json",
         "Accept-Encoding": 'gzip',
         "Cache-Control": "no-cache",
         "User-Agent": "Python FRED Client"
     }
-    _url: URLFactory
 
-    def __init__(self, key: str, ratelimiter_enabled: bool, ratelimiter_max_calls: int, ratelimiter_period: int, request_params: dict = None):
-        self._url = URLFactory(key)
-        self.rate_limit = 120
-        self._rate_limit_remaining = None
-        self._rate_limit_last_check = None
+    def __init__(self, key: str, ratelimiter_enabled: bool, ratelimiter_max_calls: int, ratelimiter_period: timedelta, request_params: dict = None):
+        self._url: URLFactory = URLFactory(key)
+        self._ratelimiter_enabled = ratelimiter_enabled
 
         if ratelimiter_enabled:
-            self._rate_limiter = RateLimiter(max_calls=ratelimiter_max_calls, period=ratelimiter_period)
-        else:
-            self._rate_limiter = nullcontext()
+
+            self._ratelimiter_max_calls = ratelimiter_max_calls
+
+            self._rate_limiter = Throttle(
+                limiter=PeriodicLimiter(
+                    store=DictionaryStore()
+                ),
+                rate=Quota(
+                    period=ratelimiter_period,
+                    count=ratelimiter_max_calls
+                )
+            )
 
         if request_params is None:
             request_params = dict()
@@ -94,10 +99,6 @@ class Client:
             request_params['headers'] = self._headers
 
         self.request_params = request_params
-
-    @property
-    def rate_limit_remaining(self) -> int:
-        return self.rate_limit if self._rate_limit_last_check is None or self._rate_limit_last_check <= (datetime.now() - timedelta(seconds=60)) else self._rate_limit_remaining
 
     def get(self, endpoint: str, list_key: str, limit: int = None, **kwargs) -> list:
 
@@ -118,47 +119,53 @@ class Client:
                 }
             )
 
-            with self._rate_limiter:
+            if self._ratelimiter_enabled:
 
-                res = requests.get(url, **self.request_params)
+                while True :
+                    limit_result = self._rate_limiter.check("all", 1)
 
-                # GeoFRED return error codes and messages in XML
-                if res.headers.get('content-type').startswith('text/xml') and res.status_code != 200:
-                    element = ET.fromstring(res.content.decode())
-                    raise Exception('Received error code: "{}" and message: "{}" for URL {}'.format(element.get('code'), element.get('message'), url))
+                    if limit_result.limited:
+                        logger.debug(f"Api request limited! The limit will be reset after {limit_result.reset_after}.")
+                        time.sleep(1 if not limit_result.reset_after.seconds else limit_result.reset_after.seconds)
+                    else:
+                        break
 
-                elif not res.headers.get('content-type').startswith('application/json'):
-                    raise Exception('Unexpected content-type "{}" for URL {}'.format(res.headers.get('content-type'), url))
+                logger.debug(f"Api rate limit: {limit_result.remaining} out of { self._ratelimiter_max_calls} requests per minute remaining. The limit will be reset after {limit_result.reset_after}.")
 
-                data = res.json()
+            res = requests.get(url, **self.request_params)
 
-                if res.status_code in [400, 403, 420, 429, 500]:
-                    raise Exception('Received error code: "{}" and message: "{}" for URL {}'.format(data['error_code'], " ".join(data['error_message'].split()), url))
-                elif res.status_code != 200:
-                    raise Exception('Received status code: "{}" for URL {}'.format(res.status_code, url))
+            # GeoFRED return error codes and messages in XML
+            if res.headers.get('content-type').startswith('text/xml') and res.status_code != 200:
+                element = ET.fromstring(res.content.decode())
+                raise Exception('Received error code: "{}" and message: "{}" for URL {}'.format(element.get('code'), element.get('message'), url))
 
-                self.rate_limit = int(res.headers['x-rate-limit-limit'])
-                self._rate_limit_remaining = int(res.headers['x-rate-limit-remaining'])
-                self._rate_limit_last_check = datetime.now()
-                logger.debug("Api rate limit: {} out of {} requests per minute remaining".format(self.rate_limit_remaining, self.rate_limit))
+            elif not res.headers.get('content-type').startswith('application/json'):
+                raise Exception('Unexpected content-type "{}" for URL {}'.format(res.headers.get('content-type'), url))
 
-                list_data = self._deep_get(data, list_key)
+            data = res.json()
 
-                if 'count' not in data:
-                    # GeoFRED.series_data and GeoFRED.regional_data return dict of years
-                    return list_data if isinstance(list_data, list) else [list_data]
-                else:
-                    number_of_requests = int(data['count'] / limit) + 1 if limit is not None else 1
-                    logger.debug("Number of records: {}, Request {} of {}".format(data['count'], request_number, number_of_requests))
+            if res.status_code in [400, 403, 420, 429, 500]:
+                raise Exception('Received error code: "{}" and message: "{}" for URL {}'.format(data['error_code'], " ".join(data['error_message'].split()), url))
+            elif res.status_code != 200:
+                raise Exception('Received status code: "{}" for URL {}'.format(res.status_code, url))
 
-                if limit is None or data['count'] < limit or len(list_data) < limit:
-                    stop = True
+            list_data = self._deep_get(data, list_key)
 
-                if len(list_data) == limit:
-                    offset += limit
+            if 'count' not in data:
+                # GeoFRED.series_data and GeoFRED.regional_data return dict of years
+                return list_data if isinstance(list_data, list) else [list_data]
+            else:
+                number_of_requests = int(data['count'] / limit) + 1 if limit is not None else 1
+                logger.debug("Number of records: {}, Request {} of {}".format(data['count'], request_number, number_of_requests))
 
-                result += list_data
-                request_number += 1
+            if limit is None or data['count'] < limit or len(list_data) < limit:
+                stop = True
+
+            if len(list_data) == limit:
+                offset += limit
+
+            result += list_data
+            request_number += 1
 
         return result
 
@@ -181,7 +188,7 @@ class FRED:
     FRED/ALFRED returns empty values as dot
     """
 
-    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = True, ratelimiter_max_calls: int = 120, ratelimiter_period: timedelta = timedelta(seconds=60), request_params: dict = None):
         """
         Parameters
         ----------
@@ -203,14 +210,6 @@ class FRED:
             ratelimiter_period=ratelimiter_period,
             request_params=request_params
         )
-
-    @property
-    def rate_limit(self) -> int:
-        return self._client.rate_limit
-
-    @property
-    def rate_limit_remaining(self) -> int:
-        return self._client.rate_limit_remaining
 
     """
     Category
@@ -3988,7 +3987,7 @@ class GeoFRED:
     https://geofred.stlouisfed.org/docs/api/geofred/
     """
 
-    def __init__(self, api_key: str, ratelimiter_enabled: bool = False, ratelimiter_max_calls: int = 2, ratelimiter_period: int = 1, request_params: dict = None):
+    def __init__(self, api_key: str, ratelimiter_enabled: bool = False, ratelimiter_max_calls: int = 120, ratelimiter_period: timedelta = timedelta(seconds=60), request_params: dict = None):
         """
         Parameters
         ----------
@@ -4011,14 +4010,6 @@ class GeoFRED:
             ratelimiter_period=ratelimiter_period,
             request_params=request_params
         )
-
-    @property
-    def rate_limit(self) -> int:
-        return self._client.rate_limit
-
-    @property
-    def rate_limit_remaining(self) -> int:
-        return self._client.rate_limit_remaining
 
     def shapes(self, shape: enums.ShapeType) -> List[models.Shape]:
         """

@@ -30,7 +30,7 @@ pip install pystlouisfed
 * [requests](https://docs.python-requests.org/en/latest/) for API calls
 * [shapely](https://shapely.readthedocs.io/en/latest/) for geometric data from GeoFRED
 * [sickle](https://sickle.readthedocs.io/) for FRASER oai-pmh API
-* [ratelimiter](https://github.com/RazerM/ratelimiter) for limiting API calls
+* [rush](https://github.com/sigmavirus24/rush) for limiting API calls
 
 ## Usage
 
@@ -242,7 +242,7 @@ df = fred.series_observations(series_id='T10Y2Y', aggregation_method=Aggregation
 ### Working with rate limiting
 
 The API is limited to 120 calls per 60 seconds.
-`pystlouisfed` therefore, by default uses [ratelimiter](https://github.com/RazerM/ratelimiter), which monitors this limit!
+`pystlouisfed` therefore, by default uses [rush](https://github.com/sigmavirus24/rush), which monitors this limit!
 So it is not a problem to download all series (~800) with the tag "daily" and "nsa" (Not Seasonally Adjusted) without exceeding any limits:
 
 ```python
