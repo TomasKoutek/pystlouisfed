@@ -3388,15 +3388,9 @@ class FRED:
             source_id=source_id,
             realtime_start=realtime_start,
             realtime_end=realtime_end
-        )[0]
-
-        return models.Source(
-            id=data['id'],
-            realtime_start=datetime.strptime(data['realtime_start'], '%Y-%m-%d').date(),
-            realtime_end=datetime.strptime(data['realtime_end'], '%Y-%m-%d').date(),
-            name=data['name'],
-            link=data['link'],
         )
+
+        return models.Source(**data[0])
 
     def source_releases(
             self,

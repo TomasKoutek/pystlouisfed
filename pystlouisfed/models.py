@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 from datetime import date, datetime
+from typing import Optional
 
 from shapely import geos
 from shapely.geometry import Point, MultiPolygon
-
-from typing import Optional
 
 
 @dataclass
@@ -34,11 +33,11 @@ class Series:
     notes: Optional[str] = None
 
     def __post_init__(self):
-        self.realtime_start = datetime.strptime(self.realtime_start, "%Y-%m-%d").date()
-        self.realtime_end = datetime.strptime(self.realtime_end, "%Y-%m-%d").date()
-        self.observation_start = datetime.strptime(self.observation_start, "%Y-%m-%d").date()
-        self.observation_end = datetime.strptime(self.observation_end, "%Y-%m-%d").date()
-        self.last_updated = datetime.strptime(self.last_updated + '00', '%Y-%m-%d %H:%M:%S%z')
+        self.realtime_start = datetime.strptime(str(self.realtime_start), "%Y-%m-%d").date()
+        self.realtime_end = datetime.strptime(str(self.realtime_end), "%Y-%m-%d").date()
+        self.observation_start = datetime.strptime(str(self.observation_start), "%Y-%m-%d").date()
+        self.observation_end = datetime.strptime(str(self.observation_end), "%Y-%m-%d").date()
+        self.last_updated = datetime.strptime(str(self.last_updated) + '00', '%Y-%m-%d %H:%M:%S%z')
 
 
 @dataclass
@@ -61,8 +60,8 @@ class Release:
     link: str
 
     def __post_init__(self):
-        self.realtime_start = datetime.strptime(self.realtime_start, "%Y-%m-%d").date()
-        self.realtime_end = datetime.strptime(self.realtime_end, "%Y-%m-%d").date()
+        self.realtime_start = datetime.strptime(str(self.realtime_start), "%Y-%m-%d").date()
+        self.realtime_end = datetime.strptime(str(self.realtime_end), "%Y-%m-%d").date()
 
 
 @dataclass
@@ -79,6 +78,10 @@ class Source:
     realtime_end: date
     name: str
     link: str
+
+    def __post_init__(self):
+        self.realtime_start = datetime.strptime(str(self.realtime_start), "%Y-%m-%d").date()
+        self.realtime_end = datetime.strptime(str(self.realtime_end), "%Y-%m-%d").date()
 
 
 @dataclass
@@ -110,8 +113,8 @@ class SeriesGroup:
         # self.group_id = int(self.group_id) if self.group_id is not None else None
         # self.min_start_date = date(self.min_start_date) if self.min_start_date is not None else None
         # self.max_start_date = date(self.max_start_date) if self.max_start_date is not None else None
-        self.min_date = datetime.strptime(self.min_date, "%Y-%m-%d").date()
-        self.max_date = datetime.strptime(self.max_date, "%Y-%m-%d").date()
+        self.min_date = datetime.strptime(str(self.min_date), "%Y-%m-%d").date()
+        self.max_date = datetime.strptime(str(self.max_date), "%Y-%m-%d").date()
 
 
 @dataclass
