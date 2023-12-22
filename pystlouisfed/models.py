@@ -1,9 +1,12 @@
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date
+from datetime import datetime
+from typing import NoReturn
 from typing import Optional
 
 from shapely import geos
-from shapely.geometry import Point, MultiPolygon
+from shapely.geometry import MultiPolygon
+from shapely.geometry import Point
 
 
 @dataclass
@@ -32,12 +35,12 @@ class Series:
     # group_popularity: int
     notes: Optional[str] = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> NoReturn:
         self.realtime_start = datetime.strptime(str(self.realtime_start), "%Y-%m-%d").date()
         self.realtime_end = datetime.strptime(str(self.realtime_end), "%Y-%m-%d").date()
         self.observation_start = datetime.strptime(str(self.observation_start), "%Y-%m-%d").date()
         self.observation_end = datetime.strptime(str(self.observation_end), "%Y-%m-%d").date()
-        self.last_updated = datetime.strptime(str(self.last_updated) + '00', '%Y-%m-%d %H:%M:%S%z')
+        self.last_updated = datetime.strptime(str(self.last_updated) + "00", "%Y-%m-%d %H:%M:%S%z")
 
 
 @dataclass
@@ -59,7 +62,7 @@ class Release:
     press_release: bool
     link: str
 
-    def __post_init__(self):
+    def __post_init__(self) -> NoReturn:
         self.realtime_start = datetime.strptime(str(self.realtime_start), "%Y-%m-%d").date()
         self.realtime_end = datetime.strptime(str(self.realtime_end), "%Y-%m-%d").date()
 
@@ -79,7 +82,7 @@ class Source:
     name: str
     link: str
 
-    def __post_init__(self):
+    def __post_init__(self) -> NoReturn:
         self.realtime_start = datetime.strptime(str(self.realtime_start), "%Y-%m-%d").date()
         self.realtime_end = datetime.strptime(str(self.realtime_end), "%Y-%m-%d").date()
 
@@ -109,7 +112,7 @@ class SeriesGroup:
     # min_start_date: date = None
     # max_start_date: date = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> NoReturn:
         # self.group_id = int(self.group_id) if self.group_id is not None else None
         # self.min_start_date = date(self.min_start_date) if self.min_start_date is not None else None
         # self.max_start_date = date(self.max_start_date) if self.max_start_date is not None else None
@@ -128,6 +131,6 @@ class Shape:
     short_name: str = None
     sovereignty: str = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> NoReturn:
         self._centroid = geos.WKTReader(geos.lgeos).read(self.centroid)
         self.geometry = geos.WKTReader(geos.lgeos).read(self.geometry)
