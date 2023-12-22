@@ -1,4 +1,6 @@
 tmp/
+tests/api.key
+/doc/html/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm+all,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm+all,git

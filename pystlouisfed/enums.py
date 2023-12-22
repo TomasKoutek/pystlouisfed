@@ -88,8 +88,17 @@ class FilterVariable(Enum):
     The attribute to filter results by.
     """
     frequency = "frequency"
+    """
+    Filter by frequency
+    """
     units = "units"
+    """
+    Filter by units
+    """
     seasonal_adjustment = "seasonal_adjustment"
+    """
+    Filter by seasonal adjustment
+    """
 
 
 class Seasonality(Enum):
@@ -146,28 +155,95 @@ class OrderBy(Enum):
     """
     Order results by values of the specified attribute.
     """
+
     series_id = "series_id"
+    """
+    Order by series id
+    """
     series_count = "series_count"
+    """
+    Order by series count
+    """
     title = "title"
+    """
+    Order by title
+    """
     units = "units"
+    """
+    Order by units
+    """
     frequency = "frequency"
+    """
+    Order by frequency
+    """
     seasonal_adjustment = "seasonal_adjustment"
+    """
+    Order by seasonal adjustment
+    """
     realtime_start = "realtime_start"
+    """
+    Order by realtime start
+    """
     realtime_end = "realtime_end"
+    """
+    Order by realtime end
+    """
     last_updated = "last_updated"
+    """
+    Order by last updated
+    """
     observation_start = "observation_start"
+    """
+    Order by observation start
+    """
     observation_end = "observation_end"
+    """
+    Order by observation end
+    """
     popularity = "popularity"
+    """
+    Order by popularity
+    """
     group_popularity = "group_popularity"
+    """
+    Order by group popularity
+    """
     created = "created"
+    """
+    Order by created
+    """
     name = "name"
+    """
+    Order by name
+    """
     group_id = "group_id"
+    """
+    Order by group id
+    """
     search_rank = "search_rank"
+    """
+    Order by search rank
+    """
     release_id = "release_id"
+    """
+    Order by release id
+    """
     source_id = "source_id"
+    """
+    Order by source id
+    """
     press_release = "press_release"
+    """
+    Order by press release
+    """
     release_date = "release_date"
+    """
+    Order by release date
+    """
     release_name = "release_name"
+    """
+    Order by release name
+    """
 
 
 class Unit(Enum):
@@ -391,6 +467,7 @@ class SearchType(Enum):
     This makes it possible for searches like "Industry" to match series containing related words such as "Industries". 
     Of course, you can search for multiple words like "money" and "stock".
     """
+
     series_id = "series_id"
     """
     "series_id" performs a substring search on series IDs. 

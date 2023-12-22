@@ -23,12 +23,8 @@ class GeoFRED:
 
     https://geofred.stlouisfed.org/docs/api/geofred/
     """
-    EMPTY_VALUE = "."
 
-    """
-    https://geofred.stlouisfed.org/
-    https://geofred.stlouisfed.org/docs/api/geofred/
-    """
+    EMPTY_VALUE = "."
 
     def __init__(
             self,
@@ -39,15 +35,13 @@ class GeoFRED:
             request_params: Optional[dict] = None
     ) -> NoReturn:
         """
-        Parameters
-        ----------
-        api_key: str
-                32 character alpha-numeric lowercase string
-        ratelimiter_enabled: bool
-        ratelimiter_max_calls: int
-        ratelimiter_period: int
-        request_params: dict
-                HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+        Instantiates class from a file.
+
+        :param api_key: str, 32 character alpha-numeric lowercase string
+        :param ratelimiter_enabled: bool
+        :param ratelimiter_max_calls: int
+        :param ratelimiter_period: int
+        :param request_params: dict, HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
         """  # noinspection
 
         if api_key is None or len(api_key) != 32:
@@ -63,48 +57,51 @@ class GeoFRED:
 
     def shapes(self, shape: enums.ShapeType) -> list[models.Shape]:
         """
-        https://geofred.stlouisfed.org/docs/api/geofred/shapes.html
+        :param shape: enums.ShapeType
+        :return: list[models.Shape]
+                
+        Description
+        -----------
+        | https://geofred.stlouisfed.org/docs/api/geofred/shapes.html
+        | This request returns shape files from GeoFRED in Well-known text (WKT) format.
 
-        ## Description
-        This request returns shape files from GeoFRED in Well-known text (WKT) format.
-
-        ## API Request (HTTPS GET)
+        API Request (HTTPS GET)
+        -----------------------
         https://api.stlouisfed.org/geofred/shapes/file?shape=bea&api_key=abcdefghijklmnopqrstuvwxyz123456
 
-        ## API Response
-        ```json
-        {
-          "bea": [
-            {
-              "name": "Far West",
-              "code": "8",
-              "centroid": "POINT(-142.362948378432 57.1478734829085)",
-              "geometry": "MULTIPOLYGON(((-155.778234 20.245743,-155.772734 ...)))",
-              "report name": "North Adams, MA-VT"
-            }
-            ...
-          ]
-        }
-        ```
+        API Response
+        ------------
+        .. code-block:: json
+        
+           {
+             "bea": [
+               {
+                 "name": "Far West",
+                 "code": "8",
+                 "centroid": "POINT(-142.362948378432 57.1478734829085)",
+                 "geometry": "MULTIPOLYGON(((-155.778234 20.245743,-155.772734 ...)))",
+                 "report name": "North Adams, MA-VT"
+               }
+             ]
+           }
 
-        ## Returns
-        `List[pystlouisfed.models.Shape]`
+        Example
+        -------
+        .. code-block:: python
+        
+           import matplotlib.pyplot as plt
+           from descartes import PolygonPatch
+           from pystlouisfed.client import GeoFRED, ShapeType
 
-        ## Example
-        ```python
-            import matplotlib.pyplot as plt
-            from descartes import PolygonPatch
-            from pystlouisfed.client import GeoFRED, ShapeType
+           plt.figure()
+           ax = plt.axes()
+           geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 
-            plt.figure()
-            ax = plt.axes()
-            geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+           for country_shape in geo_fred.shapes(shape=ShapeType.country):
+               ax.add_patch(PolygonPatch(country_shape.geometry, ec='#999999', fc='#6699cc', alpha=0.5, zorder=2))
+           ax.axis('scaled')
+           plt.show()
 
-            for country_shape in geo_fred.shapes(shape=ShapeType.country):
-                ax.add_patch(PolygonPatch(country_shape.geometry, ec='#999999', fc='#6699cc', alpha=0.5, zorder=2))
-            ax.axis('scaled')
-            plt.show()
-        ```
         .. image:: geofred_shape_map.png
         """  # noinspection
 
@@ -123,42 +120,46 @@ class GeoFRED:
 
     def series_group(self, series_id: str) -> models.SeriesGroup:
         """
-        https://geofred.stlouisfed.org/docs/api/geofred/series_group.html
+        :param series_id: str
+        :return: :py:class:`models.SeriesGroup`
 
-        ## Description
-        This request returns the meta information needed to make requests for GeoFRED data.
-        Minimum and maximum date are also supplied for the data range available.
+        Description
+        -----------
+        | https://geofred.stlouisfed.org/docs/api/geofred/series_group.html
+        | This request returns the meta information needed to make requests for GeoFRED data.
+        | Minimum and maximum date are also supplied for the data range available.
 
-        ## API Request (HTTPS GET)
+        API Request (HTTPS GET)
+        -----------------------
         https://api.stlouisfed.org/geofred/series/group?series_id=SMU56000000500000001a&api_key=abcdefghijklmnopqrstuvwxyz123456
 
-        ## API Response
-        ```json
-        {
-          "series_group": [
-            {
-              "title": "All Employees: Total Private",
-              "geom_type": "state",
-              "group_id": "192",
-              "season": "NSA",
-              "units": "Thousands of Persons",
-              "frequency": "m",
-              "min_start_date": "1990-01-01",
-              "max_start_date": "2015-06-01"
-            }
-          ]
-        }
-        ```
+        API Response
+        ------------
+        .. code-block:: json
+        
+           {
+             "series_group": [
+               {
+                 "title": "All Employees: Total Private",
+                 "geom_type": "state",
+                 "group_id": "192",
+                 "season": "NSA",
+                 "units": "Thousands of Persons",
+                 "frequency": "m",
+                 "min_start_date": "1990-01-01",
+                 "max_start_date": "2015-06-01"
+               }
+             ]
+           }
 
-        ## Returns
-        `models.SeriesGroup`
-
-        ## Example
-        ```python
-            >>> geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-            >>> print(geo_fred.series_group(series_id='SMU56000000500000001a'))
-            SeriesGroup(title='All Employees: Total Private', region_type='state', series_group='1223', season='NSA', units='Thousands of Persons', frequency='a', min_date=datetime.date(1990, 1, 1), max_date=datetime.date(2020, 1, 1))
-        ```
+        Example
+        -------
+        .. code-block:: python
+        
+           geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+           print(geo_fred.series_group(series_id='SMU56000000500000001a'))
+           
+           # SeriesGroup(title='All Employees: Total Private', region_type='state', series_group='1223', season='NSA', units='Thousands of Persons', frequency='a', min_date=datetime.date(1990, 1, 1), max_date=datetime.date(2020, 1, 1))
         """  # noinspection
 
         data = self._client.get(
@@ -171,64 +172,58 @@ class GeoFRED:
 
     def series_data(self, series_id: str, date: Optional[dt_date] = None, start_date: Optional[dt_date] = None) -> pd.DataFrame:
         """
-        ## Parameters
+        :param series_id: str, The FRED series_id you want to request GeoFRED data for. Not all series that are in FRED have geographical data.
+        :param date: Optional[dt_date], The date you want to request series group data from.
+        :param start_date: Optional[dt_date], The start date you want to request series group data from. This allows you to pull a range of data
+        :return: :py:class:`pd.DataFrame`
+        
+        Description
+        -----------
+        | https://geofred.stlouisfed.org/docs/api/geofred/series_data.html
+        | This request returns a cross section of regional data for a specified release dt_date.
+        | If no date is specified, the most recent data available are returned.
 
-        `series_id`
-        The FRED series_id you want to request GeoFRED data for. Not all series that are in FRED have geographical data.
-
-        `date`
-        The date you want to request series group data from.
-
-        `start_date`
-        The start date you want to request series group data from. This allows you to pull a range of data
-
-        ## Description
-        https://geofred.stlouisfed.org/docs/api/geofred/series_data.html
-
-        This request returns a cross section of regional data for a specified release dt_date.
-        If no date is specified, the most recent data available are returned.
-
-        ## API Request (HTTPS GET)
+        API Request (HTTPS GET)
+        -----------------------
         https://api.stlouisfed.org/geofred/series/data?series_id=WIPCPI&api_key=abcdefghijklmnopqrstuvwxyz123456&date=2012-01-01
 
-        ## API Response
-        ```json
-        {
-          "meta": {
-            "title": "Per Capita Personal Income by State (Dollars)",
-            "region": "state",
-            "seasonality": "Not Seasonally Adjusted",
-            "units": "Dollars",
-            "frequency": "Annual",
-            "date": "2012-01-01",
-            "data": {
-              "2022-01-01": [
-                {
-                  "region": "Alabama",
-                  "code": "01",
-                  "value": "50637",
-                  "series_id": "ALPCPI"
-                },
-              ...
-            ]
-          }
-        }
-        ```
+        API Response
+        ------------
+        .. code-block:: json
+        
+           {
+             "meta": {
+               "title": "Per Capita Personal Income by State (Dollars)",
+               "region": "state",
+               "seasonality": "Not Seasonally Adjusted",
+               "units": "Dollars",
+               "frequency": "Annual",
+               "date": "2012-01-01",
+               "data": {
+                 "2022-01-01": [
+                   {
+                     "region": "Alabama",
+                     "code": "01",
+                     "value": "50637",
+                     "series_id": "ALPCPI"
+                   },
+               ]
+             }
+           }
 
-        ## Returns
-        `pandas.DataFrame`
-
-        ## Example (`pandas.DataFrame`)
-        ```python
-        >>> geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-        >>> geo_fred.series_data(series_id='WIPCPI')
-              region  code  value series_id       year
-        0  Louisiana    22  54622    LAPCPI 2022-01-01
-        1     Nevada    32  61282    NVPCPI 2022-01-01
-        2   Maryland    24  70730    MDPCPI 2022-01-01
-        3    Arizona     4  56667    AZPCPI 2022-01-01
-        4   New York    36  78089    NYPCPI 2022-01-01
-        ```
+        Example
+        -------
+        .. code-block:: python 
+        
+           geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+           geo_fred.series_data(series_id='WIPCPI')
+            
+           #       region  code  value series_id       year
+           # 0  Louisiana    22  54622    LAPCPI 2022-01-01
+           # 1     Nevada    32  61282    NVPCPI 2022-01-01
+           # 2   Maryland    24  70730    MDPCPI 2022-01-01
+           # 3    Arizona     4  56667    AZPCPI 2022-01-01
+           # 4   New York    36  78089    NYPCPI 2022-01-01
         """  # noinspection
 
         if date is None:
@@ -275,82 +270,63 @@ class GeoFRED:
             aggregation_method: enums.AggregationMethod = enums.AggregationMethod.average
     ) -> pd.DataFrame:
         """
-        ## Parameters
+        :param series_group: str, The ID for a group of seriess found in GeoFRED.
+        :param region_type: enums.RegionType, The region you want want to pull data for.
+        :param date: dt_date, The date you want to pull a series group data from.
+        :param season: enums.Seasonality, The seasonality of the series group.
+        :param units: str, The units of the series you want to pull.
+        :param start_date: Optional[dt_date] = None, The start date you want to request series group data from. This allows you to pull a range of data.
+        :param frequency: Optional[enums.Frequency], An optional parameter that indicates a lower frequency to aggregate values to. The GeoFRED frequency aggregation feature converts higher frequency data series into lower frequency data series (e.g. converts a monthly data series into an annual data series). In GeoFRED, the highest frequency data is daily, and the lowest frequency data is annual. There are 3 aggregation methods available- average, sum, and end of period. See the aggregation_method parameter.
+        :param transformation: enums.Unit, A key that indicates a data value transformation.
+        :param aggregation_method: One of the following values: 'avg', 'sum', 'eop'
+        :return: :py:class:`pd.DataFrame`
 
-        `series_group`
-        The ID for a group of seriess found in GeoFRED.
+        Description
+        -----------
+        | https://geofred.stlouisfed.org/docs/api/geofred/regional_data.html
+        | This request returns a cross section of regional data
 
-        `region_type`
-        The region you want want to pull data for.
-
-        `date
-        The date you want to pull a series group data from.
-
-        `start_date`
-        The start date you want to request series group data from.
-        This allows you to pull a range of data
-
-        `units`
-        The units of the series you want to pull.
-
-        `season`
-        The seasonality of the series group.
-
-        `frequency`
-        An optional parameter that indicates a lower frequency to aggregate values to.
-        The GeoFRED frequency aggregation feature converts higher frequency data series into lower frequency data series (e.g. converts a monthly data series into an annual data series).
-        In GeoFRED, the highest frequency data is daily, and the lowest frequency data is annual.
-        There are 3 aggregation methods available- average, sum, and end of period.
-        See the aggregation_method parameter.
-
-        `transformation`
-        A key that indicates a data value transformation.
-
-        ## Description
-        https://geofred.stlouisfed.org/docs/api/geofred/regional_data.html
-
-        This request returns a cross section of regional data
-
-        ## API Request (HTTPS GET)
+        API Request (HTTPS GET)
+        -----------------------
         https://api.stlouisfed.org/geofred/regional/data?api_key=abcdefghijklmnopqrstuvwxyz123456&series_group=882&date=2013-01-01&region_type=state&units=Dollars&frequency=a&season=NSA
-        ## API Response
-        ```json
-        {
-          "meta": {
-            "title": "Per Capita Personal Income by State (Dollars)",
-            "region": "state",
-            "seasonality": "Not Seasonally Adjusted",
-            "units": "Dollars",
-            "frequency": "Annual",
-            "data": {
-              "2013-01-01": [
-                {
-                  "region": "Alabama",
-                  "code": "01",
-                  "value": "36014",
-                  "series_id": "ALPCPI"
-                },
-                ...
-                ]
-            }
-          }
-        }
-        ```
+        
+        API Response
+        ------------
+        .. code-block:: json 
+        
+           {
+             "meta": {
+               "title": "Per Capita Personal Income by State (Dollars)",
+               "region": "state",
+               "seasonality": "Not Seasonally Adjusted",
+               "units": "Dollars",
+               "frequency": "Annual",
+               "data": {
+                 "2013-01-01": [
+                   {
+                     "region": "Alabama",
+                     "code": "01",
+                     "value": "36014",
+                     "series_id": "ALPCPI"
+                   },
+                 ]
+               }
+             }
+           }
 
-        ## Returns
-        `pandas.DataFrame`
-
-        ## Example (`pandas.DataFrame`)
-        ```python
-        >>> geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-        >>> geo_fred.regional_data(series_group='882', date=date(2013, 1, 1), region_type=RegionType.state, frequency=Frequency.anual, season=Seasonality.not_seasonally_adjusted)
-                         region  code  value series_id       year
-        0                Hawaii    15  43931    HIPCPI 2013-01-01
-        1            California     6  48502    CAPCPI 2013-01-01
-        2  District of Columbia    11  67774    DCPCPI 2013-01-01
-        3              Colorado     8  47404    COPCPI 2013-01-01
-        4           Connecticut     9  62647    CTPCPI 2013-01-01
-        ```
+        Example
+        -------
+        .. code-block:: python 
+        
+           geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+           geo_fred.regional_data(series_group='882', date=date(2013, 1, 1), region_type=RegionType.state, frequency=Frequency.anual, season=Seasonality.not_seasonally_adjusted)
+           
+           #                  region  code  value series_id       year
+           # 0                Hawaii    15  43931    HIPCPI 2013-01-01
+           # 1            California     6  48502    CAPCPI 2013-01-01
+           # 2  District of Columbia    11  67774    DCPCPI 2013-01-01
+           # 3              Colorado     8  47404    COPCPI 2013-01-01
+           # 4           Connecticut     9  62647    CTPCPI 2013-01-01
         """  # noinspection
 
         if start_date is None:
@@ -399,32 +375,33 @@ class GeoFRED:
     def _add_years(self, data: dict) -> Generator[dict, None, None]:
         """
         transform dict indexed by year from:
-        ```json
-        {
-          "2020-01-01": [
-            {
-              "region": "Alabama",
-              "code": "01",
-              "value": "46479",
-              "series_id": "ALPCPI"
-            },
-            ...
-          ]
-        }
-        ```
+        
+        .. code-block:: json 
+        
+           {
+             "2020-01-01": [
+               {
+                 "region": "Alabama",
+                 "code": "01",
+                 "value": "46479",
+                 "series_id": "ALPCPI"
+               },
+             ]
+           }
+
         to
-        ```json
-        [
-          {
-            "region": "Alabama",
-            "code": "01",
-            "value": "46479",
-            "series_id": "ALPCPI",
-            "year": "2020-01-01"
-          },
-          ...
-        ]
-        ```
+        
+        .. code-block:: json 
+        
+            [
+              {
+                "region": "Alabama",
+                "code": "01",
+                "value": "46479",
+                "series_id": "ALPCPI",
+                "year": "2020-01-01"
+              },
+            ]
         """  # noinspection
         for year, rows in data.items():
             for row in rows:

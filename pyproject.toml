@@ -85,7 +85,7 @@ exclude = [
 ]
 
 # Same as Black.
-line-length = 200
+line-length = 370
 indent-width = 4
 
 # Assume Python 3.11
@@ -99,8 +99,8 @@ select = ["ALL"]
 ignore = [
     "D", # Missing docstring
     "ANN101", # Missing type annotation for `self` in method
-    "TD", # TODO
-    "FIX002", # Line contains TODO, consider resolving the issue
+    "TD", # to be done
+    "FIX002", # Line contains to be done, consider resolving the issue
     "W291", # Trailing whitespace
     "ERA001", # Found commented-out code
     "FBT", # Boolean-typed positional argument
@@ -108,6 +108,12 @@ ignore = [
     "COM812", # Trailing comma missing
     "S104", # Possible binding to all interfaces
     "SLF001", # Private member accessed: `_matcher`
+    "EM101", # Exception must not use a string literal, assign to variable first
+    "EM102", # Exception must not use an f-string literal, assign to variable first
+    "G004", # Logging statement uses f-string
+    "TRY003", # Avoid specifying long messages outside the exception class
+    "PD901", # Avoid using the generic variable name `df` for DataFrames
+    "PIE796", # Enum contains duplicate value
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
