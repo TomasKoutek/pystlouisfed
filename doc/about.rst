@@ -1,6 +1,0 @@
-About
-=====
-
-.. warning::
-
-   TODO

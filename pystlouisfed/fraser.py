@@ -11,10 +11,10 @@ logger = logging.getLogger(__name__)
 
 class FRASER:
     """
-    FRASER is a digital library of U.S. economic, financial, and banking history—particularly the history of the Federal Reserve System.
+    | FRASER is a digital library of U.S. economic, financial, and banking history—particularly the history of the Federal Reserve System.
 
-    Providing economic information and data to the public is an important mission for the St. Louis Fed started by former St. Louis Fed Research Director Homer Jones in 1958.
-    FRASER began as a data preservation and accessibility project of the Federal Reserve Bank of St. Louis in 2004 and now provides access to data and policy documents from the Federal Reserve System and many other institutions.
+    | Providing economic information and data to the public is an important mission for the St. Louis Fed started by former St. Louis Fed Research Director Homer Jones in 1958.
+    | FRASER began as a data preservation and accessibility project of the Federal Reserve Bank of St. Louis in 2004 and now provides access to data and policy documents from the Federal Reserve System and many other institutions.
 
     https://fraser.stlouisfed.org/
     https://research.stlouisfed.org/docs/api/fraser/
@@ -25,9 +25,10 @@ class FRASER:
 
     def list_records(self, ignore_deleted: bool = False, set: Optional[str] = None) -> BaseOAIIterator:
         """
-        :param ignore_deleted: bool, 
-        :param set: Optional[str], This parameter specifies the setSpec value and limits the records that are retrieved to only those in the specified set. Ignore this parameter to return all records.
-        :return: :py:class:`sickle.iterator.BaseOAIIterator`
+        :type ignore_deleted: bool
+        :param set: This parameter specifies the setSpec value and limits the records that are retrieved to only those in the specified set. Ignore this parameter to return all records.
+        :type set: str
+        :rtype: sickle.iterator.BaseOAIIterator
          
         Description
         -----------
@@ -54,7 +55,7 @@ class FRASER:
 
     def list_sets(self) -> BaseOAIIterator:
         """
-        :return: :py:class:`sickle.iterator.BaseOAIIterator`
+        :rtype: sickle.iterator.BaseOAIIterator
         
         Description
         -----------
@@ -80,9 +81,10 @@ class FRASER:
 
     def list_identifiers(self, ignore_deleted: bool = False, set: Optional[str] = None) -> BaseOAIIterator:
         """
-        :param ignore_deleted: bool
-        :param set: str, This parameter specifies the setSpec value and limits the records that are retrieved to only those in the specified set Ignore this parameter to return all records.
-        :return: :py:class:`sickle.iterator.BaseOAIIterator`
+        :type ignore_deleted: bool
+        :param set: :py:class:`str`, This parameter specifies the setSpec value and limits the records that are retrieved to only those in the specified set Ignore this parameter to return all records.
+        :type set: str
+        :rtype: sickle.iterator.BaseOAIIterator
         
         Description
         -----------
@@ -108,8 +110,8 @@ class FRASER:
 
     def get_record(self, identifier: str) -> Record:
         """
-        :param identifier: str
-        :return: :py:class:`sickle.models.Record`
+        :type identifier: str
+        :rtype: sickle.models.Record
         
         Description
         -----------
@@ -124,9 +126,9 @@ class FRASER:
         -------
         .. code-block:: python
         
-           from pystlouisfed import FRASER
+            from pystlouisfed import FRASER
 
-            RASER().get_record(identifier='oai:fraser.stlouisfed.org:title:176')
+            FRASER().get_record(identifier='oai:fraser.stlouisfed.org:title:176')
         """  # noinspection
 
         return self._sickle.GetRecord(identifier=identifier, metadataPrefix="mods")

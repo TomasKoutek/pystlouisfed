@@ -17,12 +17,19 @@ logger = logging.getLogger(__name__)
 
 class GeoFRED:
     """
-    The GeoFRED API is a web service that allows developers to write programs and build applications to harvest data and shape files found in GeoFRED website hosted by the Economic Research Division of the Federal Reserve Bank of St. Louis.
+    | The GeoFRED API is a web service that allows developers to write programs and build applications to harvest data and shape files found in GeoFRED website hosted by the Economic Research Division of the Federal Reserve Bank of St. Louis.
 
     https://geofred.stlouisfed.org/
-
     https://geofred.stlouisfed.org/docs/api/geofred/
-    """
+    
+    :param api_key: 32 character alpha-numeric lowercase string
+    :type api_key: str
+    :type ratelimiter_enabled: bool
+    :type ratelimiter_max_calls: int
+    :type ratelimiter_period: int
+    :param request_params: HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
+    :type request_params: dict
+    """  # noinspection
 
     EMPTY_VALUE = "."
 
@@ -34,15 +41,6 @@ class GeoFRED:
             ratelimiter_period: timedelta = timedelta(seconds=60),
             request_params: Optional[dict] = None
     ) -> NoReturn:
-        """
-        Instantiates class from a file.
-
-        :param api_key: str, 32 character alpha-numeric lowercase string
-        :param ratelimiter_enabled: bool
-        :param ratelimiter_max_calls: int
-        :param ratelimiter_period: int
-        :param request_params: dict, HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
-        """  # noinspection
 
         if api_key is None or len(api_key) != 32:
             raise ValueError("Variable api_key must be 32 character length alphanumeric string.")
@@ -57,8 +55,9 @@ class GeoFRED:
 
     def shapes(self, shape: enums.ShapeType) -> list[models.Shape]:
         """
-        :param shape: enums.ShapeType
-        :return: list[models.Shape]
+        :param shape: Shape
+        :type shape: enums.ShapeType
+        :rtype: list[models.Shape]
                 
         Description
         -----------
@@ -120,8 +119,9 @@ class GeoFRED:
 
     def series_group(self, series_id: str) -> models.SeriesGroup:
         """
-        :param series_id: str
-        :return: :py:class:`models.SeriesGroup`
+        :param series_id: Series ID
+        :type series_id: str
+        :rtype: models.SeriesGroup
 
         Description
         -----------
@@ -172,10 +172,13 @@ class GeoFRED:
 
     def series_data(self, series_id: str, date: Optional[dt_date] = None, start_date: Optional[dt_date] = None) -> pd.DataFrame:
         """
-        :param series_id: str, The FRED series_id you want to request GeoFRED data for. Not all series that are in FRED have geographical data.
-        :param date: Optional[dt_date], The date you want to request series group data from.
-        :param start_date: Optional[dt_date], The start date you want to request series group data from. This allows you to pull a range of data
-        :return: :py:class:`pd.DataFrame`
+        :param series_id: The FRED series_id you want to request GeoFRED data for. Not all series that are in FRED have geographical data.
+        :type series_id: str
+        :param date: The date you want to request series group data from.
+        :type date: datetime.date
+        :param start_date: The start date you want to request series group data from. This allows you to pull a range of data
+        :type start_date: datetime.date
+        :rtype: pandas.DataFrame
         
         Description
         -----------
@@ -270,16 +273,25 @@ class GeoFRED:
             aggregation_method: enums.AggregationMethod = enums.AggregationMethod.average
     ) -> pd.DataFrame:
         """
-        :param series_group: str, The ID for a group of seriess found in GeoFRED.
-        :param region_type: enums.RegionType, The region you want want to pull data for.
-        :param date: dt_date, The date you want to pull a series group data from.
-        :param season: enums.Seasonality, The seasonality of the series group.
-        :param units: str, The units of the series you want to pull.
-        :param start_date: Optional[dt_date] = None, The start date you want to request series group data from. This allows you to pull a range of data.
-        :param frequency: Optional[enums.Frequency], An optional parameter that indicates a lower frequency to aggregate values to. The GeoFRED frequency aggregation feature converts higher frequency data series into lower frequency data series (e.g. converts a monthly data series into an annual data series). In GeoFRED, the highest frequency data is daily, and the lowest frequency data is annual. There are 3 aggregation methods available- average, sum, and end of period. See the aggregation_method parameter.
-        :param transformation: enums.Unit, A key that indicates a data value transformation.
+        :param series_group: The ID for a group of seriess found in GeoFRED.
+        :type series_group: str
+        :param region_type: The region you want want to pull data for.
+        :type region_type: enums.RegionType
+        :param date: The date you want to pull a series group data from.
+        :type date: datetime.date
+        :param season: The seasonality of the series group.
+        :type season: enums.Seasonality
+        :param units: The units of the series you want to pull.
+        :type units: str
+        :param start_date: The start date you want to request series group data from. This allows you to pull a range of data.
+        :type start_date: datetime.date
+        :param frequency: An optional parameter that indicates a lower frequency to aggregate values to. The GeoFRED frequency aggregation feature converts higher frequency data series into lower frequency data series (e.g. converts a monthly data series into an annual data series). In GeoFRED, the highest frequency data is daily, and the lowest frequency data is annual. There are 3 aggregation methods available- average, sum, and end of period. See the aggregation_method parameter.
+        :type frequency: enums.Frequency
+        :param transformation: A key that indicates a data value transformation.
+        :type transformation: enums.Unit
         :param aggregation_method: One of the following values: 'avg', 'sum', 'eop'
-        :return: :py:class:`pd.DataFrame`
+        :type aggregation_method: enums.AggregationMethod
+        :rtype: pandas.DataFrame
 
         Description
         -----------

@@ -63,6 +63,7 @@ from pystlouisfed import FRED
 
 fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 category = fred.category(category_id=125)
+
 # Category(id=125, name='Trade Balance', parent_id=13)
 ```
 
@@ -73,6 +74,7 @@ from pystlouisfed import FRED
 
 fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
 fred.source(source_id=1)
+
 # Source(id=1, realtime_start='2022-01-14', realtime_end='2022-01-14', name='Board of Governors of the Federal Reserve System (US)', link='http://www.federalreserve.gov/')
 ```
 
@@ -133,7 +135,7 @@ df.plot(y='value', grid=True)
 plt.show()
 ```
 
-![FRED series_observations](./docs/T10Y2Y.png "FRED series_observations")
+![FRED series_observations](./doc/T10Y2Y.png "FRED series_observations")
 
 In addition, each DataFrame has correctly set data types.
 
@@ -327,7 +329,7 @@ This functionality is currently on the TODO list.
 FRED/ALFRED works with date in 99% of cases. 
 But what is a date? For example, the friday "2022-02-04" can be almost anything - it depends on the time zone:
 
-![timezones](./docs/timezones.png "timezones")
+![timezones](./doc/timezones.png "timezones")
 
 Why we are interested in this?
 
@@ -378,7 +380,7 @@ ax.axis('scaled')
 plt.show()
 ```
 
-![GeoFRED shape map](./docs/geofred_shape_map.png "GeoFRED shape map")
+![GeoFRED shape map](./doc/geofred_shape_map.png "GeoFRED shape map")
 
 Or it is possible to return data for a specific series ID:
 
@@ -423,15 +425,61 @@ fraser = FRASER()
 record = fraser.get_record(identifier='oai:fraser.stlouisfed.org:title:176')
 metadata = record.get_metadata()
 
-print(metadata['url'])
+print(metadata)
 ```
 
 ```python
-[
-    'https://fraser.stlouisfed.org/title/investigation-economic-problems-176',
-    'https://fraser.stlouisfed.org/images/record-thumbnail.jpg',
-    'https://fraser.stlouisfed.org/docs/historical/senate/1933sen_investeconprob/1933sen_investeconprob.pdf'
-]
+{
+    "accessCondition": ["http://rightsstatements.org/vocab/NoC-US/1.0/"],
+    "classification": ["Y 4.F 49:Ec 7/"],
+    "contentType": ["title"],
+    "dateIssued": ["February 13-28, 1933"],
+    "digitalOrigin": ["reformatted digital"],
+    "extent": ["1246 pages"],
+    "form": ["print"],
+    "genre": ["government publication"],
+    "geographic": [None, "United States"],
+    "identifier": ["4350587"],
+    "internetMediaType": ["application/pdf"],
+    "issuance": ["monographic"],
+    "language": ["eng"],
+    "location": [None],
+    "name": [None, None],
+    "originInfo": [None],
+    "physicalDescription": [None],
+    "place": ["Washington"],
+    "publisher": ["Government Printing Office"],
+    "recordInfo": [None, None, None, None, None, None, None, None],
+    "relatedItem": [None],
+    "role": [None, None],
+    "roleTerm": ["creator", "contributor"],
+    "sortDate": ["1933-02-13"],
+    "recordIdentifier": ["524", "8499", "8", "97", "4145", "6824", "4293", "5292"],
+    "subTitle": ["Hearings Before the Committee on Finance, United States Senate"],
+    "subject": [None],
+    "namePart": [
+        "United States. Congress. Senate. Committee on Finance",
+        "1815-",
+        "Seventy-Second Congress",
+        "1931-1933"
+    ],
+    "theme": [
+        None,
+        "Great Depression",
+        None,
+        "Meltzer\"s History of the Federal Reserve - Primary Sources"
+    ],
+    "title": ["Investigation of Economic Problems", "Congressional Documents"],
+    "titleInfo": [None, None],
+    "titlePartNumber": ["Seventy-Second Congress, Second Session, Pursuant to S. Res. 315, February 13 to 28, 1933"],
+    "topic": [None, "Economic conditions", None, "Congressional hearings"],
+    "typeOfResource": ["text"],
+    "url": [
+        "https://fraser.stlouisfed.org/oai/title/investigation-economic-problems-176",
+        "https://fraser.stlouisfed.org/images/record-thumbnail.jpg",
+        "https://fraser.stlouisfed.org/oai/docs/historical/senate/1933sen_investeconprob/1933sen_investeconprob.pdf"
+    ]
+}
 ```
 
 Other functions in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#pystlouisfed.client.FRASER).
