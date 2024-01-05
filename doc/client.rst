@@ -8,7 +8,7 @@ Clients
 .. autoclass:: pystlouisfed.ALFRED
   :members:
 
-.. autoclass:: pystlouisfed.GeoFRED
+.. autoclass:: pystlouisfed.FREDMaps
   :members:
 
 .. autoclass:: pystlouisfed.FRASER

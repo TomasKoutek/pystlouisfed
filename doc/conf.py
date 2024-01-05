@@ -30,6 +30,7 @@ extensions = [
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3.11", None),
     "pandas": ("https://pandas.pydata.org/docs/", None),
+    "geopandas": ("https://geopandas.org/en/stable/", None),
     "sickle": ("https://sickle.readthedocs.io/en/latest/", None)
 }
 
