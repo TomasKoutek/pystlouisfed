@@ -13,10 +13,10 @@ version = "2.2.1"
 authors = [
     { name = "Tomas Koutek", email = "66636b6f6666@gmail.com" },
 ]
-description = "Federal Reserve Bank of St. Louis - FRED, ALFRED, GeoFRED and FRASER."
+description = "Federal Reserve Bank of St. Louis - FRED, ALFRED, FRED Maps and FRASER."
 readme = "README.md"
 requires-python = ">=3.9"
-keywords = ["economics", "API", "financial", "FRED", "ALFRED", "FRASER", "GEOFRED", "stlouisfed", "trading", "algotrading"]
+keywords = ["economics", "API", "financial", "FRED", "ALFRED", "FRASER", "FRED Maps", "stlouisfed", "trading", "algotrading"]
 license = { text = "MIT" }
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -38,9 +38,9 @@ classifiers = [
 ]
 dependencies = [
     "pandas>1.0.0",
+    "geopandas",
     "requests",
     "rush",
-    "shapely",
     "sickle",
     "numpy"
 ]
@@ -88,8 +88,8 @@ exclude = [
 line-length = 370
 indent-width = 4
 
-# Assume Python 3.11
-target-version = "py311"
+# Assume Python 3.9
+target-version = "py39"
 
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.

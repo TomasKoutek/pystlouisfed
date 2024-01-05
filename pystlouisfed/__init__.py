@@ -1,16 +1,16 @@
 __version__ = "2.2.1"
 
 from .alfred import FRED, ALFRED
-from .geofred import GeoFRED
+from .fredmaps import FREDMaps
 from .fraser import FRASER
 from .enums import SortOrder, TagGroupID, FilterVariable, Seasonality, FilterValue, OrderBy, Unit, Frequency, AggregationMethod, OutputType, SearchType, RegionType, ShapeType
-from .models import Release, Category, Shape, Source, Series, SeriesGroup
+from .models import Release, Category, Source, Series, SeriesGroup
 
 __all__ = [
-    "FRED", "ALFRED", "GeoFRED", "FRASER",
+    "FRED", "ALFRED", "FREDMaps", "FRASER",
     "SortOrder", "TagGroupID", "FilterVariable", "Seasonality", "FilterValue", "OrderBy", "Unit", "Frequency", "AggregationMethod",
     "OutputType", "SearchType", "RegionType", "ShapeType",
-    "Release", "Category", "Shape", "Source", "Series", "SeriesGroup"
+    "Release", "Category", "Source", "Series", "SeriesGroup"
 ]
 
 __pdoc__ = {

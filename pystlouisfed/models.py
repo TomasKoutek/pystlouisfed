@@ -4,10 +4,6 @@ from datetime import datetime
 from typing import NoReturn
 from typing import Optional
 
-from shapely import geos
-from shapely.geometry import MultiPolygon
-from shapely.geometry import Point
-
 
 @dataclass
 class Category:
@@ -118,19 +114,3 @@ class SeriesGroup:
         # self.max_start_date = date(self.max_start_date) if self.max_start_date is not None else None
         self.min_date = datetime.strptime(str(self.min_date), "%Y-%m-%d").date()
         self.max_date = datetime.strptime(str(self.max_date), "%Y-%m-%d").date()
-
-
-@dataclass
-class Shape:
-    name: str
-    code: str
-    centroid: Point
-    geometry: MultiPolygon
-    report_name: str = None
-    abbreviation: str = None
-    short_name: str = None
-    sovereignty: str = None
-
-    def __post_init__(self) -> NoReturn:
-        self._centroid = geos.WKTReader(geos.lgeos).read(self.centroid)
-        self.geometry = geos.WKTReader(geos.lgeos).read(self.geometry)

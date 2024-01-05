@@ -1,6 +1,5 @@
 import logging
 import time
-import xml.etree.ElementTree as ET
 from datetime import datetime
 from datetime import timedelta
 from enum import Enum
@@ -9,6 +8,7 @@ from http import HTTPStatus
 from typing import ClassVar
 from typing import NoReturn
 from typing import Optional
+from typing import Union
 
 import requests
 from rush.limiters.periodic import PeriodicLimiter
@@ -96,7 +96,7 @@ class Client:
 
         self.request_params = request_params
 
-    def get(self, endpoint: str, list_key: str, limit: Optional[int] = None, **kwargs) -> list:
+    def get(self, endpoint: str, list_key: str = None, limit: Optional[int] = None, **kwargs) -> Union[list, dict]:
 
         offset = 0 if limit is not None else None
         stop = False
@@ -129,12 +129,7 @@ class Client:
 
             res = requests.get(url, **self.request_params)
 
-            # GeoFRED return error codes and messages in XML
-            if res.headers.get("content-type").startswith("text/xml") and res.status_code != HTTPStatus.OK.value:
-                element = ET.fromstring(res.content.decode())
-                raise ValueError(f'Received error code: "{element.get("code")}" and message: "{element.get("message")}" for URL {url}')
-
-            elif not res.headers.get("content-type").startswith("application/json"):
+            if not res.headers.get("content-type").startswith("application/json"):
                 raise ValueError(f'Unexpected content-type "{res.headers.get("content-type")}" for URL {url}')
 
             data = res.json()
@@ -150,11 +145,13 @@ class Client:
             elif res.status_code != HTTPStatus.OK.value:
                 raise ValueError(f'Received status code: "{res.status_code}" for URL {url}')
 
-            list_data = self._deep_get(data, list_key)
+            if list_key is not None:
+                list_data = self._deep_get(data, list_key)
+            else:
+                list_data = data
 
             if "count" not in data:
-                # GeoFRED.series_data and GeoFRED.regional_data return dict of years
-                return list_data if isinstance(list_data, list) else [list_data]
+                return list_data
             else:
                 number_of_requests = int(data["count"] / limit) + 1 if limit is not None else 1
                 logger.debug(f"Number of records: {data['count']}, Request {request_number} of {number_of_requests}")

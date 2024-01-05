@@ -8,10 +8,9 @@
 
 The Federal Reserve Bank of St. Louis is one of 12 regional Reserve Banks that, along with the Board of Governors in Washington, D.C., make up the United States' central bank.
 The https://stlouisfed.org site currently provides more than 816,000 time series from 107 sources using the [FRED](https://fred.stlouisfed.org/) (Federal Reserve Economic Data)
-and [ALFRED](https://alfred.stlouisfed.org/) (Archival FRED) interfaces. It is also possible to obtain detailed geographical data from [GeoFRED](https://geofred.stlouisfed.org/) (
-Geographical Economic FRED) or more than 500,000 publications from the digital library [FRASER](https://fraser.stlouisfed.org/).
+and [ALFRED](https://alfred.stlouisfed.org/) (Archival FRED) interfaces. It is also possible to obtain detailed geographical data from [FRED Maps](https://fredhelp.stlouisfed.org/fred/maps/find-maps/how-can-i-find-maps-in-fred/) or more than 500,000 publications from the digital library [FRASER](https://fraser.stlouisfed.org/).
 
-The `pystlouisfed` package covers the entire FRED / ALFRED / GeoFRED / FRASER API and returns most of the results as `pandas.DataFrame`, which is cast to the correct data types
+The `pystlouisfed` package covers the entire FRED / ALFRED / FRED Maps / FRASER API and returns most of the results as `pandas.DataFrame`, which is cast to the correct data types
 with a specific index. So "date", "realtime_start", "observation_start" etc are `datetime64` type, "value" is `float` and not `str`, missing values are `np.NaN` and not "." etc ...
 The naming convention of methods and parameters is the same as in the target API and everything is detailed [documented](https://tomaskoutek.github.io/pystlouisfed/). There is also
 a default rate-limiter, which ensures that the API call limit is not exceeded.
@@ -27,8 +26,8 @@ pip install pystlouisfed
 ### Dependencies
 
 * [pandas](https://pandas.pydata.org/) for time series data and lists
+* [geopandas](https://geopandas.org/en/stable/) for time series data and lists
 * [requests](https://docs.python-requests.org/en/latest/) for API calls
-* [shapely](https://shapely.readthedocs.io/en/latest/) for geometric data from GeoFRED
 * [sickle](https://sickle.readthedocs.io/) for FRASER oai-pmh API
 * [rush](https://github.com/sigmavirus24/rush) for limiting API calls
 
@@ -352,57 +351,68 @@ Probably all the date values that the API returns are in "US/Central", but I hav
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-### GeoFRED
+### FRED Maps
 
-> https://geofred.stlouisfed.org/about/
+> https://fredaccount.stlouisfed.org/public/dashboard/83217
 >
-> GeoFRED® allows you to create, customize, and share geographical maps of data found in FRED®.
-> Easily access the details and adjust how the data are displayed.
-> You can also transform the data and download it according to geographic category and time frame.
+> Maps provide a cross-sectional perspective that lets you compare regions on a map while complementing and expanding the data analysis you get on a time-series graph. 
+> FRED has 9 types of maps: 
+> - U.S. counties, 
+> - U.S. metro areas, 
+> - U.S. states, 
+> - nations, 
+> - Federal Reserve Districts, 
+> - Census regions, 
+> - Census divisions, 
+> - BEA regions 
+> - NECTAs (New England city and town areas)
 
-For example, the `GeoFRED.shapes` method returns a list of the` pystlouisfed.models.Shape` object.
+For example, the `FREDMaps.shapes` method returns a [geopandas.GeoDataFrame](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html).
 
 This result can be plotted:
 
 ```python
-import matplotlib.pyplot as plt
-from descartes import PolygonPatch
-from pystlouisfed import GeoFRED, ShapeType
+import plotly.express as px
+from pystlouisfed import FREDMaps, ShapeType
 
-plt.figure()
-ax = plt.axes()
-geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+gdf = FREDMaps(api_key="abcdefghijklmnopqrstuvwxyz123456") \
+    .shapes(shape=ShapeType.country) \
+    .to_crs(epsg=4326) \
+    .set_index("name")
 
-for country_shape in geo_fred.shapes(shape=ShapeType.country):
-    ax.add_patch(PolygonPatch(country_shape.geometry, ec='#999999', fc='#6699cc', alpha=0.5, zorder=2))
+fig = px.choropleth(
+    gdf,
+    geojson=gdf.geometry,
+    locations=gdf.index,
+    color="fips",
+)
 
-ax.axis('scaled')
-plt.show()
+fig.update_layout(width=1200, height=1000, showlegend=False)
+fig.update_geos(fitbounds="locations", visible=False)
+fig.show()
 ```
 
-![GeoFRED shape map](./doc/geofred_shape_map.png "GeoFRED shape map")
+![FRED Maps shape map](./doc/maps_country.png "FRED Maps shape map")
 
 Or it is possible to return data for a specific series ID:
 
 ```python
-from pystlouisfed import GeoFRED, ShapeType
+from pystlouisfed import FREDMaps
 
-geo_fred = GeoFRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
-df = geo_fred.series_data(series_id="WIPCPI")
+fred_maps = FREDMaps(api_key="abcdefghijklmnopqrstuvwxyz123456")
+fred_maps.series_data(series_id='WIPCPI')
+           
+print(fred_maps.head())
 
-print(df.head())
+#       region  code  value series_id       year
+# 0  Louisiana    22  54622    LAPCPI 2022-01-01
+# 1     Nevada    32  61282    NVPCPI 2022-01-01
+# 2   Maryland    24  70730    MDPCPI 2022-01-01
+# 3    Arizona     4  56667    AZPCPI 2022-01-01
+# 4   New York    36  78089    NYPCPI 2022-01-01
 ```
 
-```
-       region code    value series_id  year
-0     Alabama   01  46479.0    ALPCPI  2020
-1      Alaska   02  63502.0    AKPCPI  2020
-2     Arizona   04  49648.0    AZPCPI  2020
-3    Arkansas   05  47235.0    ARPCPI  2020
-4  California   06  70192.0    CAPCPI  2020
-```
-
-Other functions in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#pystlouisfed.client.GeoFRED).
+Other functions in the [documentation](https://tomaskoutek.github.io/pystlouisfed/client.html#pystlouisfed.FREDMaps).
 
 ### FRASER
 

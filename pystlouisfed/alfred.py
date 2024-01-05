@@ -100,7 +100,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.category(category_id=125)
             
             # Category(id=125, name='Trade Balance', parent_id=13)
@@ -155,7 +155,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.category_children(category_id=13).head()
             
             #                                     name  parent_id
@@ -234,7 +234,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.category_related(category_id=32073).head()
             
             #             name  parent_id
@@ -354,7 +354,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.category_series(category_id=125).head()
             
             #             realtime_start realtime_end                                              title observation_start observation_end  frequency frequency_short                units units_short      seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
@@ -518,7 +518,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.category_tags(category_id=125).head()
             
             #                 group_id   notes                   created  popularity  series_count
@@ -674,7 +674,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.category_related_tags(category_id=125, tag_names=['services', 'quarterly']).head()
             
             #                  group_id                    notes                   created  popularity  series_count
@@ -802,7 +802,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.releases().head()
             
             #        realtime_start realtime_end                                               name  press_release                                         link                                              notes
@@ -923,7 +923,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.releases_dates(realtime_start=dt_date.today() - timedelta(days=1)).head()
             
             #                                                      release_name       date
@@ -1028,7 +1028,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.release(release_id=53)
         
             # Release(id=53, realtime_start=datetime.date(2022, 1, 14), realtime_end=datetime.date(2022, 1, 14), name='Gross Domestic Product', press_release=True, link='https://www.bea.gov/data/gdp/gross-domestic-product')
@@ -1117,7 +1117,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.release_dates(release_id=82).head()
             
             #    release_id       date
@@ -1242,7 +1242,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.release_series(release_id=51).head()
             
             #                 realtime_start realtime_end                                              title observation_start observation_end frequency frequency_short                units units_short  seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
@@ -1377,7 +1377,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.release_sources(release_id=51).head()
             
             #    realtime_start realtime_end                              name                    link
@@ -1491,7 +1491,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.release_tags(release_id=86).head()
         
             #            group_id notes                   created  popularity  series_count
@@ -1631,7 +1631,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.release_related_tags(release_id=86, tag_names=['sa', 'foreign']).head()
             
             #                  group_id notes                   created  popularity  series_count
@@ -1833,7 +1833,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series(series_id='GNPCA')
             
             # Series(id='GNPCA', realtime_start=datetime.date(2022, 1, 14), realtime_end=datetime.date(2022, 1, 14), title='Real Gross National Product', observation_start=datetime.date(1929, 1, 1), observation_end=datetime.date(2020, 1, 1), frequency='Annual', frequency_short='A', units='Billions of Chained 2012 Dollars', units_short='Bil. of Chn. 2012 $', seasonal_adjustment='Not Seasonally Adjusted', seasonal_adjustment_short='NSA', last_updated=datetime.datetime(2021, 7, 29, 7, 45, 58, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=68400))), popularity=12, notes='BEA Account Code: A001RX\\n\\n')
@@ -1907,7 +1907,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_categories(series_id='EXJPUS')
             
             #               name  parent_id
@@ -2096,7 +2096,7 @@ class FRED:
 
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_observations(
                 series_id='GNPCA',
                 output_type=OutputType.new_and_revised,
@@ -2120,7 +2120,7 @@ class FRED:
 
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_observations(
                 series_id='GNPCA',
                 output_type=OutputType.initial_release_only,
@@ -2252,7 +2252,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_release(series_id='IRA').head()
             
             #    realtime_start realtime_end                      name  press_release                                        link
@@ -2388,7 +2388,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_search(search_text='monetary service index').head()
         
             #         realtime_start realtime_end                                            title observation_start observation_end frequency frequency_short                units units_short  seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
@@ -2562,7 +2562,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_search_tags(series_search_text='monetary service index').head()
         
             #               group_id            notes                   created  popularity  series_count
@@ -2702,7 +2702,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_search_related_tags(series_search_text='mortgage rate', tag_names=['30-year', 'frb'], realtime_start=date(2022, 1, 5), realtime_end=date(2022, 1, 5)).head()
         
             #               group_id                         notes                   created  popularity  series_count
@@ -2827,7 +2827,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_tags(series_id='STLFSI').head()
             
             #              group_id                             notes                   created  popularity  series_count
@@ -2958,7 +2958,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_updates(start_time=datetime(2022, 1, 15), end_time=datetime(2022, 1, 16)).head()
             
             #          realtime_start realtime_end                  title observation_start observation_end     frequency frequency_short         units units_short      seasonal_adjustment seasonal_adjustment_short              last_updated  popularity                                              notes
@@ -3085,7 +3085,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.series_vintagedates(series_id='GNPCA').head()
         
             # 0    1958-12-21
@@ -3185,7 +3185,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.sources()
         
             #    realtime_start realtime_end                                               name                              link notes
@@ -3293,7 +3293,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.source(source_id=1)
         
             # Source(id=1, realtime_start='2022-01-14', realtime_end='2022-01-14', name='Board of Governors of the Federal Reserve System (US)', link='http://www.federalreserve.gov/')
@@ -3383,7 +3383,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.source_releases(source_id=1).head()
         
             #    realtime_start realtime_end                                               name  press_release                                         link notes
@@ -3519,7 +3519,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.tags().head()
         
             #                group_id notes                   created  popularity  series_count
@@ -3658,7 +3658,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.related_tags(tag_names=['monetary aggregates', 'weekly']).head()
             
                                            group_id           notes                   created  popularity  series_count
@@ -3808,7 +3808,7 @@ class FRED:
         -------
         .. code-block:: python
         
-            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
+            fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             fred.tags_series(tag_names=['food', 'oecd']).head()
         
             #                 realtime_start realtime_end                                              title observation_start observation_end  frequency frequency_short           units     units_short      seasonal_adjustment seasonal_adjustment_short              last_updated  popularity  group_popularity                                              notes
