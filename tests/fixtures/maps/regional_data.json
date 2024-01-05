@@ -1,0 +1,319 @@
+{
+    "meta": {
+        "title": "2022 Per Capita Personal Income by State (Dollars)",
+        "region": "state",
+        "seasonality": "Not Seasonally Adjusted",
+        "units": "Dollars",
+        "frequency": "Annual",
+        "data": {
+            "2013-01-01": [
+                {
+                    "region": "Arizona",
+                    "code": "04",
+                    "value": 36877,
+                    "series_id": "AZPCPI"
+                },
+                {
+                    "region": "Hawaii",
+                    "code": "15",
+                    "value": 43553,
+                    "series_id": "HIPCPI"
+                },
+                {
+                    "region": "Florida",
+                    "code": "12",
+                    "value": 40733,
+                    "series_id": "FLPCPI"
+                },
+                {
+                    "region": "Montana",
+                    "code": "30",
+                    "value": 40146,
+                    "series_id": "MTPCPI"
+                },
+                {
+                    "region": "Michigan",
+                    "code": "26",
+                    "value": 39293,
+                    "series_id": "MIPCPI"
+                },
+                {
+                    "region": "Nebraska",
+                    "code": "31",
+                    "value": 45918,
+                    "series_id": "NEPCPI"
+                },
+                {
+                    "region": "Idaho",
+                    "code": "16",
+                    "value": 35716,
+                    "series_id": "IDPCPI"
+                },
+                {
+                    "region": "Texas",
+                    "code": "48",
+                    "value": 44396,
+                    "series_id": "TXPCPI"
+                },
+                {
+                    "region": "Virginia",
+                    "code": "51",
+                    "value": 48198,
+                    "series_id": "VAPCPI"
+                },
+                {
+                    "region": "Mississippi",
+                    "code": "28",
+                    "value": 33976,
+                    "series_id": "MSPCPI"
+                },
+                {
+                    "region": "West Virginia",
+                    "code": "54",
+                    "value": 35092,
+                    "series_id": "WVPCPI"
+                },
+                {
+                    "region": "Alabama",
+                    "code": "01",
+                    "value": 35713,
+                    "series_id": "ALPCPI"
+                },
+                {
+                    "region": "New Hampshire",
+                    "code": "33",
+                    "value": 50428,
+                    "series_id": "NHPCPI"
+                },
+                {
+                    "region": "Wisconsin",
+                    "code": "55",
+                    "value": 42688,
+                    "series_id": "WIPCPI"
+                },
+                {
+                    "region": "Wyoming",
+                    "code": "56",
+                    "value": 52836,
+                    "series_id": "WYPCPI"
+                },
+                {
+                    "region": "New Mexico",
+                    "code": "35",
+                    "value": 34858,
+                    "series_id": "NMPCPI"
+                },
+                {
+                    "region": "Colorado",
+                    "code": "08",
+                    "value": 47082,
+                    "series_id": "COPCPI"
+                },
+                {
+                    "region": "Louisiana",
+                    "code": "22",
+                    "value": 40997,
+                    "series_id": "LAPCPI"
+                },
+                {
+                    "region": "California",
+                    "code": "06",
+                    "value": 48076,
+                    "series_id": "CAPCPI"
+                },
+                {
+                    "region": "Minnesota",
+                    "code": "27",
+                    "value": 47419,
+                    "series_id": "MNPCPI"
+                },
+                {
+                    "region": "Delaware",
+                    "code": "10",
+                    "value": 43948,
+                    "series_id": "DEPCPI"
+                },
+                {
+                    "region": "Rhode Island",
+                    "code": "44",
+                    "value": 45112,
+                    "series_id": "RIPCPI"
+                },
+                {
+                    "region": "North Dakota",
+                    "code": "38",
+                    "value": 54358,
+                    "series_id": "NDPCPI"
+                },
+                {
+                    "region": "Georgia",
+                    "code": "13",
+                    "value": 37486,
+                    "series_id": "GAPCPI"
+                },
+                {
+                    "region": "Pennsylvania",
+                    "code": "42",
+                    "value": 45904,
+                    "series_id": "PAPCPI"
+                },
+                {
+                    "region": "Illinois",
+                    "code": "17",
+                    "value": 46731,
+                    "series_id": "ILPCPI"
+                },
+                {
+                    "region": "New Jersey",
+                    "code": "34",
+                    "value": 54380,
+                    "series_id": "NJPCPI"
+                },
+                {
+                    "region": "South Dakota",
+                    "code": "46",
+                    "value": 44983,
+                    "series_id": "SDPCPI"
+                },
+                {
+                    "region": "Kentucky",
+                    "code": "21",
+                    "value": 35759,
+                    "series_id": "KYPCPI"
+                },
+                {
+                    "region": "South Carolina",
+                    "code": "45",
+                    "value": 35906,
+                    "series_id": "SCPCPI"
+                },
+                {
+                    "region": "Missouri",
+                    "code": "29",
+                    "value": 40121,
+                    "series_id": "MOPCPI"
+                },
+                {
+                    "region": "Oregon",
+                    "code": "41",
+                    "value": 39462,
+                    "series_id": "ORPCPI"
+                },
+                {
+                    "region": "Vermont",
+                    "code": "50",
+                    "value": 45298,
+                    "series_id": "VTPCPI"
+                },
+                {
+                    "region": "Washington",
+                    "code": "53",
+                    "value": 47454,
+                    "series_id": "WAPCPI"
+                },
+                {
+                    "region": "Indiana",
+                    "code": "18",
+                    "value": 39436,
+                    "series_id": "INPCPI"
+                },
+                {
+                    "region": "District of Columbia",
+                    "code": "11",
+                    "value": 67024,
+                    "series_id": "DCPCPI"
+                },
+                {
+                    "region": "Maryland",
+                    "code": "24",
+                    "value": 51880,
+                    "series_id": "MDPCPI"
+                },
+                {
+                    "region": "North Carolina",
+                    "code": "37",
+                    "value": 38062,
+                    "series_id": "NCPCPI"
+                },
+                {
+                    "region": "Utah",
+                    "code": "49",
+                    "value": 36116,
+                    "series_id": "UTPCPI"
+                },
+                {
+                    "region": "Tennessee",
+                    "code": "47",
+                    "value": 39102,
+                    "series_id": "TNPCPI"
+                },
+                {
+                    "region": "Arkansas",
+                    "code": "05",
+                    "value": 36285,
+                    "series_id": "ARPCPI"
+                },
+                {
+                    "region": "Ohio",
+                    "code": "39",
+                    "value": 40754,
+                    "series_id": "OHPCPI"
+                },
+                {
+                    "region": "Connecticut",
+                    "code": "09",
+                    "value": 61999,
+                    "series_id": "CTPCPI"
+                },
+                {
+                    "region": "Iowa",
+                    "code": "19",
+                    "value": 43012,
+                    "series_id": "IAPCPI"
+                },
+                {
+                    "region": "New York",
+                    "code": "36",
+                    "value": 52875,
+                    "series_id": "NYPCPI"
+                },
+                {
+                    "region": "Alaska",
+                    "code": "02",
+                    "value": 52252,
+                    "series_id": "AKPCPI"
+                },
+                {
+                    "region": "Massachusetts",
+                    "code": "25",
+                    "value": 56130,
+                    "series_id": "MAPCPI"
+                },
+                {
+                    "region": "Oklahoma",
+                    "code": "40",
+                    "value": 43605,
+                    "series_id": "OKPCPI"
+                },
+                {
+                    "region": "Maine",
+                    "code": "23",
+                    "value": 39952,
+                    "series_id": "MEPCPI"
+                },
+                {
+                    "region": "Nevada",
+                    "code": "32",
+                    "value": 39319,
+                    "series_id": "NVPCPI"
+                },
+                {
+                    "region": "Kansas",
+                    "code": "20",
+                    "value": 45670,
+                    "series_id": "KSPCPI"
+                }
+            ]
+        }
+    }
+}

@@ -172,7 +172,7 @@ class TestFRED(unittest.TestCase):
         self.assertEqual(series.seasonal_adjustment, "Not Seasonally Adjusted")
         self.assertEqual(series.seasonal_adjustment_short, "NSA")
         self.assertEqual(series.last_updated, datetime.datetime(2023, 3, 30, 7, 54, 21, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=68400))))
-        self.assertEqual(series.popularity, 8)
+        self.assertEqual(series.popularity, 10)
         self.assertEqual(series.notes, "BEA Account Code: A001RX\n\n")
 
     def test_series_categories(self):
