@@ -43,9 +43,6 @@ class FREDMaps:
     """  # noqa
 
     EMPTY_VALUE = "."
-    """
-    FRED Maps returns empty values as dot
-    """
 
     def __init__(
             self,
@@ -145,9 +142,11 @@ class FREDMaps:
                 ]
             }
 
-        Example
-        -------
+        Examples
+        --------
         
+        Get country polygons:
+            
         .. code-block:: python
 
             from pystlouisfed import FREDMaps, ShapeType
@@ -163,14 +162,32 @@ class FREDMaps:
             # 4    POLYGON ((5849.000 6344.000, 5852.000 6341.000...   admin0         0.58         0.41     sc    SC                            Seychelles         6           Syc.             Eastern Africa          Sub-Saharan Africa    SYC     SC  23424941  Seven seas (open ocean)
             # 5    MULTIPOLYGON (((6818.000 7133.000, 6820.000 71...   admin0         0.34         0.43     in    IN                                 India         2          India              Southern Asia                  South Asia    IND     IN  23424848                     Asia
 
+        Plot with `Matplotlib <https://matplotlib.org/>`_:
+        
+        .. code-block:: python
+        
+            from pystlouisfed import FREDMaps, ShapeType
+            import matplotlib.pyplot as plt
+            
+            gdf = FREDMaps(api_key="abcdefghijklmnopqrstuvwxyz123456") \\
+                    .shapes(shape=ShapeType.state) \\
+                    .plot(figsize=(12, 8))
+                    
+            plt.show()
+
+        .. image:: maps_states_plt.png
+
+        Plot with `Plotly <https://plotly.com/python/>`_:
+        
         .. code-block:: python
 
             from pystlouisfed import FREDMaps, ShapeType
+            import plotly.express as px
             
-            gdf = FREDMaps(api_key="abcdefghijklmnopqrstuvwxyz123456") \
-                .shapes(shape=ShapeType.state) \
-                .to_crs(epsg=4326) \
-                .set_index("name")
+            gdf = FREDMaps(api_key="abcdefghijklmnopqrstuvwxyz123456") \\
+                    .shapes(shape=ShapeType.state) \\
+                    .to_crs(epsg=4326) \\
+                    .set_index("name")
             
             fig = px.choropleth(
                 gdf,
@@ -185,7 +202,7 @@ class FREDMaps:
         
         .. image:: maps_states.png
         
-        or :py:class:`pystlouisfed.ShapeType.country`
+        or plot :py:class:`pystlouisfed.ShapeType.country`
         
         .. image:: maps_country.png
         

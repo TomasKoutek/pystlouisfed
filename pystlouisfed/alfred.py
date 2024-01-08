@@ -30,7 +30,7 @@ class FRED:
     :type ratelimiter_period: int
     :param request_params: HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request
     :type request_params: dict
-    """  # noinspection
+    """  # noqa
 
     EMPTY_VALUE = "."
     """
@@ -104,14 +104,14 @@ class FRED:
             fred.category(category_id=125)
             
             # Category(id=125, name='Trade Balance', parent_id=13)
-        """  # noinspection
+        """  # noqa
 
         if int(category_id) < 0:
             raise ValueError("Variable category_id is not 0 or a positive integer.")
 
         data = self._client.get(
-            "/fred/category",
-            "categories",
+            endpoint="/fred/category",
+            list_key="categories",
             category_id=category_id
         )
 
@@ -165,7 +165,7 @@ class FRED:
             # 3000          Income Payments & Receipts         13
             # 33705  International Investment Position         13
             # 125                        Trade Balance         13
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -183,8 +183,8 @@ class FRED:
             raise ValueError(f'The date set by variable realtime_start ("{realtime_start}") can not be after the date set by variable realtime_end ("{realtime_end}").')
 
         data = self._client.get(
-            "/fred/category/children",
-            "categories",
+            endpoint="/fred/category/children",
+            list_key="categories",
             category_id=category_id,
             realtime_start=realtime_start,
             realtime_end=realtime_end
@@ -244,7 +244,7 @@ class FRED:
             # 151      Indiana      27281
             # 152     Kentucky      27281
             # 153  Mississippi      27281
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -262,8 +262,8 @@ class FRED:
             raise ValueError(f'The date set by variable realtime_start ("{realtime_start}") can not be after the date set by variable realtime_end ("{realtime_end}").')
 
         data = self._client.get(
-            "/fred/category/related",
-            "categories",
+            endpoint="/fred/category/related",
+            list_key="categories",
             category_id=category_id,
             realtime_start=realtime_start,
             realtime_end=realtime_end
@@ -364,7 +364,7 @@ class FRED:
             #     BOPBCA      2022-02-05   2022-02-05          Balance on Current Account (DISCONTINUED)        1960-01-01      2014-01-01  Quarterly               Q  Billions of Dollars   Bil. of $      Seasonally Adjusted                        SA 2014-06-18 13:41:28+00:00          10                11  This series has been discontinued as a result ...
             #     BOPBCAA     2022-02-05   2022-02-05          Balance on Current Account (DISCONTINUED)        1960-01-01      2013-01-01     Annual               A  Billions of Dollars   Bil. of $  Not Seasonally Adjusted                       NSA 2014-06-18 13:41:28+00:00           2                11  This series has been discontinued as a result ...
             #     BOPBCAN     2022-02-05   2022-02-05          Balance on Current Account (DISCONTINUED)        1960-01-01      2014-01-01  Quarterly               Q  Billions of Dollars   Bil. of $  Not Seasonally Adjusted                       NSA 2014-06-18 13:41:28+00:00           1                11  This series has been discontinued as a result ...
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -407,8 +407,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/category/series",
-                "seriess",
+                endpoint="/fred/category/series",
+                list_key="seriess",
                 limit=1000,
                 category_id=category_id,
                 realtime_start=realtime_start,
@@ -528,7 +528,7 @@ class FRED:
             # transfers            gen         2012-02-27 16:18:19+00:00          31             2
             # census               src  Census 2012-02-27 16:18:19+00:00          80             4
             # investment           gen         2012-02-27 16:18:19+00:00          56             4
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -571,8 +571,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/category/tags",
-                "tags",
+                endpoint="/fred/category/tags",
+                list_key="tags",
                 limit=1000,
                 category_id=category_id,
                 realtime_start=realtime_start,
@@ -684,7 +684,7 @@ class FRED:
             #     sa               seas      Seasonally Adjusted 2012-02-27 16:18:19+00:00          88             6
             #     goods             gen                          2012-02-27 16:18:19+00:00          68             8
             #     balance           gen                          2012-02-27 16:18:19+00:00          47            12
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -714,8 +714,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/category/related_tags",
-                "tags",
+                endpoint="/fred/category/related_tags",
+                list_key="tags",
                 limit=1000,
                 category_id=category_id,
                 realtime_start=realtime_start,
@@ -812,7 +812,7 @@ class FRED:
             #     11     2022-02-05   2022-02-05                              Employment Cost Index           True                  http://www.bls.gov/ncs/ect/                                               <NA>
             #     13     2022-02-05   2022-02-05  G.17 Industrial Production and Capacity Utiliz...           True  http://www.federalreserve.gov/releases/g17/                                               <NA>
             #     14     2022-02-05   2022-02-05                               G.19 Consumer Credit           True  http://www.federalreserve.gov/releases/g19/                                               <NA>
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -842,8 +842,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/releases",
-                "releases",
+                endpoint="/fred/releases",
+                list_key="releases",
                 limit=1000,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -933,7 +933,7 @@ class FRED:
             #     484                                    Key ECB Interest Rates 2022-02-04
             #     483                              SOFR Averages and Index Data 2022-02-04
             #     469         State Unemployment Insurance Weekly Claims Report 2022-02-04
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date(dt_date.today().year, 1, 1)
@@ -961,8 +961,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/releases/dates",
-                "release_dates",
+                endpoint="/fred/releases/dates",
+                list_key="release_dates",
                 limit=1000,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -1032,7 +1032,7 @@ class FRED:
             fred.release(release_id=53)
         
             # Release(id=53, realtime_start=datetime.date(2022, 1, 14), realtime_end=datetime.date(2022, 1, 14), name='Gross Domestic Product', press_release=True, link='https://www.bea.gov/data/gdp/gross-domestic-product')
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -1053,8 +1053,8 @@ class FRED:
             raise ValueError(f'The date set by variable realtime_start ("{realtime_start}") can not be after the date set by variable realtime_end ("{realtime_end}").')
 
         data = self._client.get(
-            "/fred/release",
-            "releases",
+            endpoint="/fred/release",
+            list_key="releases",
             release_id=release_id,
             realtime_start=realtime_start,
             realtime_end=realtime_end,
@@ -1126,7 +1126,7 @@ class FRED:
             # 2          82 1999-02-04
             # 3          82 2000-02-10
             # 4          82 2001-01-16
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date(1776, 7, 4)
@@ -1145,8 +1145,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/release/dates",
-                "release_dates",
+                endpoint="/fred/release/dates",
+                list_key="release_dates",
                 limit=10000,
                 release_id=release_id,
                 realtime_start=realtime_start,
@@ -1252,7 +1252,7 @@ class FRED:
             #     BOMVJMM133S     2022-02-05   2022-02-05  U.S. Imports of Services - Direct Defense Expe...        1992-01-01      2013-12-01   Monthly               M  Millions of Dollars   Mil. of $  Seasonally Adjusted                        SA 2014-10-20 14:26:44+00:00           1                 1  BEA has introduced new table presentations, in...
             #     BOMVMPM133S     2022-02-05   2022-02-05         U.S. Imports of Services - Passenger Fares        1992-01-01      2017-09-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA 2017-11-03 13:12:15+00:00           1                 1  Further information related to the internation...
             #     BOMVOMM133S     2022-02-05   2022-02-05  U.S. Imports of Services - Other Private Servi...        1992-01-01      2013-12-01   Monthly               M   Million of Dollars   Mil. of $  Seasonally Adjusted                        SA 2014-10-20 14:25:54+00:00           1                 1  BEA has introduced new table presentations, in...
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -1292,8 +1292,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/release/series",
-                "seriess",
+                endpoint="/fred/release/series",
+                list_key="seriess",
                 limit=1000,
                 release_id=release_id,
                 realtime_start=realtime_start,
@@ -1384,7 +1384,7 @@ class FRED:
             # id
             # 19     2022-02-05   2022-02-05                U.S. Census Bureau  http://www.census.gov/
             # 18     2022-02-05   2022-02-05  U.S. Bureau of Economic Analysis     http://www.bea.gov/
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -1400,8 +1400,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/release/sources",
-                "sources",
+                endpoint="/fred/release/sources",
+                list_key="sources",
                 release_id=release_id,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end
@@ -1501,7 +1501,7 @@ class FRED:
             # owned           gen       2012-06-25 20:04:36+00:00          33             2
             # tier-2          gen       2014-02-12 17:18:16+00:00         -13             2
             # 10-20 days      gen       2014-02-12 17:08:07+00:00         -16             4
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -1531,8 +1531,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/release/tags",
-                "tags",
+                endpoint="/fred/release/tags",
+                list_key="tags",
                 limit=1000,
                 release_id=release_id,
                 realtime_start=realtime_start,
@@ -1641,7 +1641,7 @@ class FRED:
             #     nonfinancial      gen       2012-02-27 16:18:19+00:00          55             2
             #     weekly           freq       2012-02-27 16:18:19+00:00          68             2
             #     commercial        gen       2012-02-27 16:18:19+00:00          61             4
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -1671,8 +1671,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/release/related_tags",
-                "tags",
+                endpoint="/fred/release/related_tags",
+                list_key="tags",
                 limit=1000,
                 release_id=release_id,
                 realtime_start=realtime_start,
@@ -1764,7 +1764,7 @@ class FRED:
                     ]
                 }
             }
-        """  # noinspection
+        """  # noqa
 
         if observation_date is None:
             observation_date = dt_date(9999, 12, 31)
@@ -1837,7 +1837,7 @@ class FRED:
             fred.series(series_id='GNPCA')
             
             # Series(id='GNPCA', realtime_start=datetime.date(2022, 1, 14), realtime_end=datetime.date(2022, 1, 14), title='Real Gross National Product', observation_start=datetime.date(1929, 1, 1), observation_end=datetime.date(2020, 1, 1), frequency='Annual', frequency_short='A', units='Billions of Chained 2012 Dollars', units_short='Bil. of Chn. 2012 $', seasonal_adjustment='Not Seasonally Adjusted', seasonal_adjustment_short='NSA', last_updated=datetime.datetime(2021, 7, 29, 7, 45, 58, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=68400))), popularity=12, notes='BEA Account Code: A001RX\\n\\n')
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -1855,8 +1855,8 @@ class FRED:
             raise ValueError(f'The date set by variable realtime_start ("{realtime_start}") can not be after the date set by variable realtime_end ("{realtime_end}").')
 
         data = self._client.get(
-            "/fred/series",
-            "seriess",
+            endpoint="/fred/series",
+            list_key="seriess",
             series_id=series_id,
             realtime_start=realtime_start,
             realtime_end=realtime_end,
@@ -1914,7 +1914,7 @@ class FRED:
             # id
             # 95   Monthly Rates         15
             # 275          Japan        158
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -1933,8 +1933,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/categories",
-                "categories",
+                endpoint="/fred/series/categories",
+                list_key="categories",
                 series_id=series_id,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -2135,7 +2135,7 @@ class FRED:
             # 2020-01-01     2021-03-25   2021-07-28  18612.022
             # 2021-01-01     2022-03-30   2022-09-28  19644.028
             # 2022-01-01     2023-03-30   2023-07-20  20158.225
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -2172,8 +2172,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/observations",
-                "observations",
+                endpoint="/fred/series/observations",
+                list_key="observations",
                 limit=100000,
                 series_id=series_id,
                 realtime_start=realtime_start,
@@ -2258,7 +2258,7 @@ class FRED:
             #    realtime_start realtime_end                      name  press_release                                        link
             # id
             # 21     2022-02-05   2022-02-05  H.6 Money Stock Measures           True  http://www.federalreserve.gov/releases/h6/
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -2277,8 +2277,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/release",
-                "releases",
+                endpoint="/fred/series/release",
+                list_key="releases",
                 series_id=series_id,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -2398,7 +2398,7 @@ class FRED:
             # MSIALLP     2022-02-05   2022-02-05  Monetary Services Index: ALL Assets (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:45+00:00          14                14  The MSI measure the flow of monetary services ...
             # MSIM1P      2022-02-05   2022-02-05          Monetary Services Index: M1 (preferred)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:45+00:00           9                 9  The MSI measure the flow of monetary services ...
             # MSIM2A      2022-02-05   2022-02-05        Monetary Services Index: M2 (alternative)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:44+00:00           8                 8  The MSI measure the flow of monetary services ...
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -2455,8 +2455,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/search",
-                "seriess",
+                endpoint="/fred/series/search",
+                list_key="seriess",
                 limit=1000,
                 search_text=search_text,
                 search_type=search_type,
@@ -2572,7 +2572,7 @@ class FRED:
             # assets             gen                  2012-02-27 16:18:19+00:00          64             2
             # boe                src  Bank of England 2013-02-25 22:21:19+00:00          42             2
             # communication      gen                  2012-02-27 16:18:19+00:00          22             2
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -2602,8 +2602,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/search/tags",
-                "tags",
+                endpoint="/fred/series/search/tags",
+                list_key="tags",
                 limit=1000,
                 series_search_text=series_search_text,
                 realtime_start=realtime_start,
@@ -2712,7 +2712,7 @@ class FRED:
             # h15                rls  H.15 Selected Interest Rates 2012-08-16 20:21:17+00:00          57             2
             # interest           gen                               2012-02-27 16:18:19+00:00          74             2
             # interest rate      gen                               2012-05-29 15:14:19+00:00          74             2
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -2742,8 +2742,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/search/related_tags",
-                "tags",
+                endpoint="/fred/series/search/related_tags",
+                list_key="tags",
                 limit=1000,
                 series_search_text=series_search_text,
                 realtime_start=realtime_start,
@@ -2837,7 +2837,7 @@ class FRED:
             # weekly           freq                                   2012-02-27 16:18:19+00:00          68          3548
             # financial         gen                                   2012-02-27 16:18:19+00:00          55         21652
             # discontinued      gen                                   2012-02-27 16:18:19+00:00          67         40386
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -2867,8 +2867,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/tags",
-                "tags",
+                endpoint="/fred/series/tags",
+                list_key="tags",
                 series_id=series_id,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -2968,7 +2968,7 @@ class FRED:
             # CBBTCUSD     2022-02-05   2022-02-05       Coinbase Bitcoin        2014-12-01      2022-02-04  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA 2022-02-05 01:04:06+00:00          65  All data is as of 5 PM PST.
             # CBETHUSD     2022-02-05   2022-02-05      Coinbase Ethereum        2016-05-18      2022-02-04  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA 2022-02-05 01:04:05+00:00          44  All data is as of 5 PM PST.
             # CBLTCUSD     2022-02-05   2022-02-05      Coinbase Litecoin        2016-08-17      2022-02-04  Daily, 7-Day               D  U.S. Dollars      U.S. $  Not Seasonally Adjusted                       NSA 2022-02-05 01:04:03+00:00          20  All data is as of 5 PM PST.
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -2999,8 +2999,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/series/updates",
-                "seriess",
+                endpoint="/fred/series/updates",
+                list_key="seriess",
                 limit=1000,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -3093,7 +3093,7 @@ class FRED:
             # 2    1959-07-19
             # 3    1960-02-16
             # 4    1960-07-22
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date(1776, 7, 4)
@@ -3113,8 +3113,8 @@ class FRED:
         return pd.to_datetime(
             pd.Series(
                 self._client.get(
-                    "/fred/series/vintagedates",
-                    "vintage_dates",
+                    endpoint="/fred/series/vintagedates",
+                    list_key="vintage_dates",
                     limit=10000,
                     series_id=series_id,
                     realtime_start=realtime_start,
@@ -3195,7 +3195,7 @@ class FRED:
             # 4      2022-02-05   2022-02-05                  Federal Reserve Bank of St. Louis        http://www.stlouisfed.org/  <NA>
             # 6      2022-02-05   2022-02-05  Federal Financial Institutions Examination Cou...             http://www.ffiec.gov/  <NA>
             # 11     2022-02-05   2022-02-05                                Dow Jones & Company           http://www.dowjones.com  <NA>
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -3224,8 +3224,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/sources",
-                "sources",
+                endpoint="/fred/sources",
+                list_key="sources",
                 limit=1000,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -3297,7 +3297,7 @@ class FRED:
             fred.source(source_id=1)
         
             # Source(id=1, realtime_start='2022-01-14', realtime_end='2022-01-14', name='Board of Governors of the Federal Reserve System (US)', link='http://www.federalreserve.gov/')
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -3315,8 +3315,8 @@ class FRED:
             raise ValueError(f'The date set by variable realtime_start ("{realtime_start}") can not be after the date set by variable realtime_end ("{realtime_end}").')
 
         data = self._client.get(
-            "/fred/source",
-            "sources",
+            endpoint="/fred/source",
+            list_key="sources",
             source_id=source_id,
             realtime_start=realtime_start,
             realtime_end=realtime_end
@@ -3393,7 +3393,7 @@ class FRED:
             # 15     2022-02-05   2022-02-05                         G.5 Foreign Exchange Rates           True   http://www.federalreserve.gov/releases/g5/  <NA>
             # 17     2022-02-05   2022-02-05                        H.10 Foreign Exchange Rates           True  http://www.federalreserve.gov/releases/h10/  <NA>
             # 18     2022-02-05   2022-02-05                       H.15 Selected Interest Rates           True  http://www.federalreserve.gov/releases/h15/  <NA>
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -3423,8 +3423,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/source/releases",
-                "releases",
+                endpoint="/fred/source/releases",
+                list_key="releases",
                 limit=1000,
                 source_id=source_id,
                 realtime_start=realtime_start,
@@ -3529,7 +3529,7 @@ class FRED:
             # 2-week              gen       2012-05-25 16:29:34+00:00          -6             2
             # 30 to 34 years      gen       2013-10-10 21:13:04+00:00         -13             2
             # 3-family +          gen       2012-08-06 19:48:11+00:00         -49             2
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -3562,8 +3562,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/tags",
-                "tags",
+                endpoint="/fred/tags",
+                list_key="tags",
                 limit=1000,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -3668,7 +3668,7 @@ class FRED:
             # frb stl                             src   St. Louis Fed 2012-02-27 16:18:19+00:00          68             2
             # m1                                  gen  M1 Money Stock 2012-02-27 16:18:19+00:00          47             2
             # m3                                  gen  M3 Money Stock 2012-02-27 16:18:19+00:00          39             2
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -3711,8 +3711,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/related_tags",
-                "tags",
+                endpoint="/fred/related_tags",
+                list_key="tags",
                 limit=1000,
                 realtime_start=realtime_start,
                 realtime_end=realtime_end,
@@ -3818,7 +3818,7 @@ class FRED:
             # AUSCPIFODAINMEI     2022-02-05   2022-02-05           Consumer Price Index: Food for Australia        1977-01-01      2017-01-01     Annual               A  Index 2010=100  Index 2010=100  Not Seasonally Adjusted                       NSA 2018-03-09 21:12:09+00:00           1                 2  Copyright, 2016, OECD. Reprinted with permissi...
             # AUSCPIFODQINMEI     2022-02-05   2022-02-05           Consumer Price Index: Food for Australia        1976-07-01      2018-01-01  Quarterly               Q  Index 2010=100  Index 2010=100  Not Seasonally Adjusted                       NSA 2018-04-24 19:51:04+00:00           2                 2  Copyright, 2016, OECD. Reprinted with permissi...
             # AUTCPICORAINMEI     2022-02-05   2022-02-05  Consumer Price Index: All Items Excluding Food...        1966-01-01      2020-01-01     Annual               A  Index 2015=100  Index 2015=100  Not Seasonally Adjusted                       NSA 2021-03-16 22:37:57+00:00           0                 1  Copyright, 2016, OECD. Reprinted with permissi...
-        """  # noinspection
+        """  # noqa
 
         if realtime_start is None:
             realtime_start = dt_date.today()
@@ -3855,8 +3855,8 @@ class FRED:
 
         df = pd.DataFrame(
             self._client.get(
-                "/fred/tags/series",
-                "seriess",
+                endpoint="/fred/tags/series",
+                list_key="seriess",
                 limit=1000,
                 tag_names=tag_names,
                 exclude_tag_names=exclude_tag_names,
@@ -3900,4 +3900,4 @@ class ALFRED(FRED):
     https://alfred.stlouisfed.org/
 
     https://fred.stlouisfed.org/docs/api/fred/alfred.html
-    """  # noinspection
+    """  # noqa

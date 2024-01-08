@@ -114,6 +114,7 @@ ignore = [
     "TRY003", # Avoid specifying long messages outside the exception class
     "PD901", # Avoid using the generic variable name `df` for DataFrames
     "PIE796", # Enum contains duplicate value
+    "PGH004", # Use specific rule codes when using `noqa`
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.

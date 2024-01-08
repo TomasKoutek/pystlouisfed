@@ -49,7 +49,7 @@ class FRASER:
 
            for record in FRASER().list_records():
                print(record.get_metadata())
-        """  # noinspection
+        """  # noqa
 
         return self._sickle.ListRecords(metadataPrefix="mods", ignore_deleted=ignore_deleted, set=set)
 
@@ -75,7 +75,7 @@ class FRASER:
 
            for set in FRASER().list_sets():
                print(set)
-        """  # noinspection
+        """  # noqa
 
         return self._sickle.ListSets()
 
@@ -104,7 +104,7 @@ class FRASER:
 
            for header in FRASER().list_identifiers():
                print(header.identifier)
-        """  # noinspection
+        """  # noqa
 
         return self._sickle.ListIdentifiers(metadataPrefix="mods", ignore_deleted=ignore_deleted, set=set)
 
@@ -129,6 +129,6 @@ class FRASER:
             from pystlouisfed import FRASER
 
             FRASER().get_record(identifier='oai:fraser.stlouisfed.org:title:176')
-        """  # noinspection
+        """  # noqa
 
         return self._sickle.GetRecord(identifier=identifier, metadataPrefix="mods")
