@@ -9,7 +9,7 @@ packages = [
 
 [project]
 name = "pystlouisfed"
-version = "2.2.1"
+version = "3.0.0"
 authors = [
     { name = "Tomas Koutek", email = "66636b6f6666@gmail.com" },
 ]
