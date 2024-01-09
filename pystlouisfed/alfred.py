@@ -33,9 +33,6 @@ class FRED:
     """  # noqa
 
     EMPTY_VALUE = "."
-    """
-    FRED/ALFRED returns empty values as dot
-    """
 
     def __init__(
             self,
@@ -77,7 +74,8 @@ class FRED:
         | https://fred.stlouisfed.org/docs/api/fred/category.html
         
         | Get a category.
-
+        
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/category?category_id=125&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -95,7 +93,8 @@ class FRED:
                     }
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -133,6 +132,7 @@ class FRED:
         
         | Get the child categories for a specified parent category.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/category/children?category_id=13&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -150,7 +150,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -212,6 +213,7 @@ class FRED:
         | A related category is a one-way relation between 2 categories that is not part of a parent-child category hierarchy.
         | Most categories do not have related categories.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/category/related?category_id=32073&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -229,7 +231,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -312,6 +315,7 @@ class FRED:
         
         | Get the series in a category.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/category/series?category_id=125&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -349,7 +353,8 @@ class FRED:
                 },
               ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -486,6 +491,7 @@ class FRED:
         | Indirectly through series, it is possible to get the tags for a category. No tags exist for a category that does not have series.
         | See the related request fred/category/related_tags.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/category/tags?category_id=125&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -513,7 +519,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -642,6 +649,7 @@ class FRED:
         | Series are assigned tags and categories. Indirectly through series, it is possible to get the tags for a category.
         | No tags exist for a category that does not have series.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/category/related_tags?category_id=125&tag_names=services;quarterly&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -669,7 +677,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -770,6 +779,7 @@ class FRED:
 
         | Get all releases of economic data.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/releases?api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -797,7 +807,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -894,6 +905,7 @@ class FRED:
         | Get release dates for all releases of economic data.
         | Note that release dates are published by data sources and do not necessarily represent when data will be available on the FRED or ALFRED websites.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/releases/dates?api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -918,7 +930,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1001,6 +1014,7 @@ class FRED:
 
         | Get a release of economic data.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/release?release_id=53&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1023,7 +1037,8 @@ class FRED:
                     }
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1088,7 +1103,8 @@ class FRED:
         | https://fred.stlouisfed.org/docs/api/fred/release_dates.html
 
         | Get release dates for a release of economic data.
-
+        
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/release/dates?release_id=82&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1112,7 +1128,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1200,6 +1217,7 @@ class FRED:
 
         | Get the series on a release of economic data.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/release/series?release_id=51&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1237,7 +1255,8 @@ class FRED:
                     }
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1351,6 +1370,7 @@ class FRED:
 
         | Get the sources for a release of economic data.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/release/sources?release_id=51&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1372,7 +1392,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1459,6 +1480,7 @@ class FRED:
         | Indirectly through series, it is possible to get the tags for a release.
         | See the related request fred/release/related_tags.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/release/tags?release_id=86&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1486,7 +1508,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1599,6 +1622,7 @@ class FRED:
         | See the related request fred/release/tags.
         | Series are assigned tags and releases. Indirectly through series, it is possible to get the tags for a release.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/release/related_tags?release_id=86&tag_names=sa;foreign&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1626,7 +1650,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1724,6 +1749,7 @@ class FRED:
         | You may also use a drill-down approach to start at the root (top most) element by leaving the element_id off.
         | Note that release dates are published by data sources and do not necessarily represent when data will be available on the FRED or ALFRED websites.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/release/tables?release_id=53&api_key=abcdefghijklmnopqrstuvwxyz123456&element_id=12886&file_type=json
@@ -1764,6 +1790,7 @@ class FRED:
                     ]
                 }
             }
+        IGNORE
         """  # noqa
 
         if observation_date is None:
@@ -1797,6 +1824,7 @@ class FRED:
 
         | Get an economic data series.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series?series_id=GNPCA&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1828,7 +1856,8 @@ class FRED:
                     }
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1885,6 +1914,7 @@ class FRED:
 
         | Get the categories for an economic data series.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/categories?series_id=EXJPUS&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -1902,7 +1932,8 @@ class FRED:
                     }
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -1990,6 +2021,7 @@ class FRED:
 
         | Get the observations or data values for an economic data series.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/observations?series_id=GNPCA&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -2020,14 +2052,18 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Examples
         --------
+        
+        Plot value with `default <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html>`_ `matplotlib <https://matplotlib.org/>`_:
 
         .. code-block:: python
         
             from matplotlib import pyplot as plt
-    
+            from pystlouisfed import FRED
+            
             fred = FRED(api_key="abcdefghijklmnopqrstuvwxyz123456")
             df = fred.series_observations(series_id="T10Y2Y")
             df.plot(y="value", grid=True)
@@ -2036,6 +2072,28 @@ class FRED:
             
         .. image:: T10Y2Y.png
 
+        Of course, we can use any library, for example `Plotly <https://plotly.com/python/>`_:
+
+        .. code-block:: python
+        
+            import plotly.express as px
+            from pystlouisfed import FRED
+            
+            fred = FRED(api_key='3a3380d8e2f1c64b28f3bb4805ca6c22')
+            df = fred.series_observations(series_id='SP500')
+            
+            fig = px.scatter(
+                x=df.index,
+                y=df.value,
+                trendline="ols",
+                trendline_color_override="red",
+                title=f"S&P 500",
+                labels={"x": "Date", "y": "Index"},
+            )
+            fig.show()
+            
+        .. image:: sp500.png
+        
         Output types
         ------------
         These output formats are a cross tabulation between the series' observation dates and the specified vintage dates.
@@ -2225,6 +2283,7 @@ class FRED:
 
         | Get the release for an economic data series.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/release?series_id=IRA&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -2247,7 +2306,8 @@ class FRED:
                     }
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -2345,7 +2405,8 @@ class FRED:
         | https://fred.stlouisfed.org/docs/api/fred/series_search.html
 
         | Get economic data series that match search text.
-
+        
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/search?search_text=monetary+service+index&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -2383,7 +2444,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -2530,6 +2592,7 @@ class FRED:
 
         | Get the FRED tags for a series search. Optionally, filter results by tag name, tag group, or tag search. See the related request fred/series/search/related_tags.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/search/tags?series_search_text=monetary+service+index&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -2557,7 +2620,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -2670,6 +2734,7 @@ class FRED:
         | and the search words set by the series_search_text parameter.
         | See the related request fred/series/search/tags.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/search/related_tags?series_search_text=mortgage+rate&tag_names=30-year;frb&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -2697,7 +2762,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -2794,7 +2860,8 @@ class FRED:
         | https://fred.stlouisfed.org/docs/api/fred/series_tags.html
 
         | Get the FRED tags for a series.
-
+        
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/tags?series_id=STLFSI&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -2822,7 +2889,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -2915,7 +2983,8 @@ class FRED:
 
         | Get economic data series sorted by when observations were updated on the FRED server (attribute last_updated).
         | Results are limited to series updated within the last two weeks.
-
+        
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/updates?api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -2953,7 +3022,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -3059,6 +3129,7 @@ class FRED:
         | Get the dates in history when a series' data values were revised or new data values were released.
         | Vintage dates are the release dates for a series excluding release dates when the data for the series did not change.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/series/vintagedates?series_id=GNPCA&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -3080,7 +3151,8 @@ class FRED:
                     "1959-02-19",
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -3154,6 +3226,7 @@ class FRED:
 
         | Get all sources of economic data.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/sources?api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -3180,7 +3253,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -3267,6 +3341,7 @@ class FRED:
 
         | Get a source of economic data.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/source?source_id=1&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -3288,7 +3363,8 @@ class FRED:
                     }
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -3351,6 +3427,7 @@ class FRED:
 
         | Get the releases for a source.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/source/releases?source_id=1&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -3378,7 +3455,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -3487,6 +3565,7 @@ class FRED:
 
         | Get FRED tags. Optionally, filter results by tag name, tag group, or search. FRED tags are attributes assigned to series. See the related request fred/related_tags.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/tags?api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -3514,7 +3593,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -3626,6 +3706,7 @@ class FRED:
         | Related FRED tags are the tags assigned to series that match all tags in the tag_names parameter and no tags in the exclude_tag_names parameter.
         | See the related request fred/tags.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/related_tags?tag_names=monetary+aggregates;weekly&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -3653,7 +3734,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -3766,6 +3848,7 @@ class FRED:
 
         | Get the series matching all tags in the tag_names parameter and no tags in the exclude_tag_names parameter.
 
+        IGNORE:
         API Request
         -----------
         https://api.stlouisfed.org/fred/tags/series?tag_names=slovenia;food;oecd&api_key=abcdefghijklmnopqrstuvwxyz123456&file_type=json
@@ -3803,7 +3886,8 @@ class FRED:
                     },
                 ]
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python

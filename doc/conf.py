@@ -5,6 +5,7 @@
 
 import os
 import sys
+from sphinx.ext.autodoc import between
 
 sys.path.append(os.path.abspath("../"))
 
@@ -18,8 +19,16 @@ copyright = "2023, Tomas Koutek"
 author = "Tomas Koutek"
 version = __version__
 
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+def setup(app):
+    # Register a sphinx.ext.autodoc.between listener to ignore everything
+    # between lines that contain the word IGNORE
+    app.connect('autodoc-process-docstring', between('^.*IGNORE.*$', exclude=True))
+    return app
+
 
 extensions = [
     "sphinx.ext.autodoc",

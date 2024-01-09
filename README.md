@@ -120,7 +120,8 @@ MSIM1P      2022-02-05   2022-02-05          Monetary Services Index: M1 (prefer
 MSIM2A      2022-02-05   2022-02-05        Monetary Services Index: M2 (alternative)        1967-01-01      2013-12-01   Monthly               M  Billions of Dollars   Bil. of $  Seasonally Adjusted                        SA 2014-01-17 13:16:44+00:00           8                 8  The MSI measure the flow of monetary services ...
 ```
 
-or method `FRED.series_observations` (observations for specific series ID)
+Everything can be easily displayed in a graph.
+For example `FRED.series_observations` (observations for specific series ID) can be plotted with [default](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html) [matplotlib](https://matplotlib.org/) 
 
 ```python
 from matplotlib import pyplot as plt
@@ -134,7 +135,29 @@ df.plot(y='value', grid=True)
 plt.show()
 ```
 
-![FRED series_observations](./doc/T10Y2Y.png "FRED series_observations")
+![FRED series_observations - plt T10Y2Y](./doc/T10Y2Y.png "FRED series_observations - plt T10Y2Y")
+
+Of course, we can use any library, for example [Plotly](https://plotly.com/python/):
+
+```python
+import plotly.express as px
+from pystlouisfed import FRED
+
+fred = FRED(api_key='3a3380d8e2f1c64b28f3bb4805ca6c22')
+df = fred.series_observations(series_id='SP500')
+
+fig = px.scatter(
+    x=df.index,
+    y=df.value,
+    trendline="ols",
+    trendline_color_override="red",
+    title=f"S&P 500",
+    labels={"x": "Date", "y": "Index"},
+)
+fig.show()
+```
+
+![FRED series_observations - px SP500](./doc/sp500.png "FRED series_observations - px SP500")
 
 In addition, each DataFrame has correctly set data types.
 

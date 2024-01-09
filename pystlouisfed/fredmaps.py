@@ -75,6 +75,7 @@ class FREDMaps:
         | https://fred.stlouisfed.org/docs/api/geofred/shapes.html
         | This request returns shape files from FRED in GeoJSON format.
 
+        IGNORE:
         API Request (HTTPS GET)
         -----------------------
         https://api.stlouisfed.org/geofred/shapes/file?shape=country&api_key=abcdefghijklmnopqrstuvwxyz123456
@@ -141,7 +142,8 @@ class FREDMaps:
                     }
                 ]
             }
-
+        IGNORE
+        
         Examples
         --------
         
@@ -238,6 +240,7 @@ class FREDMaps:
         | This request returns the meta information needed to make requests for FRED data.
         | Minimum and maximum date are also supplied for the data range available.
 
+        IGNORE:
         API Request (HTTPS GET)
         -----------------------
         https://api.stlouisfed.org/geofred/series/group?series_id=SMU56000000500000001a&api_key=abcdefghijklmnopqrstuvwxyz123456
@@ -259,7 +262,8 @@ class FREDMaps:
                         "max_date": "2021-01-01"
                     }
             }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python
@@ -299,6 +303,7 @@ class FREDMaps:
         | This request returns a cross section of regional data for a specified release date
         | If no date is specified, the most recent data available are returned.
 
+        IGNORE:
         API Request (HTTPS GET)
         -----------------------
         https://api.stlouisfed.org/geofred/series/data?series_id=WIPCPI&api_key=abcdefghijklmnopqrstuvwxyz123456&date=2012-01-01
@@ -326,7 +331,8 @@ class FREDMaps:
                ]
              }
            }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python 
@@ -408,6 +414,7 @@ class FREDMaps:
         | https://fred.stlouisfed.org/docs/api/geofred/regional_data.html
         | This request returns a cross section of regional data.
 
+        IGNORE:
         API Request (HTTPS GET)
         -----------------------
         https://api.stlouisfed.org/geofred/regional/data?api_key=abcdefghijklmnopqrstuvwxyz123456&series_group=882&date=2013-01-01&region_type=state&units=Dollars&frequency=a&season=NSA
@@ -435,7 +442,8 @@ class FREDMaps:
                }
              }
            }
-
+        IGNORE
+        
         Example
         -------
         .. code-block:: python 
