@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pystlouisfed.fredmaps &mdash; pystlouisfed 3.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pystlouisfed
+          </a>
+              <div class="version">
+                3.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../client.html">Clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enums.html">Enums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../strange.html">Strange things</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pystlouisfed</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pystlouisfed.fredmaps</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pystlouisfed.fredmaps</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Generator</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span> <span class="k">as</span> <span class="n">dt_date</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NoReturn</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">geopandas</span> <span class="kn">import</span> <span class="n">GeoDataFrame</span>
+
+<span class="kn">from</span> <span class="nn">pystlouisfed</span> <span class="kn">import</span> <span class="n">enums</span>
+<span class="kn">from</span> <span class="nn">pystlouisfed</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">.client</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FREDMaps">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FREDMaps">[docs]</a>
+<span class="k">class</span> <span class="nc">FREDMaps</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | https://fredaccount.stlouisfed.org/public/dashboard/83217</span>
+<span class="sd">    | Maps provide a cross-sectional perspective that lets you compare regions on a map while complementing and expanding the data analysis you get on a time-series graph. </span>
+<span class="sd">    </span>
+<span class="sd">    FRED has 9 types (:class:`pystlouisfed.enums.ShapeType`) of maps: </span>
+<span class="sd">    </span>
+<span class="sd">    #. U.S. counties</span>
+<span class="sd">    #. U.S. metro areas</span>
+<span class="sd">    #. U.S. states</span>
+<span class="sd">    #. nations</span>
+<span class="sd">    #. Federal Reserve Districts</span>
+<span class="sd">    #. Census regions</span>
+<span class="sd">    #. Census divisions</span>
+<span class="sd">    #. BEA regions </span>
+<span class="sd">    #. NECTAs (New England city and town areas)</span>
+<span class="sd">    </span>
+<span class="sd">    :param api_key: 32 character alpha-numeric lowercase string</span>
+<span class="sd">    :type api_key: str</span>
+<span class="sd">    :type ratelimiter_enabled: bool</span>
+<span class="sd">    :type ratelimiter_max_calls: int</span>
+<span class="sd">    :type ratelimiter_period: int</span>
+<span class="sd">    :param request_params: HTTP GET method parameters, see https://docs.python-requests.org/en/latest/api/#requests.request</span>
+<span class="sd">    :type request_params: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+    <span class="n">EMPTY_VALUE</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">ratelimiter_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">ratelimiter_max_calls</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span>
+            <span class="n">ratelimiter_period</span><span class="p">:</span> <span class="n">timedelta</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">60</span><span class="p">),</span>
+            <span class="n">request_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">api_key</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">api_key</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">32</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Variable api_key must be 32 character length alphanumeric string.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+            <span class="n">ratelimiter_enabled</span><span class="o">=</span><span class="n">ratelimiter_enabled</span><span class="p">,</span>
+            <span class="n">ratelimiter_max_calls</span><span class="o">=</span><span class="n">ratelimiter_max_calls</span><span class="p">,</span>
+            <span class="n">ratelimiter_period</span><span class="o">=</span><span class="n">ratelimiter_period</span><span class="p">,</span>
+            <span class="n">request_params</span><span class="o">=</span><span class="n">request_params</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="FREDMaps.shapes">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FREDMaps.shapes">[docs]</a>
+    <span class="k">def</span> <span class="nf">shapes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">enums</span><span class="o">.</span><span class="n">ShapeType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeoDataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param shape: Shape</span>
+<span class="sd">        :type shape: enums.ShapeType</span>
+<span class="sd">        :rtype: geopandas.GeoDataFrame</span>
+
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://fred.stlouisfed.org/docs/api/geofred/shapes.html</span>
+<span class="sd">        </span>
+<span class="sd">        | This request returns shape files from FRED in GeoJSON format.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request (HTTPS GET)</span>
+<span class="sd">        -----------------------</span>
+<span class="sd">        https://api.stlouisfed.org/geofred/shapes/file?shape=country&amp;api_key=abcdefghijklmnopqrstuvwxyz123456</span>
+
+<span class="sd">        API Response</span>
+<span class="sd">        ------------</span>
+<span class="sd">        .. code-block:: json</span>
+<span class="sd">           </span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;title&quot;: &quot;World, Miller projection, medium resolution&quot;,</span>
+<span class="sd">                &quot;version&quot;: &quot;1.1.3&quot;,</span>
+<span class="sd">                &quot;type&quot;: &quot;FeatureCollection&quot;,</span>
+<span class="sd">                &quot;copyright&quot;: &quot;Copyright (c) 2020 Highsoft AS, Based on data from Natural Earth&quot;,</span>
+<span class="sd">                &quot;copyrightShort&quot;: &quot;Natural Earth&quot;,</span>
+<span class="sd">                &quot;copyrightUrl&quot;: &quot;http://www.naturalearthdata.com&quot;,</span>
+<span class="sd">                &quot;crs&quot;: {</span>
+<span class="sd">                    &quot;type&quot;: &quot;name&quot;,</span>
+<span class="sd">                    &quot;properties&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;urn:ogc:def:crs:EPSG:54003&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;hc-transform&quot;: {</span>
+<span class="sd">                    &quot;default&quot;: {</span>
+<span class="sd">                        &quot;crs&quot;: &quot;+proj=mill +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +R_A +datum=WGS84 +units=m +no_defs&quot;,</span>
+<span class="sd">                        &quot;scale&quot;: 0.0000172182781654,</span>
+<span class="sd">                        &quot;jsonres&quot;: 15.5,</span>
+<span class="sd">                        &quot;jsonmarginX&quot;: -999,</span>
+<span class="sd">                        &quot;jsonmarginY&quot;: 9851,</span>
+<span class="sd">                        &quot;xoffset&quot;: -19495356.3693,</span>
+<span class="sd">                        &quot;yoffset&quot;: 12635908.1982</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;features&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;type&quot;: &quot;Feature&quot;,</span>
+<span class="sd">                        &quot;id&quot;: &quot;FO&quot;,</span>
+<span class="sd">                        &quot;properties&quot;: {</span>
+<span class="sd">                            &quot;hc-group&quot;: &quot;admin0&quot;,</span>
+<span class="sd">                            &quot;hc-middle-x&quot;: 0.48,</span>
+<span class="sd">                            &quot;hc-middle-y&quot;: 0.54,</span>
+<span class="sd">                            &quot;hc-key&quot;: &quot;fo&quot;,</span>
+<span class="sd">                            &quot;hc_a2&quot;: &quot;FO&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;Faroe Islands&quot;,</span>
+<span class="sd">                            &quot;labelrank&quot;: &quot;6&quot;,</span>
+<span class="sd">                            &quot;country-abbrev&quot;: &quot;Faeroe Is.&quot;,</span>
+<span class="sd">                            &quot;subregion&quot;: &quot;Northern Europe&quot;,</span>
+<span class="sd">                            &quot;region-wb&quot;: &quot;Europe &amp; Central Asia&quot;,</span>
+<span class="sd">                            &quot;iso-a3&quot;: &quot;FRO&quot;,</span>
+<span class="sd">                            &quot;iso-a2&quot;: &quot;FO&quot;,</span>
+<span class="sd">                            &quot;woe-id&quot;: &quot;23424816&quot;,</span>
+<span class="sd">                            &quot;continent&quot;: &quot;Europe&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;geometry&quot;: {</span>
+<span class="sd">                        &quot;type&quot;: &quot;Polygon&quot;,</span>
+<span class="sd">                        &quot;coordinates&quot;: [</span>
+<span class="sd">                            [</span>
+<span class="sd">                                [ 3991, 8611 ],</span>
+<span class="sd">                                [ 4005, 8598 ],</span>
+<span class="sd">                                [ 4004, 8594 ],</span>
+<span class="sd">                                [ 3989, 8605 ],</span>
+<span class="sd">                                [ 3991, 8611 ]</span>
+<span class="sd">                            ]</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        </span>
+<span class="sd">        Get country polygons:</span>
+<span class="sd">            </span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from pystlouisfed import FREDMaps, ShapeType</span>
+<span class="sd">            </span>
+<span class="sd">            fred_maps = FREDMaps(api_key=&quot;abcdefghijklmnopqrstuvwxyz123456&quot;)</span>
+<span class="sd">            shapes = fred_maps.shapes(shape=ShapeType.country)</span>
+<span class="sd">            </span>
+<span class="sd">            #                                                       geometry hc-group  hc-middle-x  hc-middle-y hc-key hc_a2                                  name labelrank country-abbrev                  subregion                   region-wb iso-a3 iso-a2    woe-id                continent</span>
+<span class="sd">            # 0    POLYGON ((3991.000 8611.000, 4005.000 8598.000...   admin0         0.48         0.54     fo    FO                         Faroe Islands         6     Faeroe Is.            Northern Europe       Europe &amp; Central Asia    FRO     FO  23424816                   Europe</span>
+<span class="sd">            # 1    POLYGON ((-605.000 6652.000, -606.000 6652.000...   admin0         0.57         0.58     um    UM  United States Minor Outlying Islands         5       U.S. MOI    Seven seas (open ocean)         East Asia &amp; Pacific    UMI     UM  28289407            North America</span>
+<span class="sd">            # 2    MULTIPOLYGON (((556.000 8034.000, 559.000 8032...   admin0         0.68         0.68     us    US              United States of America         2         U.S.A.           Northern America               North America    USA     US  23424977            North America</span>
+<span class="sd">            # 3    MULTIPOLYGON (((8389.000 7914.000, 8390.000 79...   admin0         0.52         0.66     jp    JP                                 Japan         2          Japan               Eastern Asia         East Asia &amp; Pacific    JPN     JP  23424856                     Asia</span>
+<span class="sd">            # 4    POLYGON ((5849.000 6344.000, 5852.000 6341.000...   admin0         0.58         0.41     sc    SC                            Seychelles         6           Syc.             Eastern Africa          Sub-Saharan Africa    SYC     SC  23424941  Seven seas (open ocean)</span>
+<span class="sd">            # 5    MULTIPOLYGON (((6818.000 7133.000, 6820.000 71...   admin0         0.34         0.43     in    IN                                 India         2          India              Southern Asia                  South Asia    IND     IN  23424848                     Asia</span>
+
+<span class="sd">        Plot with `Matplotlib &lt;https://matplotlib.org/&gt;`_:</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            from pystlouisfed import FREDMaps, ShapeType</span>
+<span class="sd">            import matplotlib.pyplot as plt</span>
+<span class="sd">            </span>
+<span class="sd">            gdf = FREDMaps(api_key=&quot;abcdefghijklmnopqrstuvwxyz123456&quot;) \\</span>
+<span class="sd">                    .shapes(shape=ShapeType.state) \\</span>
+<span class="sd">                    .plot(figsize=(12, 8))</span>
+<span class="sd">                    </span>
+<span class="sd">            plt.show()</span>
+
+<span class="sd">        .. image:: maps_states_plt.png</span>
+
+<span class="sd">        Plot with `Plotly &lt;https://plotly.com/python/&gt;`_:</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from pystlouisfed import FREDMaps, ShapeType</span>
+<span class="sd">            import plotly.express as px</span>
+<span class="sd">            </span>
+<span class="sd">            gdf = FREDMaps(api_key=&quot;abcdefghijklmnopqrstuvwxyz123456&quot;) \\</span>
+<span class="sd">                    .shapes(shape=ShapeType.state) \\</span>
+<span class="sd">                    .to_crs(epsg=4326) \\</span>
+<span class="sd">                    .set_index(&quot;name&quot;)</span>
+<span class="sd">            </span>
+<span class="sd">            fig = px.choropleth(</span>
+<span class="sd">                gdf,</span>
+<span class="sd">                geojson=gdf.geometry,</span>
+<span class="sd">                locations=gdf.index,</span>
+<span class="sd">                color=&quot;fips&quot;,</span>
+<span class="sd">            )</span>
+<span class="sd">            </span>
+<span class="sd">            fig.update_layout(width=1200, height=1000, showlegend=False)</span>
+<span class="sd">            fig.update_geos(fitbounds=&quot;locations&quot;, visible=False)</span>
+<span class="sd">            fig.show()</span>
+<span class="sd">        </span>
+<span class="sd">        .. image:: maps_states.png</span>
+<span class="sd">        </span>
+<span class="sd">        or plot :py:class:`pystlouisfed.ShapeType.country`</span>
+<span class="sd">        </span>
+<span class="sd">        .. image:: maps_country.png</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="n">feature_collection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/geofred/shapes/file&quot;</span><span class="p">,</span>
+            <span class="n">shape</span><span class="o">=</span><span class="n">shape</span>
+        <span class="p">)</span>
+
+        <span class="c1"># FRED use wrong data source - &quot;urn:ogc:def:crs:EPSG:54003&quot;</span>
+        <span class="c1"># 54003 is ESRI and not EPSG - https://epsg.io/54003</span>
+        <span class="c1"># as alternative we use hc-transform PROJ4 value</span>
+        <span class="k">if</span> <span class="s2">&quot;hc-transform&quot;</span> <span class="ow">in</span> <span class="n">feature_collection</span><span class="p">:</span>
+            <span class="n">crs</span> <span class="o">=</span> <span class="n">feature_collection</span><span class="p">[</span><span class="s2">&quot;hc-transform&quot;</span><span class="p">][</span><span class="s2">&quot;default&quot;</span><span class="p">][</span><span class="s2">&quot;crs&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">crs</span> <span class="o">=</span> <span class="n">feature_collection</span><span class="p">[</span><span class="s2">&quot;crs&quot;</span><span class="p">][</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span>
+            <span class="n">features</span><span class="o">=</span><span class="n">feature_collection</span><span class="p">,</span>
+            <span class="n">crs</span><span class="o">=</span><span class="n">crs</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FREDMaps.series_group">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FREDMaps.series_group">[docs]</a>
+    <span class="k">def</span> <span class="nf">series_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">models</span><span class="o">.</span><span class="n">SeriesGroup</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param series_id: Series ID</span>
+<span class="sd">        :type series_id: str</span>
+<span class="sd">        :rtype: models.SeriesGroup</span>
+
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://fred.stlouisfed.org/docs/api/geofred/series_group.html</span>
+<span class="sd">        </span>
+<span class="sd">        | This request returns the meta information needed to make requests for FRED data.</span>
+<span class="sd">        | Minimum and maximum date are also supplied for the data range available.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request (HTTPS GET)</span>
+<span class="sd">        -----------------------</span>
+<span class="sd">        https://api.stlouisfed.org/geofred/series/group?series_id=SMU56000000500000001a&amp;api_key=abcdefghijklmnopqrstuvwxyz123456</span>
+
+<span class="sd">        API Response</span>
+<span class="sd">        ------------</span>
+<span class="sd">        .. code-block:: json</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;series_group&quot;:</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;title&quot;: &quot;All Employees: Total Private&quot;,</span>
+<span class="sd">                        &quot;region_type&quot;: &quot;state&quot;,</span>
+<span class="sd">                        &quot;series_group&quot;: &quot;1223&quot;,</span>
+<span class="sd">                        &quot;season&quot;: &quot;NSA&quot;,</span>
+<span class="sd">                        &quot;units&quot;: &quot;Thousands of Persons&quot;,</span>
+<span class="sd">                        &quot;frequency&quot;: &quot;Annual&quot;,</span>
+<span class="sd">                        &quot;min_date&quot;: &quot;1990-01-01&quot;,</span>
+<span class="sd">                        &quot;max_date&quot;: &quot;2021-01-01&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">            }</span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            fred_maps = FREDMaps(api_key=&quot;abcdefghijklmnopqrstuvwxyz123456&quot;)</span>
+<span class="sd">            group = geo_fred.series_group(series_id=&quot;SMU56000000500000001a&quot;)</span>
+<span class="sd">           </span>
+<span class="sd">            # SeriesGroup(title=&#39;All Employees: Total Private&#39;, region_type=&#39;state&#39;, series_group=&#39;1223&#39;, season=&#39;NSA&#39;, units=&#39;Thousands of Persons&#39;, frequency=&#39;a&#39;, min_date=datetime.date(1990, 1, 1), max_date=datetime.date(2020, 1, 1))</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/geofred/series/group&quot;</span><span class="p">,</span>
+            <span class="n">list_key</span><span class="o">=</span><span class="s2">&quot;series_group&quot;</span><span class="p">,</span>
+            <span class="n">series_id</span><span class="o">=</span><span class="n">series_id</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">SeriesGroup</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FREDMaps.series_data">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FREDMaps.series_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">series_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">series_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dt_date</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dt_date</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param series_id: The FRED series_id you want to request maps data for. Not all series that are in FRED have geographical data.</span>
+<span class="sd">        :type series_id: str</span>
+<span class="sd">        :param date: The date you want to request series group data from.</span>
+<span class="sd">        :type date: datetime.date</span>
+<span class="sd">        :param start_date: The start date you want to request series group data from. This allows you to pull a range of data.</span>
+<span class="sd">        :type start_date: datetime.date</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://fred.stlouisfed.org/docs/api/geofred/series_data.html</span>
+<span class="sd">        </span>
+<span class="sd">        | This request returns a cross section of regional data for a specified release date</span>
+<span class="sd">        | If no date is specified, the most recent data available are returned.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request (HTTPS GET)</span>
+<span class="sd">        -----------------------</span>
+<span class="sd">        https://api.stlouisfed.org/geofred/series/data?series_id=WIPCPI&amp;api_key=abcdefghijklmnopqrstuvwxyz123456&amp;date=2012-01-01</span>
+
+<span class="sd">        API Response</span>
+<span class="sd">        ------------</span>
+<span class="sd">        .. code-block:: json</span>
+
+<span class="sd">           {</span>
+<span class="sd">             &quot;meta&quot;: {</span>
+<span class="sd">               &quot;title&quot;: &quot;Per Capita Personal Income by State (Dollars)&quot;,</span>
+<span class="sd">               &quot;region&quot;: &quot;state&quot;,</span>
+<span class="sd">               &quot;seasonality&quot;: &quot;Not Seasonally Adjusted&quot;,</span>
+<span class="sd">               &quot;units&quot;: &quot;Dollars&quot;,</span>
+<span class="sd">               &quot;frequency&quot;: &quot;Annual&quot;,</span>
+<span class="sd">               &quot;date&quot;: &quot;2012-01-01&quot;,</span>
+<span class="sd">               &quot;data&quot;: {</span>
+<span class="sd">                 &quot;2022-01-01&quot;: [</span>
+<span class="sd">                   {</span>
+<span class="sd">                     &quot;region&quot;: &quot;Alabama&quot;,</span>
+<span class="sd">                     &quot;code&quot;: &quot;01&quot;,</span>
+<span class="sd">                     &quot;value&quot;: &quot;50637&quot;,</span>
+<span class="sd">                     &quot;series_id&quot;: &quot;ALPCPI&quot;</span>
+<span class="sd">                   },</span>
+<span class="sd">               ]</span>
+<span class="sd">             }</span>
+<span class="sd">           }</span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python </span>
+
+<span class="sd">           fred_maps = FREDMaps(api_key=&quot;abcdefghijklmnopqrstuvwxyz123456&quot;)</span>
+<span class="sd">           fred_maps.series_data(series_id=&#39;WIPCPI&#39;)</span>
+
+<span class="sd">           #       region  code  value series_id       year</span>
+<span class="sd">           # 0  Louisiana    22  54622    LAPCPI 2022-01-01</span>
+<span class="sd">           # 1     Nevada    32  61282    NVPCPI 2022-01-01</span>
+<span class="sd">           # 2   Maryland    24  70730    MDPCPI 2022-01-01</span>
+<span class="sd">           # 3    Arizona     4  56667    AZPCPI 2022-01-01</span>
+<span class="sd">           # 4   New York    36  78089    NYPCPI 2022-01-01</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="n">years</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/geofred/series/data&quot;</span><span class="p">,</span>
+            <span class="n">list_key</span><span class="o">=</span><span class="s2">&quot;meta.data&quot;</span><span class="p">,</span>
+            <span class="n">series_id</span><span class="o">=</span><span class="n">series_id</span><span class="p">,</span>
+            <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span>
+            <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">years</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_years</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EMPTY_VALUE</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                <span class="s2">&quot;series_id&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="nb">int</span>
+            <span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="FREDMaps.regional_data">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FREDMaps.regional_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">regional_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">series_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">region_type</span><span class="p">:</span> <span class="n">enums</span><span class="o">.</span><span class="n">RegionType</span><span class="p">,</span>
+            <span class="n">date</span><span class="p">:</span> <span class="n">dt_date</span><span class="p">,</span>
+            <span class="n">season</span><span class="p">:</span> <span class="n">enums</span><span class="o">.</span><span class="n">Seasonality</span><span class="p">,</span>
+            <span class="n">units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Dollars&quot;</span><span class="p">,</span>  <span class="c1"># Documentation is missing</span>
+            <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dt_date</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">frequency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">enums</span><span class="o">.</span><span class="n">Frequency</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">transformation</span><span class="p">:</span> <span class="n">enums</span><span class="o">.</span><span class="n">Unit</span> <span class="o">=</span> <span class="n">enums</span><span class="o">.</span><span class="n">Unit</span><span class="o">.</span><span class="n">lin</span><span class="p">,</span>
+            <span class="n">aggregation_method</span><span class="p">:</span> <span class="n">enums</span><span class="o">.</span><span class="n">AggregationMethod</span> <span class="o">=</span> <span class="n">enums</span><span class="o">.</span><span class="n">AggregationMethod</span><span class="o">.</span><span class="n">average</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param series_group: The ID for a group of seriess found in FRED.</span>
+<span class="sd">        :type series_group: str</span>
+<span class="sd">        :param region_type: The region you want want to pull data for.</span>
+<span class="sd">        :type region_type: enums.RegionType</span>
+<span class="sd">        :param date: The date you want to pull a series group data from.</span>
+<span class="sd">        :type date: datetime.date</span>
+<span class="sd">        :param season: The seasonality of the series group.</span>
+<span class="sd">        :type season: enums.Seasonality</span>
+<span class="sd">        :param units: The units of the series you want to pull.</span>
+<span class="sd">        :type units: str</span>
+<span class="sd">        :param start_date: The start date you want to request series group data from. This allows you to pull a range of data.</span>
+<span class="sd">        :type start_date: datetime.date</span>
+<span class="sd">        :param frequency: Frequency automatically assigns the default frequency of the map when using the Request Wizard above. The parameter can be used as a frequency aggregation feature. The maps frequency aggregation feature converts higher frequency data series into lower frequency data series (e.g. converts a monthly data series into an annual data series). In maps, the highest frequency data is daily, and the lowest frequency data is annual. There are 3 aggregation methods available- average, sum, and end of period. See the aggregation_method parameter.</span>
+<span class="sd">        :type frequency: enums.Frequency</span>
+<span class="sd">        :param transformation: A key that indicates a data value transformation.</span>
+<span class="sd">        :type transformation: enums.Unit</span>
+<span class="sd">        :param aggregation_method: One of the following values: &#39;avg&#39;, &#39;sum&#39;, &#39;eop&#39;</span>
+<span class="sd">        :type aggregation_method: enums.AggregationMethod</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://fred.stlouisfed.org/docs/api/geofred/regional_data.html</span>
+<span class="sd">        </span>
+<span class="sd">        | This request returns a cross section of regional data.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request (HTTPS GET)</span>
+<span class="sd">        -----------------------</span>
+<span class="sd">        https://api.stlouisfed.org/geofred/regional/data?api_key=abcdefghijklmnopqrstuvwxyz123456&amp;series_group=882&amp;date=2013-01-01&amp;region_type=state&amp;units=Dollars&amp;frequency=a&amp;season=NSA</span>
+
+<span class="sd">        API Response</span>
+<span class="sd">        ------------</span>
+<span class="sd">        .. code-block:: json </span>
+
+<span class="sd">           {</span>
+<span class="sd">             &quot;meta&quot;: {</span>
+<span class="sd">               &quot;title&quot;: &quot;Per Capita Personal Income by State (Dollars)&quot;,</span>
+<span class="sd">               &quot;region&quot;: &quot;state&quot;,</span>
+<span class="sd">               &quot;seasonality&quot;: &quot;Not Seasonally Adjusted&quot;,</span>
+<span class="sd">               &quot;units&quot;: &quot;Dollars&quot;,</span>
+<span class="sd">               &quot;frequency&quot;: &quot;Annual&quot;,</span>
+<span class="sd">               &quot;data&quot;: {</span>
+<span class="sd">                 &quot;2013-01-01&quot;: [</span>
+<span class="sd">                   {</span>
+<span class="sd">                     &quot;region&quot;: &quot;Alabama&quot;,</span>
+<span class="sd">                     &quot;code&quot;: &quot;01&quot;,</span>
+<span class="sd">                     &quot;value&quot;: &quot;36014&quot;,</span>
+<span class="sd">                     &quot;series_id&quot;: &quot;ALPCPI&quot;</span>
+<span class="sd">                   },</span>
+<span class="sd">                 ]</span>
+<span class="sd">               }</span>
+<span class="sd">             }</span>
+<span class="sd">           }</span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python </span>
+
+<span class="sd">           fred_maps = FREDMaps(api_key=&quot;abcdefghijklmnopqrstuvwxyz123456&quot;)</span>
+<span class="sd">           fred_maps.regional_data(</span>
+<span class="sd">                series_group=&#39;882&#39;,</span>
+<span class="sd">                date=date(2013, 1, 1),</span>
+<span class="sd">                start_date=datetime.date(2014, 1, 1),</span>
+<span class="sd">                region_type=RegionType.state,</span>
+<span class="sd">                frequency=Frequency.anual,</span>
+<span class="sd">                season=Seasonality.not_seasonally_adjusted</span>
+<span class="sd">            )</span>
+
+<span class="sd">            #                    region  code  value series_id       year</span>
+<span class="sd">            # 0                   Texas    48  46739    TXPCPI 2014-01-01</span>
+<span class="sd">            # 1             Mississippi    28  34624    MSPCPI 2014-01-01</span>
+<span class="sd">            # 2                  Hawaii    15  45448    HIPCPI 2014-01-01</span>
+<span class="sd">            # 3                Kentucky    21  37226    KYPCPI 2014-01-01</span>
+<span class="sd">            # ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="k">if</span> <span class="n">frequency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">frequency</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">enums</span><span class="o">.</span><span class="n">Frequency</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Variable frequency is not one of the values: </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">enums</span><span class="o">.</span><span class="n">Frequency</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">aggregation_method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">enums</span><span class="o">.</span><span class="n">AggregationMethod</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Variable aggregation_method is not one of the values: </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">enums</span><span class="o">.</span><span class="n">AggregationMethod</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">transformation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">enums</span><span class="o">.</span><span class="n">Unit</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Variable transformation is not one of the values: </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">enums</span><span class="o">.</span><span class="n">Unit</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">years</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;/geofred/regional/data&quot;</span><span class="p">,</span>
+            <span class="n">list_key</span><span class="o">=</span><span class="s2">&quot;meta.data&quot;</span><span class="p">,</span>
+            <span class="n">series_group</span><span class="o">=</span><span class="n">series_group</span><span class="p">,</span>
+            <span class="n">region_type</span><span class="o">=</span><span class="n">region_type</span><span class="p">,</span>
+            <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">units</span><span class="p">,</span>
+            <span class="n">season</span><span class="o">=</span><span class="n">season</span><span class="p">,</span>
+            <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
+            <span class="n">frequency</span><span class="o">=</span><span class="n">frequency</span><span class="p">,</span>
+            <span class="n">transformation</span><span class="o">=</span><span class="n">transformation</span><span class="p">,</span>
+            <span class="n">aggregation_method</span><span class="o">=</span><span class="n">aggregation_method</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">years</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_years</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EMPTY_VALUE</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                <span class="s2">&quot;series_id&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="nb">int</span>
+            <span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_add_years</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        transform dict indexed by year from:</span>
+
+<span class="sd">        .. code-block:: json </span>
+
+<span class="sd">           {</span>
+<span class="sd">             &quot;2020-01-01&quot;: [</span>
+<span class="sd">               {</span>
+<span class="sd">                 &quot;region&quot;: &quot;Alabama&quot;,</span>
+<span class="sd">                 &quot;code&quot;: &quot;01&quot;,</span>
+<span class="sd">                 &quot;value&quot;: &quot;46479&quot;,</span>
+<span class="sd">                 &quot;series_id&quot;: &quot;ALPCPI&quot;</span>
+<span class="sd">               },</span>
+<span class="sd">             ]</span>
+<span class="sd">           }</span>
+
+<span class="sd">        to</span>
+
+<span class="sd">        .. code-block:: json </span>
+
+<span class="sd">            [</span>
+<span class="sd">              {</span>
+<span class="sd">                &quot;region&quot;: &quot;Alabama&quot;,</span>
+<span class="sd">                &quot;code&quot;: &quot;01&quot;,</span>
+<span class="sd">                &quot;value&quot;: &quot;46479&quot;,</span>
+<span class="sd">                &quot;series_id&quot;: &quot;ALPCPI&quot;,</span>
+<span class="sd">                &quot;year&quot;: &quot;2020-01-01&quot;</span>
+<span class="sd">              },</span>
+<span class="sd">            ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+        <span class="k">for</span> <span class="n">year</span><span class="p">,</span> <span class="n">rows</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">row</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">year</span>
+                <span class="k">yield</span> <span class="n">row</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Tomas Koutek.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

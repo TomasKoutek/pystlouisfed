@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enums &mdash; pystlouisfed 3.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models" href="models.html" />
+    <link rel="prev" title="Clients" href="client.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pystlouisfed
+          </a>
+              <div class="version">
+                3.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client.html">Clients</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Enums</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.AggregationMethod"><code class="docutils literal notranslate"><span class="pre">AggregationMethod</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.average"><code class="docutils literal notranslate"><span class="pre">AggregationMethod.average</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.avg"><code class="docutils literal notranslate"><span class="pre">AggregationMethod.avg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.end_of_period"><code class="docutils literal notranslate"><span class="pre">AggregationMethod.end_of_period</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.eop"><code class="docutils literal notranslate"><span class="pre">AggregationMethod.eop</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.sum"><code class="docutils literal notranslate"><span class="pre">AggregationMethod.sum</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.FilterValue"><code class="docutils literal notranslate"><span class="pre">FilterValue</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.FilterValue.all"><code class="docutils literal notranslate"><span class="pre">FilterValue.all</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.FilterValue.macro"><code class="docutils literal notranslate"><span class="pre">FilterValue.macro</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.FilterValue.regional"><code class="docutils literal notranslate"><span class="pre">FilterValue.regional</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.FilterVariable"><code class="docutils literal notranslate"><span class="pre">FilterVariable</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.FilterVariable.frequency"><code class="docutils literal notranslate"><span class="pre">FilterVariable.frequency</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.FilterVariable.seasonal_adjustment"><code class="docutils literal notranslate"><span class="pre">FilterVariable.seasonal_adjustment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.FilterVariable.units"><code class="docutils literal notranslate"><span class="pre">FilterVariable.units</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.Frequency"><code class="docutils literal notranslate"><span class="pre">Frequency</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.anual"><code class="docutils literal notranslate"><span class="pre">Frequency.anual</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.biweekly"><code class="docutils literal notranslate"><span class="pre">Frequency.biweekly</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.biweekly_ending_monday"><code class="docutils literal notranslate"><span class="pre">Frequency.biweekly_ending_monday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.biweekly_ending_wednesday"><code class="docutils literal notranslate"><span class="pre">Frequency.biweekly_ending_wednesday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.bwem"><code class="docutils literal notranslate"><span class="pre">Frequency.bwem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.bwew"><code class="docutils literal notranslate"><span class="pre">Frequency.bwew</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.daily"><code class="docutils literal notranslate"><span class="pre">Frequency.daily</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.monthly"><code class="docutils literal notranslate"><span class="pre">Frequency.monthly</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.querterly"><code class="docutils literal notranslate"><span class="pre">Frequency.querterly</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.semiannual"><code class="docutils literal notranslate"><span class="pre">Frequency.semiannual</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_friday"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly_ending_friday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_monday"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly_ending_monday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_saturday"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly_ending_saturday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_sunday"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly_ending_sunday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_thursday"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly_ending_thursday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_tuesday"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly_ending_tuesday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_wednesday"><code class="docutils literal notranslate"><span class="pre">Frequency.weekly_ending_wednesday</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.wef"><code class="docutils literal notranslate"><span class="pre">Frequency.wef</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.wem"><code class="docutils literal notranslate"><span class="pre">Frequency.wem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.wesa"><code class="docutils literal notranslate"><span class="pre">Frequency.wesa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.wesu"><code class="docutils literal notranslate"><span class="pre">Frequency.wesu</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.weth"><code class="docutils literal notranslate"><span class="pre">Frequency.weth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.wetu"><code class="docutils literal notranslate"><span class="pre">Frequency.wetu</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Frequency.wew"><code class="docutils literal notranslate"><span class="pre">Frequency.wew</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.OrderBy"><code class="docutils literal notranslate"><span class="pre">OrderBy</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.created"><code class="docutils literal notranslate"><span class="pre">OrderBy.created</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.frequency"><code class="docutils literal notranslate"><span class="pre">OrderBy.frequency</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.group_id"><code class="docutils literal notranslate"><span class="pre">OrderBy.group_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.group_popularity"><code class="docutils literal notranslate"><span class="pre">OrderBy.group_popularity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.last_updated"><code class="docutils literal notranslate"><span class="pre">OrderBy.last_updated</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.name"><code class="docutils literal notranslate"><span class="pre">OrderBy.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.observation_end"><code class="docutils literal notranslate"><span class="pre">OrderBy.observation_end</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.observation_start"><code class="docutils literal notranslate"><span class="pre">OrderBy.observation_start</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.popularity"><code class="docutils literal notranslate"><span class="pre">OrderBy.popularity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.press_release"><code class="docutils literal notranslate"><span class="pre">OrderBy.press_release</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.realtime_end"><code class="docutils literal notranslate"><span class="pre">OrderBy.realtime_end</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.realtime_start"><code class="docutils literal notranslate"><span class="pre">OrderBy.realtime_start</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.release_date"><code class="docutils literal notranslate"><span class="pre">OrderBy.release_date</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.release_id"><code class="docutils literal notranslate"><span class="pre">OrderBy.release_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.release_name"><code class="docutils literal notranslate"><span class="pre">OrderBy.release_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.search_rank"><code class="docutils literal notranslate"><span class="pre">OrderBy.search_rank</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.seasonal_adjustment"><code class="docutils literal notranslate"><span class="pre">OrderBy.seasonal_adjustment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.series_count"><code class="docutils literal notranslate"><span class="pre">OrderBy.series_count</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.series_id"><code class="docutils literal notranslate"><span class="pre">OrderBy.series_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.source_id"><code class="docutils literal notranslate"><span class="pre">OrderBy.source_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.title"><code class="docutils literal notranslate"><span class="pre">OrderBy.title</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OrderBy.units"><code class="docutils literal notranslate"><span class="pre">OrderBy.units</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.OutputType"><code class="docutils literal notranslate"><span class="pre">OutputType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OutputType.all"><code class="docutils literal notranslate"><span class="pre">OutputType.all</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OutputType.initial_release_only"><code class="docutils literal notranslate"><span class="pre">OutputType.initial_release_only</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OutputType.new_and_revised"><code class="docutils literal notranslate"><span class="pre">OutputType.new_and_revised</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.OutputType.realtime_period"><code class="docutils literal notranslate"><span class="pre">OutputType.realtime_period</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.RegionType"><code class="docutils literal notranslate"><span class="pre">RegionType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.bea"><code class="docutils literal notranslate"><span class="pre">RegionType.bea</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.censusdivision"><code class="docutils literal notranslate"><span class="pre">RegionType.censusdivision</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.censusregion"><code class="docutils literal notranslate"><span class="pre">RegionType.censusregion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.country"><code class="docutils literal notranslate"><span class="pre">RegionType.country</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.county"><code class="docutils literal notranslate"><span class="pre">RegionType.county</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.frb"><code class="docutils literal notranslate"><span class="pre">RegionType.frb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.msa"><code class="docutils literal notranslate"><span class="pre">RegionType.msa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.necta"><code class="docutils literal notranslate"><span class="pre">RegionType.necta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.RegionType.state"><code class="docutils literal notranslate"><span class="pre">RegionType.state</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.SearchType"><code class="docutils literal notranslate"><span class="pre">SearchType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.SearchType.full_text"><code class="docutils literal notranslate"><span class="pre">SearchType.full_text</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.SearchType.series_id"><code class="docutils literal notranslate"><span class="pre">SearchType.series_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.Seasonality"><code class="docutils literal notranslate"><span class="pre">Seasonality</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Seasonality.not_seasonally_adjusted"><code class="docutils literal notranslate"><span class="pre">Seasonality.not_seasonally_adjusted</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Seasonality.nsa"><code class="docutils literal notranslate"><span class="pre">Seasonality.nsa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Seasonality.sa"><code class="docutils literal notranslate"><span class="pre">Seasonality.sa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Seasonality.seasonally_adjusted"><code class="docutils literal notranslate"><span class="pre">Seasonality.seasonally_adjusted</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted"><code class="docutils literal notranslate"><span class="pre">Seasonality.smoothed_seasonally_adjusted</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Seasonality.ssa"><code class="docutils literal notranslate"><span class="pre">Seasonality.ssa</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.ShapeType"><code class="docutils literal notranslate"><span class="pre">ShapeType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.bea"><code class="docutils literal notranslate"><span class="pre">ShapeType.bea</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.censusdivision"><code class="docutils literal notranslate"><span class="pre">ShapeType.censusdivision</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.censusregion"><code class="docutils literal notranslate"><span class="pre">ShapeType.censusregion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.country"><code class="docutils literal notranslate"><span class="pre">ShapeType.country</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.county"><code class="docutils literal notranslate"><span class="pre">ShapeType.county</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.frb"><code class="docutils literal notranslate"><span class="pre">ShapeType.frb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.msa"><code class="docutils literal notranslate"><span class="pre">ShapeType.msa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.necta"><code class="docutils literal notranslate"><span class="pre">ShapeType.necta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.ShapeType.state"><code class="docutils literal notranslate"><span class="pre">ShapeType.state</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.SortOrder"><code class="docutils literal notranslate"><span class="pre">SortOrder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.SortOrder.asc"><code class="docutils literal notranslate"><span class="pre">SortOrder.asc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.SortOrder.desc"><code class="docutils literal notranslate"><span class="pre">SortOrder.desc</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID"><code class="docutils literal notranslate"><span class="pre">TagGroupID</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.cc"><code class="docutils literal notranslate"><span class="pre">TagGroupID.cc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.citation_and_copyright"><code class="docutils literal notranslate"><span class="pre">TagGroupID.citation_and_copyright</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.freq"><code class="docutils literal notranslate"><span class="pre">TagGroupID.freq</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.frequency"><code class="docutils literal notranslate"><span class="pre">TagGroupID.frequency</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.gen"><code class="docutils literal notranslate"><span class="pre">TagGroupID.gen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.general_or_concept"><code class="docutils literal notranslate"><span class="pre">TagGroupID.general_or_concept</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geo"><code class="docutils literal notranslate"><span class="pre">TagGroupID.geo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geography"><code class="docutils literal notranslate"><span class="pre">TagGroupID.geography</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geography_type"><code class="docutils literal notranslate"><span class="pre">TagGroupID.geography_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geot"><code class="docutils literal notranslate"><span class="pre">TagGroupID.geot</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.release"><code class="docutils literal notranslate"><span class="pre">TagGroupID.release</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.rls"><code class="docutils literal notranslate"><span class="pre">TagGroupID.rls</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.seas"><code class="docutils literal notranslate"><span class="pre">TagGroupID.seas</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.seasonal_adjustment"><code class="docutils literal notranslate"><span class="pre">TagGroupID.seasonal_adjustment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.source"><code class="docutils literal notranslate"><span class="pre">TagGroupID.source</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.TagGroupID.src"><code class="docutils literal notranslate"><span class="pre">TagGroupID.src</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pystlouisfed.enums.Unit"><code class="docutils literal notranslate"><span class="pre">Unit</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.cca"><code class="docutils literal notranslate"><span class="pre">Unit.cca</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.cch"><code class="docutils literal notranslate"><span class="pre">Unit.cch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.ch1"><code class="docutils literal notranslate"><span class="pre">Unit.ch1</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.chg"><code class="docutils literal notranslate"><span class="pre">Unit.chg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.lin"><code class="docutils literal notranslate"><span class="pre">Unit.lin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.log"><code class="docutils literal notranslate"><span class="pre">Unit.log</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.pc1"><code class="docutils literal notranslate"><span class="pre">Unit.pc1</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.pca"><code class="docutils literal notranslate"><span class="pre">Unit.pca</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pystlouisfed.enums.Unit.pch"><code class="docutils literal notranslate"><span class="pre">Unit.pch</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strange.html">Strange things</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pystlouisfed</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Enums</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/enums.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pystlouisfed.enums">
+<span id="enums"></span><h1>Enums<a class="headerlink" href="#module-pystlouisfed.enums" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.AggregationMethod">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">AggregationMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#AggregationMethod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.AggregationMethod" title="Link to this definition"></a></dt>
+<dd><p>A key that indicates the aggregation method used for frequency aggregation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.AggregationMethod.average">
+<span class="sig-name descname"><span class="pre">average</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'avg'</span></em><a class="headerlink" href="#pystlouisfed.enums.AggregationMethod.average" title="Link to this definition"></a></dt>
+<dd><p>Average (same as <a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.avg" title="pystlouisfed.enums.AggregationMethod.avg"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.AggregationMethod.avg</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.AggregationMethod.avg">
+<span class="sig-name descname"><span class="pre">avg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'avg'</span></em><a class="headerlink" href="#pystlouisfed.enums.AggregationMethod.avg" title="Link to this definition"></a></dt>
+<dd><p>Average (same as <a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.average" title="pystlouisfed.enums.AggregationMethod.average"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.AggregationMethod.average</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.AggregationMethod.end_of_period">
+<span class="sig-name descname"><span class="pre">end_of_period</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'eop'</span></em><a class="headerlink" href="#pystlouisfed.enums.AggregationMethod.end_of_period" title="Link to this definition"></a></dt>
+<dd><p>End of Period (same as <a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.eop" title="pystlouisfed.enums.AggregationMethod.eop"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.AggregationMethod.eop</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.AggregationMethod.eop">
+<span class="sig-name descname"><span class="pre">eop</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'eop'</span></em><a class="headerlink" href="#pystlouisfed.enums.AggregationMethod.eop" title="Link to this definition"></a></dt>
+<dd><p>End of Period (same as <a class="reference internal" href="#pystlouisfed.enums.AggregationMethod.end_of_period" title="pystlouisfed.enums.AggregationMethod.end_of_period"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.AggregationMethod.end_of_period</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.AggregationMethod.sum">
+<span class="sig-name descname"><span class="pre">sum</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sum'</span></em><a class="headerlink" href="#pystlouisfed.enums.AggregationMethod.sum" title="Link to this definition"></a></dt>
+<dd><p>Sum</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterValue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">FilterValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#FilterValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.FilterValue" title="Link to this definition"></a></dt>
+<dd><p>The value of the filter_variable attribute to filter results by.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterValue.all">
+<span class="sig-name descname"><span class="pre">all</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all'</span></em><a class="headerlink" href="#pystlouisfed.enums.FilterValue.all" title="Link to this definition"></a></dt>
+<dd><p>All results.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterValue.macro">
+<span class="sig-name descname"><span class="pre">macro</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'macro'</span></em><a class="headerlink" href="#pystlouisfed.enums.FilterValue.macro" title="Link to this definition"></a></dt>
+<dd><p>Limits results to macroeconomic data series. 
+In general, these are series for entire countries that are not subregions of the United States.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterValue.regional">
+<span class="sig-name descname"><span class="pre">regional</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'regional'</span></em><a class="headerlink" href="#pystlouisfed.enums.FilterValue.regional" title="Link to this definition"></a></dt>
+<dd><p>Limits results to series for parts of the US; namely, series for US states, counties, and Metropolitan Statistical Areas (MSA).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterVariable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">FilterVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#FilterVariable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.FilterVariable" title="Link to this definition"></a></dt>
+<dd><p>The attribute to filter results by.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterVariable.frequency">
+<span class="sig-name descname"><span class="pre">frequency</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'frequency'</span></em><a class="headerlink" href="#pystlouisfed.enums.FilterVariable.frequency" title="Link to this definition"></a></dt>
+<dd><p>Filter by frequency</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterVariable.seasonal_adjustment">
+<span class="sig-name descname"><span class="pre">seasonal_adjustment</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'seasonal_adjustment'</span></em><a class="headerlink" href="#pystlouisfed.enums.FilterVariable.seasonal_adjustment" title="Link to this definition"></a></dt>
+<dd><p>Filter by seasonal adjustment</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.FilterVariable.units">
+<span class="sig-name descname"><span class="pre">units</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'units'</span></em><a class="headerlink" href="#pystlouisfed.enums.FilterVariable.units" title="Link to this definition"></a></dt>
+<dd><p>Filter by units</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">Frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#Frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.Frequency" title="Link to this definition"></a></dt>
+<dd><p>Parameter that indicates a lower frequency to aggregate values to.
+The FRED frequency aggregation feature converts higher frequency data series into lower frequency data series (e.g. converts a monthly data series into an annual data series).
+In FRED, the highest frequency data is daily, and the lowest frequency data is annual.
+There are 3 aggregation methods available - See <cite>AggregationMethod</cite>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.anual">
+<span class="sig-name descname"><span class="pre">anual</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'a'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.anual" title="Link to this definition"></a></dt>
+<dd><p>Annual</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.biweekly">
+<span class="sig-name descname"><span class="pre">biweekly</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bw'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.biweekly" title="Link to this definition"></a></dt>
+<dd><p>Biweekly</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.biweekly_ending_monday">
+<span class="sig-name descname"><span class="pre">biweekly_ending_monday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bwem'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.biweekly_ending_monday" title="Link to this definition"></a></dt>
+<dd><p>Biweekly Ending Monday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.bwem" title="pystlouisfed.enums.Frequency.bwem"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.bwem</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.biweekly_ending_wednesday">
+<span class="sig-name descname"><span class="pre">biweekly_ending_wednesday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bwew'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.biweekly_ending_wednesday" title="Link to this definition"></a></dt>
+<dd><p>Biweekly Ending Wednesday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.bwew" title="pystlouisfed.enums.Frequency.bwew"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.bwew</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.bwem">
+<span class="sig-name descname"><span class="pre">bwem</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bwem'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.bwem" title="Link to this definition"></a></dt>
+<dd><p>Biweekly Ending Monday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.biweekly_ending_monday" title="pystlouisfed.enums.Frequency.biweekly_ending_monday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.biweekly_ending_monday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.bwew">
+<span class="sig-name descname"><span class="pre">bwew</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bwew'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.bwew" title="Link to this definition"></a></dt>
+<dd><p>Biweekly Ending Wednesday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.biweekly_ending_wednesday" title="pystlouisfed.enums.Frequency.biweekly_ending_wednesday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.biweekly_ending_wednesday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.daily">
+<span class="sig-name descname"><span class="pre">daily</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'d'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.daily" title="Link to this definition"></a></dt>
+<dd><p>Daily</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.monthly">
+<span class="sig-name descname"><span class="pre">monthly</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'m'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.monthly" title="Link to this definition"></a></dt>
+<dd><p>Monthly</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.querterly">
+<span class="sig-name descname"><span class="pre">querterly</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'q'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.querterly" title="Link to this definition"></a></dt>
+<dd><p>Quarterly</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.semiannual">
+<span class="sig-name descname"><span class="pre">semiannual</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sa'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.semiannual" title="Link to this definition"></a></dt>
+<dd><p>Semiannual</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly">
+<span class="sig-name descname"><span class="pre">weekly</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'w'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly" title="Link to this definition"></a></dt>
+<dd><p>Weekly</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly_ending_friday">
+<span class="sig-name descname"><span class="pre">weekly_ending_friday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wef'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly_ending_friday" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Friday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.wef" title="pystlouisfed.enums.Frequency.wef"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.wef</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly_ending_monday">
+<span class="sig-name descname"><span class="pre">weekly_ending_monday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wem'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly_ending_monday" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Monday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.wem" title="pystlouisfed.enums.Frequency.wem"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.wem</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly_ending_saturday">
+<span class="sig-name descname"><span class="pre">weekly_ending_saturday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wesa'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly_ending_saturday" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Saturday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.wesa" title="pystlouisfed.enums.Frequency.wesa"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.wesa</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly_ending_sunday">
+<span class="sig-name descname"><span class="pre">weekly_ending_sunday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wesu'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly_ending_sunday" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Sunday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.wesu" title="pystlouisfed.enums.Frequency.wesu"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.wesu</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly_ending_thursday">
+<span class="sig-name descname"><span class="pre">weekly_ending_thursday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'weth'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly_ending_thursday" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Thursday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weth" title="pystlouisfed.enums.Frequency.weth"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weth</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly_ending_tuesday">
+<span class="sig-name descname"><span class="pre">weekly_ending_tuesday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wetu'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly_ending_tuesday" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Tuesday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.wetu" title="pystlouisfed.enums.Frequency.wetu"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.wetu</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weekly_ending_wednesday">
+<span class="sig-name descname"><span class="pre">weekly_ending_wednesday</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wew'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weekly_ending_wednesday" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Wednesday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.wew" title="pystlouisfed.enums.Frequency.wew"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.wew</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.wef">
+<span class="sig-name descname"><span class="pre">wef</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wef'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.wef" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Friday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_friday" title="pystlouisfed.enums.Frequency.weekly_ending_friday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weekly_ending_friday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.wem">
+<span class="sig-name descname"><span class="pre">wem</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wem'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.wem" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Monday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_monday" title="pystlouisfed.enums.Frequency.weekly_ending_monday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weekly_ending_monday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.wesa">
+<span class="sig-name descname"><span class="pre">wesa</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wesa'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.wesa" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Saturday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_saturday" title="pystlouisfed.enums.Frequency.weekly_ending_saturday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weekly_ending_saturday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.wesu">
+<span class="sig-name descname"><span class="pre">wesu</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wesu'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.wesu" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Sunday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_sunday" title="pystlouisfed.enums.Frequency.weekly_ending_sunday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weekly_ending_sunday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.weth">
+<span class="sig-name descname"><span class="pre">weth</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'weth'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.weth" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Thursday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_thursday" title="pystlouisfed.enums.Frequency.weekly_ending_thursday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weekly_ending_thursday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.wetu">
+<span class="sig-name descname"><span class="pre">wetu</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wetu'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.wetu" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Tuesday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_tuesday" title="pystlouisfed.enums.Frequency.weekly_ending_tuesday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weekly_ending_tuesday</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Frequency.wew">
+<span class="sig-name descname"><span class="pre">wew</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wew'</span></em><a class="headerlink" href="#pystlouisfed.enums.Frequency.wew" title="Link to this definition"></a></dt>
+<dd><p>Weekly Ending Wednesday (same as <a class="reference internal" href="#pystlouisfed.enums.Frequency.weekly_ending_wednesday" title="pystlouisfed.enums.Frequency.weekly_ending_wednesday"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Frequency.weekly_ending_wednesday</span></code></a>)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">OrderBy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#OrderBy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.OrderBy" title="Link to this definition"></a></dt>
+<dd><p>Order results by values of the specified attribute.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.created">
+<span class="sig-name descname"><span class="pre">created</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'created'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.created" title="Link to this definition"></a></dt>
+<dd><p>Order by created</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.frequency">
+<span class="sig-name descname"><span class="pre">frequency</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'frequency'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.frequency" title="Link to this definition"></a></dt>
+<dd><p>Order by frequency</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.group_id">
+<span class="sig-name descname"><span class="pre">group_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group_id'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.group_id" title="Link to this definition"></a></dt>
+<dd><p>Order by group id</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.group_popularity">
+<span class="sig-name descname"><span class="pre">group_popularity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'group_popularity'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.group_popularity" title="Link to this definition"></a></dt>
+<dd><p>Order by group popularity</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.last_updated">
+<span class="sig-name descname"><span class="pre">last_updated</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'last_updated'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.last_updated" title="Link to this definition"></a></dt>
+<dd><p>Order by last updated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'name'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.name" title="Link to this definition"></a></dt>
+<dd><p>Order by name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.observation_end">
+<span class="sig-name descname"><span class="pre">observation_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'observation_end'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.observation_end" title="Link to this definition"></a></dt>
+<dd><p>Order by observation end</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.observation_start">
+<span class="sig-name descname"><span class="pre">observation_start</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'observation_start'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.observation_start" title="Link to this definition"></a></dt>
+<dd><p>Order by observation start</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.popularity">
+<span class="sig-name descname"><span class="pre">popularity</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'popularity'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.popularity" title="Link to this definition"></a></dt>
+<dd><p>Order by popularity</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.press_release">
+<span class="sig-name descname"><span class="pre">press_release</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'press_release'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.press_release" title="Link to this definition"></a></dt>
+<dd><p>Order by press release</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.realtime_end">
+<span class="sig-name descname"><span class="pre">realtime_end</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'realtime_end'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.realtime_end" title="Link to this definition"></a></dt>
+<dd><p>Order by realtime end</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.realtime_start">
+<span class="sig-name descname"><span class="pre">realtime_start</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'realtime_start'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.realtime_start" title="Link to this definition"></a></dt>
+<dd><p>Order by realtime start</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.release_date">
+<span class="sig-name descname"><span class="pre">release_date</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'release_date'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.release_date" title="Link to this definition"></a></dt>
+<dd><p>Order by release date</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.release_id">
+<span class="sig-name descname"><span class="pre">release_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'release_id'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.release_id" title="Link to this definition"></a></dt>
+<dd><p>Order by release id</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.release_name">
+<span class="sig-name descname"><span class="pre">release_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'release_name'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.release_name" title="Link to this definition"></a></dt>
+<dd><p>Order by release name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.search_rank">
+<span class="sig-name descname"><span class="pre">search_rank</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'search_rank'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.search_rank" title="Link to this definition"></a></dt>
+<dd><p>Order by search rank</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.seasonal_adjustment">
+<span class="sig-name descname"><span class="pre">seasonal_adjustment</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'seasonal_adjustment'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.seasonal_adjustment" title="Link to this definition"></a></dt>
+<dd><p>Order by seasonal adjustment</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.series_count">
+<span class="sig-name descname"><span class="pre">series_count</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'series_count'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.series_count" title="Link to this definition"></a></dt>
+<dd><p>Order by series count</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.series_id">
+<span class="sig-name descname"><span class="pre">series_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'series_id'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.series_id" title="Link to this definition"></a></dt>
+<dd><p>Order by series id</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.source_id">
+<span class="sig-name descname"><span class="pre">source_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'source_id'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.source_id" title="Link to this definition"></a></dt>
+<dd><p>Order by source id</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'title'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.title" title="Link to this definition"></a></dt>
+<dd><p>Order by title</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OrderBy.units">
+<span class="sig-name descname"><span class="pre">units</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'units'</span></em><a class="headerlink" href="#pystlouisfed.enums.OrderBy.units" title="Link to this definition"></a></dt>
+<dd><p>Order by units</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OutputType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">OutputType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#OutputType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.OutputType" title="Link to this definition"></a></dt>
+<dd><p>Output type.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OutputType.all">
+<span class="sig-name descname"><span class="pre">all</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pystlouisfed.enums.OutputType.all" title="Link to this definition"></a></dt>
+<dd><p>Observations by Vintage Date - All Observations</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OutputType.initial_release_only">
+<span class="sig-name descname"><span class="pre">initial_release_only</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#pystlouisfed.enums.OutputType.initial_release_only" title="Link to this definition"></a></dt>
+<dd><p>Observations - Initial Release Only</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OutputType.new_and_revised">
+<span class="sig-name descname"><span class="pre">new_and_revised</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pystlouisfed.enums.OutputType.new_and_revised" title="Link to this definition"></a></dt>
+<dd><p>Observations by Vintage Date - New and Revised Observations Only</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.OutputType.realtime_period">
+<span class="sig-name descname"><span class="pre">realtime_period</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pystlouisfed.enums.OutputType.realtime_period" title="Link to this definition"></a></dt>
+<dd><p>Observations by Real-Time Period</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">RegionType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#RegionType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.RegionType" title="Link to this definition"></a></dt>
+<dd><p>The region you want want to pull data for.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.bea">
+<span class="sig-name descname"><span class="pre">bea</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bea'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.bea" title="Link to this definition"></a></dt>
+<dd><p>Bureau of Economic Anaylis Region</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.censusdivision">
+<span class="sig-name descname"><span class="pre">censusdivision</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'censusdivision'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.censusdivision" title="Link to this definition"></a></dt>
+<dd><p>US Census Divisons</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.censusregion">
+<span class="sig-name descname"><span class="pre">censusregion</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'censusregion'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.censusregion" title="Link to this definition"></a></dt>
+<dd><p>US Census Regions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.country">
+<span class="sig-name descname"><span class="pre">country</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'country'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.country" title="Link to this definition"></a></dt>
+<dd><p>Country</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.county">
+<span class="sig-name descname"><span class="pre">county</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'county'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.county" title="Link to this definition"></a></dt>
+<dd><p>USA Counties</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.frb">
+<span class="sig-name descname"><span class="pre">frb</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'frb'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.frb" title="Link to this definition"></a></dt>
+<dd><p>Federal Reserve Bank Districts</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.msa">
+<span class="sig-name descname"><span class="pre">msa</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'msa'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.msa" title="Link to this definition"></a></dt>
+<dd><p>Metropolitan Statistical Area</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.necta">
+<span class="sig-name descname"><span class="pre">necta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'necta'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.necta" title="Link to this definition"></a></dt>
+<dd><p>New England City and Town Area</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.RegionType.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'state'</span></em><a class="headerlink" href="#pystlouisfed.enums.RegionType.state" title="Link to this definition"></a></dt>
+<dd><p>State</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.SearchType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">SearchType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#SearchType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.SearchType" title="Link to this definition"></a></dt>
+<dd><p>Determines the type of search to perform.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.SearchType.full_text">
+<span class="sig-name descname"><span class="pre">full_text</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'full_text'</span></em><a class="headerlink" href="#pystlouisfed.enums.SearchType.full_text" title="Link to this definition"></a></dt>
+<dd><p>“full_text” searches series attributes title, units, frequency, and tags by parsing words into stems. 
+This makes it possible for searches like “Industry” to match series containing related words such as “Industries”. 
+Of course, you can search for multiple words like “money” and “stock”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.SearchType.series_id">
+<span class="sig-name descname"><span class="pre">series_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'series_id'</span></em><a class="headerlink" href="#pystlouisfed.enums.SearchType.series_id" title="Link to this definition"></a></dt>
+<dd><p>“series_id” performs a substring search on series IDs. 
+Searching for “ex” will find series containing “ex” anywhere in a series ID. 
+“*” can be used to anchor searches and match 0 or more of any character. 
+Searching for “ex*” will find series containing “ex” at the beginning of a series ID. 
+Searching for “<em>ex” will find series containing “ex” at the end of a series ID. 
+It”s also possible to put an “</em>” in the middle of a string. 
+“m*sl” finds any series starting with “m” and ending with “sl”.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Seasonality">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">Seasonality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#Seasonality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.Seasonality" title="Link to this definition"></a></dt>
+<dd><p>The seasonality of the series group.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Seasonality.not_seasonally_adjusted">
+<span class="sig-name descname"><span class="pre">not_seasonally_adjusted</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NSA'</span></em><a class="headerlink" href="#pystlouisfed.enums.Seasonality.not_seasonally_adjusted" title="Link to this definition"></a></dt>
+<dd><p>Not Seasonally Adjusted (same as <a class="reference internal" href="#pystlouisfed.enums.Seasonality.nsa" title="pystlouisfed.enums.Seasonality.nsa"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Seasonality.nsa</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Seasonality.nsa">
+<span class="sig-name descname"><span class="pre">nsa</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NSA'</span></em><a class="headerlink" href="#pystlouisfed.enums.Seasonality.nsa" title="Link to this definition"></a></dt>
+<dd><p>Not Seasonally Adjusted (same as <a class="reference internal" href="#pystlouisfed.enums.Seasonality.not_seasonally_adjusted" title="pystlouisfed.enums.Seasonality.not_seasonally_adjusted"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Seasonality.not_seasonally_adjusted</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Seasonality.sa">
+<span class="sig-name descname"><span class="pre">sa</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SA'</span></em><a class="headerlink" href="#pystlouisfed.enums.Seasonality.sa" title="Link to this definition"></a></dt>
+<dd><p>Seasonally Adjusted (same as <a class="reference internal" href="#pystlouisfed.enums.Seasonality.seasonally_adjusted" title="pystlouisfed.enums.Seasonality.seasonally_adjusted"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Seasonality.seasonally_adjusted</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Seasonality.seasonally_adjusted">
+<span class="sig-name descname"><span class="pre">seasonally_adjusted</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SA'</span></em><a class="headerlink" href="#pystlouisfed.enums.Seasonality.seasonally_adjusted" title="Link to this definition"></a></dt>
+<dd><p>Seasonally Adjusted (same as <a class="reference internal" href="#pystlouisfed.enums.Seasonality.sa" title="pystlouisfed.enums.Seasonality.sa"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Seasonality.sa</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted">
+<span class="sig-name descname"><span class="pre">smoothed_seasonally_adjusted</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SSA'</span></em><a class="headerlink" href="#pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted" title="Link to this definition"></a></dt>
+<dd><p>Smoothed Seasonally Adjusted (same as <a class="reference internal" href="#pystlouisfed.enums.Seasonality.ssa" title="pystlouisfed.enums.Seasonality.ssa"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Seasonality.ssa</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Seasonality.ssa">
+<span class="sig-name descname"><span class="pre">ssa</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SSA'</span></em><a class="headerlink" href="#pystlouisfed.enums.Seasonality.ssa" title="Link to this definition"></a></dt>
+<dd><p>Smoothed Seasonally Adjusted (same as <a class="reference internal" href="#pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted" title="pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted</span></code></a>)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">ShapeType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#ShapeType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.ShapeType" title="Link to this definition"></a></dt>
+<dd><p>The type of shape you want to pull Well-known text (WKT) data for.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.bea">
+<span class="sig-name descname"><span class="pre">bea</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bea'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.bea" title="Link to this definition"></a></dt>
+<dd><p>Bureau of Economic Anaylis Region</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.censusdivision">
+<span class="sig-name descname"><span class="pre">censusdivision</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'censusdivision'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.censusdivision" title="Link to this definition"></a></dt>
+<dd><p>US Census Divisons</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.censusregion">
+<span class="sig-name descname"><span class="pre">censusregion</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'censusregion'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.censusregion" title="Link to this definition"></a></dt>
+<dd><p>US Census Regions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.country">
+<span class="sig-name descname"><span class="pre">country</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'country'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.country" title="Link to this definition"></a></dt>
+<dd><p>Country</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.county">
+<span class="sig-name descname"><span class="pre">county</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'county'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.county" title="Link to this definition"></a></dt>
+<dd><p>USA Counties</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.frb">
+<span class="sig-name descname"><span class="pre">frb</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'frb'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.frb" title="Link to this definition"></a></dt>
+<dd><p>Federal Reserve Bank Districts</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.msa">
+<span class="sig-name descname"><span class="pre">msa</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'msa'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.msa" title="Link to this definition"></a></dt>
+<dd><p>Metropolitan Statistical Area</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.necta">
+<span class="sig-name descname"><span class="pre">necta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'necta'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.necta" title="Link to this definition"></a></dt>
+<dd><p>New England City and Town Area</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.ShapeType.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'state'</span></em><a class="headerlink" href="#pystlouisfed.enums.ShapeType.state" title="Link to this definition"></a></dt>
+<dd><p>State</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.SortOrder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">SortOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#SortOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.SortOrder" title="Link to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.SortOrder.asc">
+<span class="sig-name descname"><span class="pre">asc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'asc'</span></em><a class="headerlink" href="#pystlouisfed.enums.SortOrder.asc" title="Link to this definition"></a></dt>
+<dd><p>Ascending</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.SortOrder.desc">
+<span class="sig-name descname"><span class="pre">desc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'desc'</span></em><a class="headerlink" href="#pystlouisfed.enums.SortOrder.desc" title="Link to this definition"></a></dt>
+<dd><p>Descending</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">TagGroupID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#TagGroupID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.TagGroupID" title="Link to this definition"></a></dt>
+<dd><p>A tag group id to filter tags by type.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.cc">
+<span class="sig-name descname"><span class="pre">cc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cc'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.cc" title="Link to this definition"></a></dt>
+<dd><p>Citation &amp; Copyright (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.citation_and_copyright" title="pystlouisfed.enums.TagGroupID.citation_and_copyright"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.citation_and_copyright</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.citation_and_copyright">
+<span class="sig-name descname"><span class="pre">citation_and_copyright</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cc'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.citation_and_copyright" title="Link to this definition"></a></dt>
+<dd><p>Citation &amp; Copyright (same as <cite>pystlouisfed.enums.TagGroupID.cc</cite>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.freq">
+<span class="sig-name descname"><span class="pre">freq</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'freq'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.freq" title="Link to this definition"></a></dt>
+<dd><p>Frequency (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.frequency" title="pystlouisfed.enums.TagGroupID.frequency"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.frequency</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.frequency">
+<span class="sig-name descname"><span class="pre">frequency</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'freq'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.frequency" title="Link to this definition"></a></dt>
+<dd><p>Frequency (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.freq" title="pystlouisfed.enums.TagGroupID.freq"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.freq</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.gen">
+<span class="sig-name descname"><span class="pre">gen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'gen'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.gen" title="Link to this definition"></a></dt>
+<dd><p>General or Concept (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.general_or_concept" title="pystlouisfed.enums.TagGroupID.general_or_concept"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.general_or_concept</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.general_or_concept">
+<span class="sig-name descname"><span class="pre">general_or_concept</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'gen'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.general_or_concept" title="Link to this definition"></a></dt>
+<dd><p>General or Concept (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.gen" title="pystlouisfed.enums.TagGroupID.gen"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.gen</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.geo">
+<span class="sig-name descname"><span class="pre">geo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'geo'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.geo" title="Link to this definition"></a></dt>
+<dd><p>Geography (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geography" title="pystlouisfed.enums.TagGroupID.geography"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.geography</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.geography">
+<span class="sig-name descname"><span class="pre">geography</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'geo'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.geography" title="Link to this definition"></a></dt>
+<dd><p>Geography (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geo" title="pystlouisfed.enums.TagGroupID.geo"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.geo</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.geography_type">
+<span class="sig-name descname"><span class="pre">geography_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'geot'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.geography_type" title="Link to this definition"></a></dt>
+<dd><p>Geography Type (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geot" title="pystlouisfed.enums.TagGroupID.geot"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.geot</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.geot">
+<span class="sig-name descname"><span class="pre">geot</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'geot'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.geot" title="Link to this definition"></a></dt>
+<dd><p>Geography Type (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.geography_type" title="pystlouisfed.enums.TagGroupID.geography_type"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.geography_type</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.release">
+<span class="sig-name descname"><span class="pre">release</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rls'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.release" title="Link to this definition"></a></dt>
+<dd><p>Release (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.rls" title="pystlouisfed.enums.TagGroupID.rls"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.rls</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.rls">
+<span class="sig-name descname"><span class="pre">rls</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rls'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.rls" title="Link to this definition"></a></dt>
+<dd><p>Release (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.release" title="pystlouisfed.enums.TagGroupID.release"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.release</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.seas">
+<span class="sig-name descname"><span class="pre">seas</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'seas'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.seas" title="Link to this definition"></a></dt>
+<dd><p>Seasonal Adjustment (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.seasonal_adjustment" title="pystlouisfed.enums.TagGroupID.seasonal_adjustment"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.seasonal_adjustment</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.seasonal_adjustment">
+<span class="sig-name descname"><span class="pre">seasonal_adjustment</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'seas'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.seasonal_adjustment" title="Link to this definition"></a></dt>
+<dd><p>Seasonal Adjustment (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.seas" title="pystlouisfed.enums.TagGroupID.seas"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.seas</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.source">
+<span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'src'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.source" title="Link to this definition"></a></dt>
+<dd><p>Source (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.src" title="pystlouisfed.enums.TagGroupID.src"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.src</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.TagGroupID.src">
+<span class="sig-name descname"><span class="pre">src</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'src'</span></em><a class="headerlink" href="#pystlouisfed.enums.TagGroupID.src" title="Link to this definition"></a></dt>
+<dd><p>Source (same as <a class="reference internal" href="#pystlouisfed.enums.TagGroupID.source" title="pystlouisfed.enums.TagGroupID.source"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystlouisfed.enums.TagGroupID.source</span></code></a>)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystlouisfed.enums.</span></span><span class="sig-name descname"><span class="pre">Unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystlouisfed/enums.html#Unit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystlouisfed.enums.Unit" title="Link to this definition"></a></dt>
+<dd><p>A key that indicates a data value transformation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.cca">
+<span class="sig-name descname"><span class="pre">cca</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cca'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.cca" title="Link to this definition"></a></dt>
+<dd><p>Continuously Compounded Annual Rate of Change</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.cch">
+<span class="sig-name descname"><span class="pre">cch</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cch'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.cch" title="Link to this definition"></a></dt>
+<dd><p>Continuously Compounded Rate of Change</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.ch1">
+<span class="sig-name descname"><span class="pre">ch1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ch1'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.ch1" title="Link to this definition"></a></dt>
+<dd><p>Change from Year Ago</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.chg">
+<span class="sig-name descname"><span class="pre">chg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'chg'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.chg" title="Link to this definition"></a></dt>
+<dd><p>Change</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.lin">
+<span class="sig-name descname"><span class="pre">lin</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lin'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.lin" title="Link to this definition"></a></dt>
+<dd><p>Levels (No transformation)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.log">
+<span class="sig-name descname"><span class="pre">log</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'log'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.log" title="Link to this definition"></a></dt>
+<dd><p>Natural Log</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.pc1">
+<span class="sig-name descname"><span class="pre">pc1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pc1'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.pc1" title="Link to this definition"></a></dt>
+<dd><p>Percent Change from Year Ago</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.pca">
+<span class="sig-name descname"><span class="pre">pca</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pca'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.pca" title="Link to this definition"></a></dt>
+<dd><p>Compounded Annual Rate of Change</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pystlouisfed.enums.Unit.pch">
+<span class="sig-name descname"><span class="pre">pch</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pch'</span></em><a class="headerlink" href="#pystlouisfed.enums.Unit.pch" title="Link to this definition"></a></dt>
+<dd><p>Percent Change</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="client.html" class="btn btn-neutral float-left" title="Clients" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="models.html" class="btn btn-neutral float-right" title="Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Tomas Koutek.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

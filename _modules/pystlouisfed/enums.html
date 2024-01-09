@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pystlouisfed.enums &mdash; pystlouisfed 3.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pystlouisfed
+          </a>
+              <div class="version">
+                3.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../client.html">Clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enums.html">Enums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../strange.html">Strange things</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pystlouisfed</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pystlouisfed.enums</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pystlouisfed.enums</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+
+<div class="viewcode-block" id="SortOrder">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.SortOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">SortOrder</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;desc&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Descending</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">asc</span> <span class="o">=</span> <span class="s2">&quot;asc&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ascending </span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="TagGroupID">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.TagGroupID">[docs]</a>
+<span class="k">class</span> <span class="nc">TagGroupID</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A tag group id to filter tags by type.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">freq</span> <span class="o">=</span> <span class="s2">&quot;freq&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Frequency (same as :py:class:`pystlouisfed.enums.TagGroupID.frequency`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="s2">&quot;freq&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Frequency (same as :py:class:`pystlouisfed.enums.TagGroupID.freq`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gen</span> <span class="o">=</span> <span class="s2">&quot;gen&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    General or Concept (same as :py:class:`pystlouisfed.enums.TagGroupID.general_or_concept`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">general_or_concept</span> <span class="o">=</span> <span class="s2">&quot;gen&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    General or Concept (same as :py:class:`pystlouisfed.enums.TagGroupID.gen`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">geo</span> <span class="o">=</span> <span class="s2">&quot;geo&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Geography (same as :py:class:`pystlouisfed.enums.TagGroupID.geography`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">geography</span> <span class="o">=</span> <span class="s2">&quot;geo&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Geography (same as :py:class:`pystlouisfed.enums.TagGroupID.geo`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">geot</span> <span class="o">=</span> <span class="s2">&quot;geot&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Geography Type (same as :py:class:`pystlouisfed.enums.TagGroupID.geography_type`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">geography_type</span> <span class="o">=</span> <span class="s2">&quot;geot&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Geography Type (same as :py:class:`pystlouisfed.enums.TagGroupID.geot`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rls</span> <span class="o">=</span> <span class="s2">&quot;rls&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Release (same as :py:class:`pystlouisfed.enums.TagGroupID.release`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">release</span> <span class="o">=</span> <span class="s2">&quot;rls&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Release (same as :py:class:`pystlouisfed.enums.TagGroupID.rls`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seas</span> <span class="o">=</span> <span class="s2">&quot;seas&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Seasonal Adjustment (same as :py:class:`pystlouisfed.enums.TagGroupID.seasonal_adjustment`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seasonal_adjustment</span> <span class="o">=</span> <span class="s2">&quot;seas&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Seasonal Adjustment (same as :py:class:`pystlouisfed.enums.TagGroupID.seas`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="s2">&quot;src&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Source (same as :py:class:`pystlouisfed.enums.TagGroupID.source`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;src&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Source (same as :py:class:`pystlouisfed.enums.TagGroupID.src`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cc</span> <span class="o">=</span> <span class="s2">&quot;cc&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Citation &amp; Copyright (same as :py:class:`pystlouisfed.enums.TagGroupID.citation_and_copyright`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">citation_and_copyright</span> <span class="o">=</span> <span class="s2">&quot;cc&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Citation &amp; Copyright (same as `pystlouisfed.enums.TagGroupID.cc`)</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="FilterVariable">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.FilterVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">FilterVariable</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The attribute to filter results by.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="s2">&quot;frequency&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter by frequency</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="s2">&quot;units&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter by units</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seasonal_adjustment</span> <span class="o">=</span> <span class="s2">&quot;seasonal_adjustment&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter by seasonal adjustment</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Seasonality">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.Seasonality">[docs]</a>
+<span class="k">class</span> <span class="nc">Seasonality</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The seasonality of the series group.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sa</span> <span class="o">=</span> <span class="s2">&quot;SA&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.seasonally_adjusted`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seasonally_adjusted</span> <span class="o">=</span> <span class="s2">&quot;SA&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.sa`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nsa</span> <span class="o">=</span> <span class="s2">&quot;NSA&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Not Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.not_seasonally_adjusted`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">not_seasonally_adjusted</span> <span class="o">=</span> <span class="s2">&quot;NSA&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Not Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.nsa`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ssa</span> <span class="o">=</span> <span class="s2">&quot;SSA&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Smoothed Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">smoothed_seasonally_adjusted</span> <span class="o">=</span> <span class="s2">&quot;SSA&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Smoothed Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.ssa`)</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="FilterValue">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.FilterValue">[docs]</a>
+<span class="k">class</span> <span class="nc">FilterValue</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The value of the filter_variable attribute to filter results by.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">macro</span> <span class="o">=</span> <span class="s2">&quot;macro&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Limits results to macroeconomic data series. </span>
+<span class="sd">    In general, these are series for entire countries that are not subregions of the United States. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">regional</span> <span class="o">=</span> <span class="s2">&quot;regional&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Limits results to series for parts of the US; namely, series for US states, counties, and Metropolitan Statistical Areas (MSA).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">all</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    All results.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="OrderBy">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.OrderBy">[docs]</a>
+<span class="k">class</span> <span class="nc">OrderBy</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order results by values of the specified attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">series_id</span> <span class="o">=</span> <span class="s2">&quot;series_id&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by series id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">series_count</span> <span class="o">=</span> <span class="s2">&quot;series_count&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by series count</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;title&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by title</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="s2">&quot;units&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by units</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="s2">&quot;frequency&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by frequency</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seasonal_adjustment</span> <span class="o">=</span> <span class="s2">&quot;seasonal_adjustment&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by seasonal adjustment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">realtime_start</span> <span class="o">=</span> <span class="s2">&quot;realtime_start&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by realtime start</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">realtime_end</span> <span class="o">=</span> <span class="s2">&quot;realtime_end&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by realtime end</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">last_updated</span> <span class="o">=</span> <span class="s2">&quot;last_updated&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by last updated</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">observation_start</span> <span class="o">=</span> <span class="s2">&quot;observation_start&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by observation start</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">observation_end</span> <span class="o">=</span> <span class="s2">&quot;observation_end&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by observation end</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">popularity</span> <span class="o">=</span> <span class="s2">&quot;popularity&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by popularity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">group_popularity</span> <span class="o">=</span> <span class="s2">&quot;group_popularity&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by group popularity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">created</span> <span class="o">=</span> <span class="s2">&quot;created&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by created</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">group_id</span> <span class="o">=</span> <span class="s2">&quot;group_id&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by group id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">search_rank</span> <span class="o">=</span> <span class="s2">&quot;search_rank&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by search rank</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">release_id</span> <span class="o">=</span> <span class="s2">&quot;release_id&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by release id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">source_id</span> <span class="o">=</span> <span class="s2">&quot;source_id&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by source id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">press_release</span> <span class="o">=</span> <span class="s2">&quot;press_release&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by press release</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">release_date</span> <span class="o">=</span> <span class="s2">&quot;release_date&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by release date</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">release_name</span> <span class="o">=</span> <span class="s2">&quot;release_name&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Order by release name</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Unit">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.Unit">[docs]</a>
+<span class="k">class</span> <span class="nc">Unit</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A key that indicates a data value transformation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lin</span> <span class="o">=</span> <span class="s2">&quot;lin&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Levels (No transformation)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">chg</span> <span class="o">=</span> <span class="s2">&quot;chg&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Change</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ch1</span> <span class="o">=</span> <span class="s2">&quot;ch1&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Change from Year Ago</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pch</span> <span class="o">=</span> <span class="s2">&quot;pch&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Percent Change</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pc1</span> <span class="o">=</span> <span class="s2">&quot;pc1&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Percent Change from Year Ago</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="s2">&quot;pca&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compounded Annual Rate of Change</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cch</span> <span class="o">=</span> <span class="s2">&quot;cch&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Continuously Compounded Rate of Change</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cca</span> <span class="o">=</span> <span class="s2">&quot;cca&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Continuously Compounded Annual Rate of Change</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="s2">&quot;log&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Natural Log</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Frequency">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.Frequency">[docs]</a>
+<span class="k">class</span> <span class="nc">Frequency</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameter that indicates a lower frequency to aggregate values to.</span>
+<span class="sd">    The FRED frequency aggregation feature converts higher frequency data series into lower frequency data series (e.g. converts a monthly data series into an annual data series).</span>
+<span class="sd">    In FRED, the highest frequency data is daily, and the lowest frequency data is annual.</span>
+<span class="sd">    There are 3 aggregation methods available - See `AggregationMethod`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ## Frequencies without period descriptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">daily</span> <span class="o">=</span> <span class="s2">&quot;d&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Daily</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly</span> <span class="o">=</span> <span class="s2">&quot;w&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">biweekly</span> <span class="o">=</span> <span class="s2">&quot;bw&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Biweekly</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">monthly</span> <span class="o">=</span> <span class="s2">&quot;m&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Monthly</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">querterly</span> <span class="o">=</span> <span class="s2">&quot;q&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Quarterly</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">semiannual</span> <span class="o">=</span> <span class="s2">&quot;sa&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Semiannual</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">anual</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Annual</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ## Frequencies with period descriptions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wef</span> <span class="o">=</span> <span class="s2">&quot;wef&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Friday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_friday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly_ending_friday</span> <span class="o">=</span> <span class="s2">&quot;wef&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Friday (same as :py:class:`pystlouisfed.enums.Frequency.wef`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weth</span> <span class="o">=</span> <span class="s2">&quot;weth&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Thursday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_thursday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly_ending_thursday</span> <span class="o">=</span> <span class="s2">&quot;weth&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Thursday (same as :py:class:`pystlouisfed.enums.Frequency.weth`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wew</span> <span class="o">=</span> <span class="s2">&quot;wew&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_wednesday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly_ending_wednesday</span> <span class="o">=</span> <span class="s2">&quot;wew&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.wew`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wetu</span> <span class="o">=</span> <span class="s2">&quot;wetu&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Tuesday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_tuesday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly_ending_tuesday</span> <span class="o">=</span> <span class="s2">&quot;wetu&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Tuesday (same as :py:class:`pystlouisfed.enums.Frequency.wetu`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wem</span> <span class="o">=</span> <span class="s2">&quot;wem&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_monday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly_ending_monday</span> <span class="o">=</span> <span class="s2">&quot;wem&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.wem`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wesu</span> <span class="o">=</span> <span class="s2">&quot;wesu&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Sunday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_sunday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly_ending_sunday</span> <span class="o">=</span> <span class="s2">&quot;wesu&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Sunday (same as :py:class:`pystlouisfed.enums.Frequency.wesu`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wesa</span> <span class="o">=</span> <span class="s2">&quot;wesa&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Saturday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_saturday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weekly_ending_saturday</span> <span class="o">=</span> <span class="s2">&quot;wesa&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Weekly Ending Saturday (same as :py:class:`pystlouisfed.enums.Frequency.wesa`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bwew</span> <span class="o">=</span> <span class="s2">&quot;bwew&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Biweekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.biweekly_ending_wednesday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">biweekly_ending_wednesday</span> <span class="o">=</span> <span class="s2">&quot;bwew&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Biweekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.bwew`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bwem</span> <span class="o">=</span> <span class="s2">&quot;bwem&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Biweekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.biweekly_ending_monday`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">biweekly_ending_monday</span> <span class="o">=</span> <span class="s2">&quot;bwem&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Biweekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.bwem`)</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="AggregationMethod">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.AggregationMethod">[docs]</a>
+<span class="k">class</span> <span class="nc">AggregationMethod</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A key that indicates the aggregation method used for frequency aggregation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">avg</span> <span class="o">=</span> <span class="s2">&quot;avg&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Average (same as :py:class:`pystlouisfed.enums.AggregationMethod.average`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">average</span> <span class="o">=</span> <span class="s2">&quot;avg&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Average (same as :py:class:`pystlouisfed.enums.AggregationMethod.avg`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="s2">&quot;sum&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sum</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eop</span> <span class="o">=</span> <span class="s2">&quot;eop&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    End of Period (same as :py:class:`pystlouisfed.enums.AggregationMethod.end_of_period`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">end_of_period</span> <span class="o">=</span> <span class="s2">&quot;eop&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    End of Period (same as :py:class:`pystlouisfed.enums.AggregationMethod.eop`)</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="OutputType">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.OutputType">[docs]</a>
+<span class="k">class</span> <span class="nc">OutputType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Output type.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">realtime_period</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Observations by Real-Time Period</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">all</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Observations by Vintage Date - All Observations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_and_revised</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Observations by Vintage Date - New and Revised Observations Only</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">initial_release_only</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Observations - Initial Release Only</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="SearchType">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.SearchType">[docs]</a>
+<span class="k">class</span> <span class="nc">SearchType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines the type of search to perform.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">full_text</span> <span class="o">=</span> <span class="s2">&quot;full_text&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;full_text&quot; searches series attributes title, units, frequency, and tags by parsing words into stems. </span>
+<span class="sd">    This makes it possible for searches like &quot;Industry&quot; to match series containing related words such as &quot;Industries&quot;. </span>
+<span class="sd">    Of course, you can search for multiple words like &quot;money&quot; and &quot;stock&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">series_id</span> <span class="o">=</span> <span class="s2">&quot;series_id&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;series_id&quot; performs a substring search on series IDs. </span>
+<span class="sd">    Searching for &quot;ex&quot; will find series containing &quot;ex&quot; anywhere in a series ID. </span>
+<span class="sd">    &quot;*&quot; can be used to anchor searches and match 0 or more of any character. </span>
+<span class="sd">    Searching for &quot;ex*&quot; will find series containing &quot;ex&quot; at the beginning of a series ID. </span>
+<span class="sd">    Searching for &quot;*ex&quot; will find series containing &quot;ex&quot; at the end of a series ID. </span>
+<span class="sd">    It&quot;s also possible to put an &quot;*&quot; in the middle of a string. </span>
+<span class="sd">    &quot;m*sl&quot; finds any series starting with &quot;m&quot; and ending with &quot;sl&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="RegionType">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.RegionType">[docs]</a>
+<span class="k">class</span> <span class="nc">RegionType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The region you want want to pull data for.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">bea</span> <span class="o">=</span> <span class="s2">&quot;bea&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bureau of Economic Anaylis Region</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">msa</span> <span class="o">=</span> <span class="s2">&quot;msa&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Metropolitan Statistical Area</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frb</span> <span class="o">=</span> <span class="s2">&quot;frb&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Federal Reserve Bank Districts</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">necta</span> <span class="o">=</span> <span class="s2">&quot;necta&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    New England City and Town Area</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;state&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    State</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="s2">&quot;country&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Country</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">county</span> <span class="o">=</span> <span class="s2">&quot;county&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    USA Counties</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">censusregion</span> <span class="o">=</span> <span class="s2">&quot;censusregion&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    US Census Regions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">censusdivision</span> <span class="o">=</span> <span class="s2">&quot;censusdivision&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    US Census Divisons </span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ShapeType">
+<a class="viewcode-back" href="../../enums.html#pystlouisfed.enums.ShapeType">[docs]</a>
+<span class="k">class</span> <span class="nc">ShapeType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The type of shape you want to pull Well-known text (WKT) data for.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">bea</span> <span class="o">=</span> <span class="s2">&quot;bea&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bureau of Economic Anaylis Region</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">msa</span> <span class="o">=</span> <span class="s2">&quot;msa&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Metropolitan Statistical Area</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frb</span> <span class="o">=</span> <span class="s2">&quot;frb&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Federal Reserve Bank Districts</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">necta</span> <span class="o">=</span> <span class="s2">&quot;necta&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    New England City and Town Area</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;state&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    State</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="s2">&quot;country&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Country</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">county</span> <span class="o">=</span> <span class="s2">&quot;county&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    USA Counties</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">censusregion</span> <span class="o">=</span> <span class="s2">&quot;censusregion&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    US Census Regions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">censusdivision</span> <span class="o">=</span> <span class="s2">&quot;censusdivision&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    US Census Divisons </span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Tomas Koutek.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pystlouisfed.fraser &mdash; pystlouisfed 3.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pystlouisfed
+          </a>
+              <div class="version">
+                3.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../description.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../client.html">Clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enums.html">Enums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../strange.html">Strange things</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pystlouisfed</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pystlouisfed.fraser</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pystlouisfed.fraser</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NoReturn</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">sickle</span> <span class="kn">import</span> <span class="n">Sickle</span>
+<span class="kn">from</span> <span class="nn">sickle.iterator</span> <span class="kn">import</span> <span class="n">BaseOAIIterator</span>
+<span class="kn">from</span> <span class="nn">sickle.models</span> <span class="kn">import</span> <span class="n">Record</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FRASER">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FRASER">[docs]</a>
+<span class="k">class</span> <span class="nc">FRASER</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | FRASER is a digital library of U.S. economic, financial, and banking history—particularly the history of the Federal Reserve System.</span>
+
+<span class="sd">    | Providing economic information and data to the public is an important mission for the St. Louis Fed started by former St. Louis Fed Research Director Homer Jones in 1958.</span>
+<span class="sd">    | FRASER began as a data preservation and accessibility project of the Federal Reserve Bank of St. Louis in 2004 and now provides access to data and policy documents from the Federal Reserve System and many other institutions.</span>
+
+<span class="sd">    https://fraser.stlouisfed.org/</span>
+<span class="sd">    https://research.stlouisfed.org/docs/api/fraser/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sickle</span> <span class="o">=</span> <span class="n">Sickle</span><span class="p">(</span><span class="s2">&quot;https://fraser.stlouisfed.org/oai&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FRASER.list_records">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FRASER.list_records">[docs]</a>
+    <span class="k">def</span> <span class="nf">list_records</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore_deleted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="nb">set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseOAIIterator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type ignore_deleted: bool</span>
+<span class="sd">        :param set: This parameter specifies the setSpec value and limits the records that are retrieved to only those in the specified set. Ignore this parameter to return all records.</span>
+<span class="sd">        :type set: str</span>
+<span class="sd">        :rtype: sickle.iterator.BaseOAIIterator</span>
+<span class="sd">         </span>
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://research.stlouisfed.org/docs/api/fraser/listRecords.html</span>
+<span class="sd">        | This request returns title records from the FRASER repository.</span>
+<span class="sd">        | A resumptionToken can be used to retrieve all records using multiple requests.</span>
+<span class="sd">        | Additional information about an individual title, including the title&#39;s child records, can be retrieved using the GetRecord request.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request</span>
+<span class="sd">        -----------</span>
+<span class="sd">        https://fraser.stlouisfed.org/oai/?verb=ListRecords&amp;metadataPrefix=mods&amp;resumptionToken=1469299598:0</span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            from pystlouisfed import FRASER</span>
+<span class="sd">            </span>
+<span class="sd">            for record in FRASER().list_records():</span>
+<span class="sd">                print(record.get_metadata())</span>
+
+<span class="sd">        First record metadata:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;name&quot;: [None],</span>
+<span class="sd">                &quot;role&quot;: [None],</span>
+<span class="sd">                &quot;roleTerm&quot;: [&quot;creator&quot;],</span>
+<span class="sd">                &quot;namePart&quot;: [&quot;United States. Women&#39;s Bureau&quot;],</span>
+<span class="sd">                &quot;recordInfo&quot;: [None, None],</span>
+<span class="sd">                &quot;recordIdentifier&quot;: [&quot;770&quot;, &quot;243&quot;],</span>
+<span class="sd">                &quot;genre&quot;: [&quot;government publication&quot;],</span>
+<span class="sd">                &quot;language&quot;: [&quot;eng&quot;],</span>
+<span class="sd">                &quot;titleInfo&quot;: [None, None, None, None],</span>
+<span class="sd">                &quot;title&quot;: [</span>
+<span class="sd">                    &quot;15 Years After College: A Study of Alumnae of the Class of 1945&quot;,</span>
+<span class="sd">                    &quot;Bulletin of the Women&#39;s Bureau&quot;,</span>
+<span class="sd">                    &quot;Bulletin of the Women&#39;s Bureau&quot;,</span>
+<span class="sd">                    &quot;Women&#39;s Bureau Bulletin&quot;</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;subTitle&quot;: [&quot;Women&#39;s Bureau Bulletin, No. 283&quot;],</span>
+<span class="sd">                &quot;originInfo&quot;: [None],</span>
+<span class="sd">                &quot;place&quot;: [&quot;Washington&quot;],</span>
+<span class="sd">                &quot;issuance&quot;: [&quot;monographic&quot;],</span>
+<span class="sd">                &quot;sortDate&quot;: [&quot;1962-01-01&quot;],</span>
+<span class="sd">                &quot;publisher&quot;: [&quot;Govt. Print. Off.&quot;],</span>
+<span class="sd">                &quot;dateIssued&quot;: [&quot;1962&quot;],</span>
+<span class="sd">                &quot;relatedItem&quot;: [None],</span>
+<span class="sd">                &quot;sortOrder&quot;: [&quot;b0283&quot;],</span>
+<span class="sd">                &quot;typeOfResource&quot;: [&quot;text&quot;],</span>
+<span class="sd">                &quot;physicalDescription&quot;: [None],</span>
+<span class="sd">                &quot;form&quot;: [&quot;print&quot;],</span>
+<span class="sd">                &quot;extent&quot;: [&quot;32 pages&quot;],</span>
+<span class="sd">                &quot;digitalOrigin&quot;: [&quot;reformatted digital&quot;],</span>
+<span class="sd">                &quot;internetMediaType&quot;: [&quot;application/pdf&quot;],</span>
+<span class="sd">                &quot;contentType&quot;: [&quot;title&quot;],</span>
+<span class="sd">                &quot;location&quot;: [None],</span>
+<span class="sd">                &quot;url&quot;: [</span>
+<span class="sd">                    &quot;https://fraser.stlouisfed.org/oai/title/15-years-college-a-study-alumnae-class-1945-5549&quot;,</span>
+<span class="sd">                    &quot;https://fraser.stlouisfed.org/images/record-thumbnail.jpg&quot;</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;accessCondition&quot;: [</span>
+<span class="sd">                    &quot;For more information on rights relating to this item, please see: https://fraser.stlouisfed.org/oai/title/15-years-college-a-study-alumnae-class-1945-5549&quot;</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sickle</span><span class="o">.</span><span class="n">ListRecords</span><span class="p">(</span><span class="n">metadataPrefix</span><span class="o">=</span><span class="s2">&quot;mods&quot;</span><span class="p">,</span> <span class="n">ignore_deleted</span><span class="o">=</span><span class="n">ignore_deleted</span><span class="p">,</span> <span class="nb">set</span><span class="o">=</span><span class="nb">set</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FRASER.list_sets">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FRASER.list_sets">[docs]</a>
+    <span class="k">def</span> <span class="nf">list_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseOAIIterator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :rtype: sickle.iterator.BaseOAIIterator</span>
+<span class="sd">        </span>
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://research.stlouisfed.org/docs/api/fraser/listSets.html</span>
+<span class="sd">        | This request returns the set structure for records in the FRASER repository.</span>
+<span class="sd">        | A resumptionToken can be used to retrieve the complete set structure using multiple requests.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request</span>
+<span class="sd">        -----------</span>
+<span class="sd">        https://fraser.stlouisfed.org/oai/?verb=ListSets&amp;resumptionToken=1478707638:0</span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            from pystlouisfed import FRASER</span>
+<span class="sd">            </span>
+<span class="sd">            for set in FRASER().list_sets():</span>
+<span class="sd">                print(set)</span>
+<span class="sd">               </span>
+<span class="sd">            # &lt;set xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;&lt;setSpec&gt;author&lt;/setSpec&gt;&lt;setName&gt;Authors&lt;/setName&gt;&lt;/set&gt;</span>
+<span class="sd">            # &lt;set xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;&lt;setSpec&gt;author:1&lt;/setSpec&gt;&lt;setName&gt;Council of Economic Advisers (U.S.)&lt;/setName&gt;&lt;/set&gt;</span>
+<span class="sd">            # &lt;set xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;&lt;setSpec&gt;author:10&lt;/setSpec&gt;&lt;setName&gt;United States. Federal Open Market Committee&lt;/setName&gt;&lt;/set&gt;</span>
+<span class="sd">            # &lt;set xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;&lt;setSpec&gt;author:10064&lt;/setSpec&gt;&lt;setName&gt;Quarles, Randal Keith, 1957-&lt;/setName&gt;&lt;/set&gt;</span>
+<span class="sd">            # &lt;set xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;&lt;setSpec&gt;author:10087&lt;/setSpec&gt;&lt;setName&gt;Dana, William B. (William Buck), 1829-1910&lt;/setName&gt;&lt;/set&gt;</span>
+<span class="sd">            # ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sickle</span><span class="o">.</span><span class="n">ListSets</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FRASER.list_identifiers">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FRASER.list_identifiers">[docs]</a>
+    <span class="k">def</span> <span class="nf">list_identifiers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore_deleted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="nb">set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseOAIIterator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type ignore_deleted: bool</span>
+<span class="sd">        :param set: :py:class:`str`, This parameter specifies the setSpec value and limits the records that are retrieved to only those in the specified set Ignore this parameter to return all records.</span>
+<span class="sd">        :type set: str</span>
+<span class="sd">        :rtype: sickle.iterator.BaseOAIIterator</span>
+<span class="sd">        </span>
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://research.stlouisfed.org/docs/api/fraser/listIdentifiers.htm</span>
+<span class="sd">        | This request returns headers for records in the FRASER repository.</span>
+<span class="sd">        | A resumptionToken can be used to retrieve all records using multiple requests.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request</span>
+<span class="sd">        -----------</span>
+<span class="sd">        https://fraser.stlouisfed.org/oai/?verb=ListIdentifiers&amp;resumptionToken=1469300451:0</span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            from pystlouisfed import FRASER</span>
+<span class="sd">            </span>
+<span class="sd">            for header in FRASER().list_identifiers():</span>
+<span class="sd">                print(header.identifier)</span>
+<span class="sd">               </span>
+<span class="sd">            # oai:fraser.stlouisfed.org:title:1</span>
+<span class="sd">            # oai:fraser.stlouisfed.org:title:7</span>
+<span class="sd">            # oai:fraser.stlouisfed.org:title:37</span>
+<span class="sd">            # oai:fraser.stlouisfed.org:title:38</span>
+<span class="sd">            # oai:fraser.stlouisfed.org:title:39</span>
+<span class="sd">            # ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sickle</span><span class="o">.</span><span class="n">ListIdentifiers</span><span class="p">(</span><span class="n">metadataPrefix</span><span class="o">=</span><span class="s2">&quot;mods&quot;</span><span class="p">,</span> <span class="n">ignore_deleted</span><span class="o">=</span><span class="n">ignore_deleted</span><span class="p">,</span> <span class="nb">set</span><span class="o">=</span><span class="nb">set</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FRASER.get_record">
+<a class="viewcode-back" href="../../client.html#pystlouisfed.FRASER.get_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Record</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type identifier: str</span>
+<span class="sd">        :rtype: sickle.models.Record</span>
+<span class="sd">        </span>
+<span class="sd">        Description</span>
+<span class="sd">        -----------</span>
+<span class="sd">        | https://research.stlouisfed.org/docs/api/fraser/getRecord.html</span>
+<span class="sd">        | This request returns a single record from the FRASER repository.</span>
+
+<span class="sd">        IGNORE:</span>
+<span class="sd">        API Request</span>
+<span class="sd">        -----------</span>
+<span class="sd">        https://fraser.stlouisfed.org/oai/?verb=GetRecord&amp;identifier=oai:fraser.stlouisfed.org:title:176     </span>
+<span class="sd">        IGNORE</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            from pystlouisfed import FRASER</span>
+<span class="sd">            </span>
+<span class="sd">            record = FRASER().get_record(identifier=&#39;oai:fraser.stlouisfed.org:title:176&#39;)</span>
+<span class="sd">            </span>
+<span class="sd">            print(record)</span>
+<span class="sd">            </span>
+<span class="sd">        .. code-block:: xml</span>
+<span class="sd">            </span>
+<span class="sd">            &lt;record</span>
+<span class="sd">                xmlns=&quot;http://www.openarchives.org/OAI/2.0/&quot;&gt;</span>
+<span class="sd">                &lt;header&gt;</span>
+<span class="sd">                    &lt;identifier&gt;oai:fraser.stlouisfed.org:title:176&lt;/identifier&gt;</span>
+<span class="sd">                    &lt;datestamp&gt;2023-12-01T14:55:47Z&lt;/datestamp&gt;</span>
+<span class="sd">                    &lt;setSpec&gt;author:524&lt;/setSpec&gt;</span>
+<span class="sd">                    &lt;setSpec&gt;author:8499&lt;/setSpec&gt;</span>
+<span class="sd">                    &lt;setSpec&gt;subject:4145&lt;/setSpec&gt;</span>
+<span class="sd">                    &lt;setSpec&gt;subject:6824&lt;/setSpec&gt;</span>
+<span class="sd">                    &lt;setSpec&gt;subject:4293&lt;/setSpec&gt;</span>
+<span class="sd">                    &lt;setSpec&gt;theme:8&lt;/setSpec&gt;</span>
+<span class="sd">                    &lt;setSpec&gt;theme:97&lt;/setSpec&gt;</span>
+<span class="sd">                &lt;/header&gt;</span>
+<span class="sd">                &lt;metadata&gt;</span>
+<span class="sd">                    &lt;mods</span>
+<span class="sd">                        xmlns=&quot;http://www.loc.gov/mods/v3&quot;</span>
+<span class="sd">                        xmlns:default=&quot;http://www.loc.gov/mods/v3&quot; default:xsi=&quot;http://www.loc.gov/standards/mods/v3/mods-3-5.xsd&quot; default:schemaLocation=&quot;http://www.loc.gov/standards/mods/v3/mods-3-5.xsd&quot;&gt;</span>
+<span class="sd">                        &lt;name&gt;</span>
+<span class="sd">                            &lt;role&gt;</span>
+<span class="sd">                                &lt;roleTerm&gt;creator&lt;/roleTerm&gt;</span>
+<span class="sd">                            &lt;/role&gt;</span>
+<span class="sd">                            &lt;namePart&gt;United States. Congress. Senate. Committee on Finance&lt;/namePart&gt;</span>
+<span class="sd">                            &lt;namePart type=&quot;date&quot;&gt;1815-&lt;/namePart&gt;</span>
+<span class="sd">                            &lt;recordInfo&gt;</span>
+<span class="sd">                                &lt;recordIdentifier&gt;524&lt;/recordIdentifier&gt;</span>
+<span class="sd">                            &lt;/recordInfo&gt;</span>
+<span class="sd">                        &lt;/name&gt;</span>
+<span class="sd">                        &lt;name&gt;</span>
+<span class="sd">                            &lt;role&gt;</span>
+<span class="sd">                                &lt;roleTerm&gt;contributor&lt;/roleTerm&gt;</span>
+<span class="sd">                            &lt;/role&gt;</span>
+<span class="sd">                            &lt;namePart&gt;Seventy-Second Congress&lt;/namePart&gt;</span>
+<span class="sd">                            &lt;namePart type=&quot;date&quot;&gt;1931-1933&lt;/namePart&gt;</span>
+<span class="sd">                            &lt;recordInfo&gt;</span>
+<span class="sd">                                &lt;recordIdentifier&gt;8499&lt;/recordIdentifier&gt;</span>
+<span class="sd">                            &lt;/recordInfo&gt;</span>
+<span class="sd">                        &lt;/name&gt;</span>
+<span class="sd">                        &lt;genre&gt;government publication&lt;/genre&gt;</span>
+<span class="sd">                        &lt;subject&gt;</span>
+<span class="sd">                            &lt;theme&gt;</span>
+<span class="sd">                                &lt;theme&gt;Great Depression&lt;/theme&gt;</span>
+<span class="sd">                                &lt;recordInfo&gt;</span>
+<span class="sd">                                    &lt;recordIdentifier&gt;8&lt;/recordIdentifier&gt;</span>
+<span class="sd">                                &lt;/recordInfo&gt;</span>
+<span class="sd">                            &lt;/theme&gt;</span>
+<span class="sd">                            &lt;theme&gt;</span>
+<span class="sd">                                &lt;theme&gt;Meltzer&#39;s History of the Federal Reserve - Primary Sources&lt;/theme&gt;</span>
+<span class="sd">                                &lt;recordInfo&gt;</span>
+<span class="sd">                                    &lt;recordIdentifier&gt;97&lt;/recordIdentifier&gt;</span>
+<span class="sd">                                &lt;/recordInfo&gt;</span>
+<span class="sd">                            &lt;/theme&gt;</span>
+<span class="sd">                            &lt;topic&gt;</span>
+<span class="sd">                                &lt;topic&gt;Economic conditions&lt;/topic&gt;</span>
+<span class="sd">                                &lt;recordInfo&gt;</span>
+<span class="sd">                                    &lt;recordIdentifier&gt;4145&lt;/recordIdentifier&gt;</span>
+<span class="sd">                                &lt;/recordInfo&gt;</span>
+<span class="sd">                            &lt;/topic&gt;</span>
+<span class="sd">                            &lt;topic&gt;</span>
+<span class="sd">                                &lt;topic&gt;Congressional hearings&lt;/topic&gt;</span>
+<span class="sd">                                &lt;recordInfo&gt;</span>
+<span class="sd">                                    &lt;recordIdentifier&gt;6824&lt;/recordIdentifier&gt;</span>
+<span class="sd">                                &lt;/recordInfo&gt;</span>
+<span class="sd">                            &lt;/topic&gt;</span>
+<span class="sd">                            &lt;geographic&gt;</span>
+<span class="sd">                                &lt;geographic&gt;United States&lt;/geographic&gt;</span>
+<span class="sd">                                &lt;recordInfo&gt;</span>
+<span class="sd">                                    &lt;recordIdentifier&gt;4293&lt;/recordIdentifier&gt;</span>
+<span class="sd">                                &lt;/recordInfo&gt;</span>
+<span class="sd">                            &lt;/geographic&gt;</span>
+<span class="sd">                        &lt;/subject&gt;</span>
+<span class="sd">                        &lt;language&gt;eng&lt;/language&gt;</span>
+<span class="sd">                        &lt;titleInfo&gt;</span>
+<span class="sd">                            &lt;title&gt;Investigation of Economic Problems&lt;/title&gt;</span>
+<span class="sd">                            &lt;subTitle&gt;Hearings Before the Committee on Finance, United States Senate&lt;/subTitle&gt;</span>
+<span class="sd">                            &lt;titlePartNumber&gt;Seventy-Second Congress, Second Session, Pursuant to S. Res. 315, February 13 to 28, 1933&lt;/titlePartNumber&gt;</span>
+<span class="sd">                        &lt;/titleInfo&gt;</span>
+<span class="sd">                        &lt;identifier type=&quot;oclc&quot;&gt;4350587&lt;/identifier&gt;</span>
+<span class="sd">                        &lt;originInfo&gt;</span>
+<span class="sd">                            &lt;place&gt;Washington&lt;/place&gt;</span>
+<span class="sd">                            &lt;issuance&gt;monographic&lt;/issuance&gt;</span>
+<span class="sd">                            &lt;sortDate&gt;1933-02-13&lt;/sortDate&gt;</span>
+<span class="sd">                            &lt;publisher&gt;Government Printing Office&lt;/publisher&gt;</span>
+<span class="sd">                            &lt;dateIssued&gt;February 13-28, 1933&lt;/dateIssued&gt;</span>
+<span class="sd">                        &lt;/originInfo&gt;</span>
+<span class="sd">                        &lt;relatedItem type=&quot;series&quot;&gt;</span>
+<span class="sd">                            &lt;titleInfo&gt;</span>
+<span class="sd">                                &lt;title&gt;Congressional Documents&lt;/title&gt;</span>
+<span class="sd">                            &lt;/titleInfo&gt;</span>
+<span class="sd">                            &lt;recordInfo&gt;</span>
+<span class="sd">                                &lt;recordIdentifier&gt;5292&lt;/recordIdentifier&gt;</span>
+<span class="sd">                            &lt;/recordInfo&gt;</span>
+<span class="sd">                        &lt;/relatedItem&gt;</span>
+<span class="sd">                        &lt;classification authority=&quot;sudocs&quot;&gt;Y 4.F 49:Ec 7/&lt;/classification&gt;</span>
+<span class="sd">                        &lt;typeOfResource&gt;text&lt;/typeOfResource&gt;</span>
+<span class="sd">                        &lt;accessCondition&gt;http://rightsstatements.org/vocab/NoC-US/1.0/&lt;/accessCondition&gt;</span>
+<span class="sd">                        &lt;physicalDescription&gt;</span>
+<span class="sd">                            &lt;form&gt;print&lt;/form&gt;</span>
+<span class="sd">                            &lt;extent&gt;1246 pages&lt;/extent&gt;</span>
+<span class="sd">                            &lt;digitalOrigin&gt;reformatted digital&lt;/digitalOrigin&gt;</span>
+<span class="sd">                            &lt;internetMediaType&gt;application/pdf&lt;/internetMediaType&gt;</span>
+<span class="sd">                        &lt;/physicalDescription&gt;</span>
+<span class="sd">                        &lt;location&gt;</span>
+<span class="sd">                            &lt;url&gt;https://fraser.stlouisfed.org/oai/title/investigation-economic-problems-176&lt;/url&gt;</span>
+<span class="sd">                            &lt;url access=&quot;preview&quot;&gt;https://fraser.stlouisfed.org/images/record-thumbnail.jpg&lt;/url&gt;</span>
+<span class="sd">                            &lt;url access=&quot;raw object&quot;&gt;https://fraser.stlouisfed.org/oai/docs/historical/senate/1933sen_investeconprob/1933sen_investeconprob.pdf&lt;/url&gt;</span>
+<span class="sd">                        &lt;/location&gt;</span>
+<span class="sd">                        &lt;contentType&gt;title&lt;/contentType&gt;</span>
+<span class="sd">                    &lt;/mods&gt;</span>
+<span class="sd">                &lt;/metadata&gt;</span>
+<span class="sd">            &lt;/record&gt;</span>
+
+<span class="sd">         </span>
+<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sickle</span><span class="o">.</span><span class="n">GetRecord</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="n">identifier</span><span class="p">,</span> <span class="n">metadataPrefix</span><span class="o">=</span><span class="s2">&quot;mods&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Tomas Koutek.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
