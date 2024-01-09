@@ -73,6 +73,7 @@ class FREDMaps:
         Description
         -----------
         | https://fred.stlouisfed.org/docs/api/geofred/shapes.html
+        
         | This request returns shape files from FRED in GeoJSON format.
 
         IGNORE:
@@ -237,6 +238,7 @@ class FREDMaps:
         Description
         -----------
         | https://fred.stlouisfed.org/docs/api/geofred/series_group.html
+        
         | This request returns the meta information needed to make requests for FRED data.
         | Minimum and maximum date are also supplied for the data range available.
 
@@ -300,6 +302,7 @@ class FREDMaps:
         Description
         -----------
         | https://fred.stlouisfed.org/docs/api/geofred/series_data.html
+        
         | This request returns a cross section of regional data for a specified release date
         | If no date is specified, the most recent data available are returned.
 
@@ -349,8 +352,8 @@ class FREDMaps:
         """  # noqa
 
         years = self._client.get(
-            "/geofred/series/data",
-            "meta.data",
+            endpoint="/geofred/series/data",
+            list_key="meta.data",
             series_id=series_id,
             date=date,
             start_date=start_date
@@ -412,6 +415,7 @@ class FREDMaps:
         Description
         -----------
         | https://fred.stlouisfed.org/docs/api/geofred/regional_data.html
+        
         | This request returns a cross section of regional data.
 
         IGNORE:
@@ -476,8 +480,8 @@ class FREDMaps:
             raise ValueError(f'Variable transformation is not one of the values: {", ".join(map(str, enums.Unit))}')
 
         years = self._client.get(
-            "/geofred/regional/data",
-            "meta.data",
+            endpoint="/geofred/regional/data",
+            list_key="meta.data",
             series_group=series_group,
             region_type=region_type,
             date=date,

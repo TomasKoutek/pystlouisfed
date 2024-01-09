@@ -19,63 +19,63 @@ class TagGroupID(Enum):
 
     freq = "freq"
     """
-    Frequency (same as `pystlouisfed.enums.TagGroupID.frequency`)
+    Frequency (same as :py:class:`pystlouisfed.enums.TagGroupID.frequency`)
     """
     frequency = "freq"
     """
-    Frequency (same as `pystlouisfed.enums.TagGroupID.freq`)
+    Frequency (same as :py:class:`pystlouisfed.enums.TagGroupID.freq`)
     """
     gen = "gen"
     """
-    General or Concept (same as `pystlouisfed.enums.TagGroupID.general_or_concept`)
+    General or Concept (same as :py:class:`pystlouisfed.enums.TagGroupID.general_or_concept`)
     """
     general_or_concept = "gen"
     """
-    General or Concept (same as `pystlouisfed.enums.TagGroupID.gen`)
+    General or Concept (same as :py:class:`pystlouisfed.enums.TagGroupID.gen`)
     """
     geo = "geo"
     """
-    Geography (same as `pystlouisfed.enums.TagGroupID.geography`)
+    Geography (same as :py:class:`pystlouisfed.enums.TagGroupID.geography`)
     """
     geography = "geo"
     """
-    Geography (same as `pystlouisfed.enums.TagGroupID.geo`)
+    Geography (same as :py:class:`pystlouisfed.enums.TagGroupID.geo`)
     """
     geot = "geot"
     """
-    Geography Type (same as `pystlouisfed.enums.TagGroupID.geography_type`)
+    Geography Type (same as :py:class:`pystlouisfed.enums.TagGroupID.geography_type`)
     """
     geography_type = "geot"
     """
-    Geography Type (same as `pystlouisfed.enums.TagGroupID.geot`)
+    Geography Type (same as :py:class:`pystlouisfed.enums.TagGroupID.geot`)
     """
     rls = "rls"
     """
-    Release (same as `pystlouisfed.enums.TagGroupID.release`)
+    Release (same as :py:class:`pystlouisfed.enums.TagGroupID.release`)
     """
     release = "rls"
     """
-    Release (same as `pystlouisfed.enums.TagGroupID.rls`)
+    Release (same as :py:class:`pystlouisfed.enums.TagGroupID.rls`)
     """
     seas = "seas"
     """
-    Seasonal Adjustment (same as `pystlouisfed.enums.TagGroupID.seasonal_adjustment`)
+    Seasonal Adjustment (same as :py:class:`pystlouisfed.enums.TagGroupID.seasonal_adjustment`)
     """
     seasonal_adjustment = "seas"
     """
-    Seasonal Adjustment (same as `pystlouisfed.enums.TagGroupID.seas`)
+    Seasonal Adjustment (same as :py:class:`pystlouisfed.enums.TagGroupID.seas`)
     """
     src = "src"
     """
-    Source (same as `pystlouisfed.enums.TagGroupID.source`)
+    Source (same as :py:class:`pystlouisfed.enums.TagGroupID.source`)
     """
     source = "src"
     """
-    Source (same as `pystlouisfed.enums.TagGroupID.src`)
+    Source (same as :py:class:`pystlouisfed.enums.TagGroupID.src`)
     """
     cc = "cc"
     """
-    Citation & Copyright (same as `pystlouisfed.enums.TagGroupID.citation_and_copyright`)
+    Citation & Copyright (same as :py:class:`pystlouisfed.enums.TagGroupID.citation_and_copyright`)
     """
     citation_and_copyright = "cc"
     """
@@ -108,27 +108,27 @@ class Seasonality(Enum):
 
     sa = "SA"
     """
-    Seasonally Adjusted (same as `pystlouisfed.enums.Seasonality.seasonally_adjusted`)
+    Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.seasonally_adjusted`)
     """
     seasonally_adjusted = "SA"
     """
-    Seasonally Adjusted (same as `pystlouisfed.enums.Seasonality.sa`)
+    Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.sa`)
     """
     nsa = "NSA"
     """
-    Not Seasonally Adjusted (same as `pystlouisfed.enums.Seasonality.not_seasonally_adjusted`)
+    Not Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.not_seasonally_adjusted`)
     """
     not_seasonally_adjusted = "NSA"
     """
-    Not Seasonally Adjusted (same as `pystlouisfed.enums.Seasonality.nsa`)
+    Not Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.nsa`)
     """
     ssa = "SSA"
     """
-    Smoothed Seasonally Adjusted (same as `pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted`)
+    Smoothed Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.smoothed_seasonally_adjusted`)
     """
     smoothed_seasonally_adjusted = "SSA"
     """
-    Smoothed Seasonally Adjusted (same as `pystlouisfed.enums.Seasonality.ssa`)
+    Smoothed Seasonally Adjusted (same as :py:class:`pystlouisfed.enums.Seasonality.ssa`)
     """
 
 
@@ -334,75 +334,75 @@ class Frequency(Enum):
     """
     wef = "wef"
     """
-    Weekly Ending Friday (same as `pystlouisfed.enums.Frequency.weekly_ending_friday`)
+    Weekly Ending Friday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_friday`)
     """
     weekly_ending_friday = "wef"
     """
-    Weekly Ending Friday (same as `pystlouisfed.enums.Frequency.wef`)
+    Weekly Ending Friday (same as :py:class:`pystlouisfed.enums.Frequency.wef`)
     """
     weth = "weth"
     """
-    Weekly Ending Thursday (same as `pystlouisfed.enums.Frequency.weekly_ending_thursday`)
+    Weekly Ending Thursday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_thursday`)
     """
     weekly_ending_thursday = "weth"
     """
-    Weekly Ending Thursday (same as `pystlouisfed.enums.Frequency.weth`)
+    Weekly Ending Thursday (same as :py:class:`pystlouisfed.enums.Frequency.weth`)
     """
     wew = "wew"
     """
-    Weekly Ending Wednesday (same as `pystlouisfed.enums.Frequency.weekly_ending_wednesday`)
+    Weekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_wednesday`)
     """
     weekly_ending_wednesday = "wew"
     """
-    Weekly Ending Wednesday (same as `pystlouisfed.enums.Frequency.wew`)
+    Weekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.wew`)
     """
     wetu = "wetu"
     """
-    Weekly Ending Tuesday (same as `pystlouisfed.enums.Frequency.weekly_ending_tuesday`)
+    Weekly Ending Tuesday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_tuesday`)
     """
     weekly_ending_tuesday = "wetu"
     """
-    Weekly Ending Tuesday (same as `pystlouisfed.enums.Frequency.wetu`)
+    Weekly Ending Tuesday (same as :py:class:`pystlouisfed.enums.Frequency.wetu`)
     """
     wem = "wem"
     """
-    Weekly Ending Monday (same as `pystlouisfed.enums.Frequency.weekly_ending_monday`)
+    Weekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_monday`)
     """
     weekly_ending_monday = "wem"
     """
-    Weekly Ending Monday (same as `pystlouisfed.enums.Frequency.wem`)
+    Weekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.wem`)
     """
     wesu = "wesu"
     """
-    Weekly Ending Sunday (same as `pystlouisfed.enums.Frequency.weekly_ending_sunday`)
+    Weekly Ending Sunday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_sunday`)
     """
     weekly_ending_sunday = "wesu"
     """
-    Weekly Ending Sunday (same as `pystlouisfed.enums.Frequency.wesu`)
+    Weekly Ending Sunday (same as :py:class:`pystlouisfed.enums.Frequency.wesu`)
     """
     wesa = "wesa"
     """
-    Weekly Ending Saturday (same as `pystlouisfed.enums.Frequency.weekly_ending_saturday`)
+    Weekly Ending Saturday (same as :py:class:`pystlouisfed.enums.Frequency.weekly_ending_saturday`)
     """
     weekly_ending_saturday = "wesa"
     """
-    Weekly Ending Saturday (same as `pystlouisfed.enums.Frequency.wesa`)
+    Weekly Ending Saturday (same as :py:class:`pystlouisfed.enums.Frequency.wesa`)
     """
     bwew = "bwew"
     """
-    Biweekly Ending Wednesday (same as `pystlouisfed.enums.Frequency.biweekly_ending_wednesday`)
+    Biweekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.biweekly_ending_wednesday`)
     """
     biweekly_ending_wednesday = "bwew"
     """
-    Biweekly Ending Wednesday (same as `pystlouisfed.enums.Frequency.bwew`)
+    Biweekly Ending Wednesday (same as :py:class:`pystlouisfed.enums.Frequency.bwew`)
     """
     bwem = "bwem"
     """
-    Biweekly Ending Monday (same as `pystlouisfed.enums.Frequency.biweekly_ending_monday`)
+    Biweekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.biweekly_ending_monday`)
     """
     biweekly_ending_monday = "bwem"
     """
-    Biweekly Ending Monday (same as `pystlouisfed.enums.Frequency.bwem`)
+    Biweekly Ending Monday (same as :py:class:`pystlouisfed.enums.Frequency.bwem`)
     """
 
 
@@ -413,11 +413,11 @@ class AggregationMethod(Enum):
 
     avg = "avg"
     """
-    Average (same as `pystlouisfed.enums.AggregationMethod.average`)
+    Average (same as :py:class:`pystlouisfed.enums.AggregationMethod.average`)
     """
     average = "avg"
     """
-    Average (same as `pystlouisfed.enums.AggregationMethod.avg`)
+    Average (same as :py:class:`pystlouisfed.enums.AggregationMethod.avg`)
     """
     sum = "sum"
     """
@@ -425,11 +425,11 @@ class AggregationMethod(Enum):
     """
     eop = "eop"
     """
-    End of Period (same as `pystlouisfed.enums.AggregationMethod.end_of_period`)
+    End of Period (same as :py:class:`pystlouisfed.enums.AggregationMethod.end_of_period`)
     """
     end_of_period = "eop"
     """
-    End of Period (same as `pystlouisfed.enums.AggregationMethod.eop`)
+    End of Period (same as :py:class:`pystlouisfed.enums.AggregationMethod.eop`)
     """
 
 

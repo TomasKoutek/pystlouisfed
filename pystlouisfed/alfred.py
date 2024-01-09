@@ -2020,6 +2020,9 @@ class FRED:
         | https://fred.stlouisfed.org/docs/api/fred/series_observations.html
 
         | Get the observations or data values for an economic data series.
+        
+        .. warning::
+            The FRED API seems to have implemented a hard cap of 2000 vintages to be retrieved at once (see :doc:`strange things <strange>` or `issues/2 <https://github.com/TomasKoutek/pystlouisfed/issues/2>`_ and `fredapi/pull/52 <https://github.com/mortada/fredapi/pull/52>`_).
 
         IGNORE:
         API Request
@@ -2079,7 +2082,7 @@ class FRED:
             import plotly.express as px
             from pystlouisfed import FRED
             
-            fred = FRED(api_key='3a3380d8e2f1c64b28f3bb4805ca6c22')
+            fred = FRED(api_key='abcdefghijklmnopqrstuvwxyz123456')
             df = fred.series_observations(series_id='SP500')
             
             fig = px.scatter(
@@ -2096,11 +2099,11 @@ class FRED:
         
         Output types
         ------------
-        These output formats are a cross tabulation between the series' observation dates and the specified vintage dates.
-        The first column contains the observation dates for which the data values are measured.
-        The first row contains the vintage dates that specify dates in history and what data actually existed on past dates.
-        The interior cells contain data values for specific combinations of observation dates and vintage dates.
-        For details see https://alfred.stlouisfed.org/help/downloaddata#outputformats .
+        | These output formats are a cross tabulation between the series' observation dates and the specified vintage dates.
+        | The first column contains the observation dates for which the data values are measured.
+        | The first row contains the vintage dates that specify dates in history and what data actually existed on past dates.
+        | The interior cells contain data values for specific combinations of observation dates and vintage dates.
+        | For details see https://alfred.stlouisfed.org/help/downloaddata#outputformats .
 
         Observations by Real-Time Period (default)
         ------------------------------------------

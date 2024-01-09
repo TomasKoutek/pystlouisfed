@@ -9,5 +9,6 @@ Federal Reserve Bank of St. Louis
    client
    enums
    models
+   strange
 
    genindex
